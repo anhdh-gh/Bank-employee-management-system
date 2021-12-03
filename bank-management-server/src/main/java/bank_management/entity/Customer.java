@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -23,6 +25,14 @@ public class Customer extends People {
 	@NotBlank(message = "CustomerCode không được để trống")
 	@Column(name = "CustomerCode")
 	private String customerCode;
+
+	@OneToOne(targetEntity = PaymentAccount.class)
+	@JoinColumn(name = "PaymentAccountID")
+	private PaymentAccount paymentAccount;
+
+	@OneToOne(targetEntity = CreditAccount.class)
+	@JoinColumn(name = "CreditAccountID")
+	private CreditAccount creditAccount;
 
 	public Customer(String identityNumber, String name, String address, Date dateOfBirth, String email, Account account,
 			@NotBlank(message = "CustomerCode không được để trống") String customerCode) {
