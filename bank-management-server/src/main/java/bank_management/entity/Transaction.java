@@ -19,7 +19,7 @@ public class Transaction extends BaseEntity{
     private BankAccount bankAccountSent;
 
     @ManyToOne(targetEntity = BankAccount.class)
-    @JoinColumn(name = "BankAccountReceiceID")
+    @JoinColumn(name = "BankAccountReceiveID")
     private BankAccount bankAccountReceive;
 
     @Column (name = "Amount")
