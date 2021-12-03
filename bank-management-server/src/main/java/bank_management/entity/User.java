@@ -2,7 +2,6 @@
 
 import java.util.Date;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,7 +27,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
-@AttributeOverride(name = "ID", column = @Column(name = "PeopleID"))
 public class User extends People {
 	
 	@Column(name = "EmployeeCode")

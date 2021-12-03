@@ -2,5 +2,6 @@ package bank_management.enumeration;
 
 public enum Role {
 	Employee,
-	Manager
+	Manager,
+	Customer
 }
