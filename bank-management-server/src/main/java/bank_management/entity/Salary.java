@@ -17,7 +17,7 @@ public class Salary extends BaseEntity{
     @JoinColumn (name = "UserID")
     private User user;
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = WorkingMonth.class)
     @JoinColumn (name = "WorkingMonthID")
     private WorkingMonth workingMonth;
 
