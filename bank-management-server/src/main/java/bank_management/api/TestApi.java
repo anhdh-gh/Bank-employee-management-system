@@ -9,36 +9,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bank_management.entity.Account;
 import bank_management.repository.AccountRepository;
-import bank_management.repository.PeopleRepository;
 
 @RestController
-@RequestMapping(path = "/people", produces = "application/json")
+@RequestMapping(path = "/test", produces = "application/json")
 @CrossOrigin(origins = "*")
-public class PeopleApi {
+public class TestApi {
 
-	private PeopleRepository peopleRepo;
 	private AccountRepository accountRepo;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
-	public PeopleApi(
-			PeopleRepository peopleRepo,
+	public TestApi(
 			AccountRepository accountRepo,
 			BCryptPasswordEncoder bCryptPasswordEncoder
 		) {
 		
-		this.peopleRepo = peopleRepo;
 		this.accountRepo = accountRepo;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 	
-//	@GetMapping
-//	public Iterable<People> getAllIPeople() {
-//		return peopleRepo.findAll();
-//	}
-	
 	@GetMapping
-	public Iterable<Account> getAllIPeople() {
+	public Iterable<Account> getAllIAccount() {
 		return accountRepo.findAll();
 	}
 }
