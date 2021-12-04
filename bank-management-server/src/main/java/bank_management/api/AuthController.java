@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bank_management.common.CustomUserDetails;
 import bank_management.common.JwtTokenProvider;
+import bank_management.entity.Account;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(maxAge = 3600)
 public class AuthController {
 	
     @Autowired
@@ -27,13 +30,13 @@ public class AuthController {
     private JwtTokenProvider tokenProvider;
     
     @PostMapping("/login")
-    public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public LoginResponse authenticateUser(@Valid @RequestBody Account account) {
 
         // Xác thực từ username và password.
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
+                		account.getUsername(),
+                		account.getPassword()
                 )
         );
 
@@ -46,6 +49,7 @@ public class AuthController {
         return new LoginResponse(jwt);
     }
     
+    @CrossOrigin("http://127.0.0.1:55595")
     // Api /api/random yêu cầu phải xác thực mới có thể request
     @GetMapping("/random")
     public RandomStuff randomStuff(){
