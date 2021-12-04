@@ -20,3 +20,6 @@ public class CorsConfig
         };
     }
 }
+
+// https://stackoverflow.com/questions/35091524/spring-cors-no-access-control-allow-origin-header-is-present
+// https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-cors
