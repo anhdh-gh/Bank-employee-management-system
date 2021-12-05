@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
@@ -21,15 +18,18 @@ import java.util.Date;
 @Table(name = "creditAccount")
 public class CreditAccount extends BankAccount{
     @Column(name = "CreditLimit")
-    @NotNull(message = "creditLimit không được để trống!")
+    @NotNull(message = "CreditLimit không được để trống!")
+    @Positive(message = "CreditLimit phải là số dương")
     private double creditLimit;
 
     @Column(name = "DebtAmount")
-    @NotNull(message = "debtAmount không được để trống!")
+    @NotNull(message = "DebtAmount không được để trống!")
+    @Positive(message = "DebtAmount phải là số dương")
     private double debtAmount;
 
     @Column(name = "InterestRate")
     @NotNull(message = "InterestRate không được để trống!")
+    @Positive(message = "InterestRate phải là số dương")
     private double interestRate;
 
     @NotBlank(message = "CVV không được để trống")

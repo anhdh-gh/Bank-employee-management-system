@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.Date;
 
 @Data
@@ -21,14 +22,17 @@ import java.util.Date;
 public class PaymentAccount extends BankAccount{
     @Column(name = "InterestRate")
     @NotNull(message = "InterestRate không được để trống!")
+    @Positive(message = "InterestRate phải là số dương")
     private double interesRate;
 
     @Column(name = "MinBalance")
-    @NotNull(message = "minBalance không được để trống!")
+    @NotNull(message = "MinBalance không được để trống!")
+    @Positive(message = "MinBalance phải là số dương")
     private  double minBalance;
 
     @Column(name = "Amount")
-    @NotNull(message = "amount không được để trống!")
+    @NotNull(message = "Amount không được để trống!")
+    @Positive(message = "Amount phải là số dương")
     private double amount;
 
     public PaymentAccount(@Digits(message = "accountCode chỉ chứa chữ số.", fraction = 0, integer = 30) String accountCode,
