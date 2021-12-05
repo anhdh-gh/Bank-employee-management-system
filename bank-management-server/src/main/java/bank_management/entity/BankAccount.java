@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Data
 @NoArgsConstructor
@@ -22,6 +23,7 @@ public class BankAccount extends BaseEntity{
     protected String accountNumber;
 
     @Column(name = "ExprideDate")
+    @NotNull(message = "expireDate không được trống")
     protected Date expireDate;
 
     @Column(name = "Branch")
@@ -30,6 +32,7 @@ public class BankAccount extends BaseEntity{
 
     @Column (name = "Type")
     @NotBlank(message = "Type không được trống!")
+    @Enumerated(EnumType.STRING)
     protected String type;
 
     @Column (name = "Status")
@@ -43,4 +46,16 @@ public class BankAccount extends BaseEntity{
     @ManyToOne (targetEntity = MemberLevel.class)
     @JoinColumn (name = "MemberLevelID")
     protected MemberLevel memberLevel;
+
+    public BankAccount(String ID, Date createDate, Date editDate, String accountCode, String accountNumber, Date expireDate, String branch, String type, boolean status, Employee employee, MemberLevel memberLevel) {
+        super(ID, createDate, editDate);
+        this.accountCode = accountCode;
+        this.accountNumber = accountNumber;
+        this.expireDate = expireDate;
+        this.branch = branch;
+        this.type = type;
+        this.status = status;
+        this.employee = employee;
+        this.memberLevel = memberLevel;
+    }
 }
