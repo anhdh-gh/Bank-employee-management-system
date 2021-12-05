@@ -17,7 +17,6 @@
 ============================================= -->
 <link rel="stylesheet" type="text/css" href="../../../../Payyed%20v1.1%20-%20Money%20Transfer%20and%20Online%20Payments%20HTML%20Template/HTML/vendor/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="../../../../Payyed%20v1.1%20-%20Money%20Transfer%20and%20Online%20Payments%20HTML%20Template/HTML/vendor/font-awesome/css/all.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../../Payyed%20v1.1%20-%20Money%20Transfer%20and%20Online%20Payments%20HTML%20Template/HTML/vendor/daterangepicker/daterangepicker.css" />
 <link rel="stylesheet" type="text/css" href="../../../../Payyed%20v1.1%20-%20Money%20Transfer%20and%20Online%20Payments%20HTML%20Template/HTML/css/stylesheet.css" />
 </head>
 <body>
@@ -31,7 +30,6 @@
 <!-- Document Wrapper   
 ============================================= -->
 <div id="main-wrapper"> 
-  
   <!-- Header
   ============================================= -->
   <header id="header">
@@ -52,8 +50,8 @@
           <nav class="primary-menu navbar navbar-expand-lg">
             <div id="header-nav" class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li class="active"><a href="transactions.html">Transactions</a></li>
+                <li class="active"><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="transactions.html">Transactions</a></li>
                 <li><a href="send-money.html">Send/Request</a></li>
                 <li><a href="deposit-money.html">Withdraw/Deposit</a></li>
                 <li><a href="contact-us.html">Contact Us</a></li>
@@ -76,17 +74,16 @@
       </div>
     </div>
   </header>
-  <!-- Header End --> 
+  <!-- Header End -->
   
   <!-- Content
   ============================================= -->
   <div id="content" class="py-4">
     <div class="container">
-      <div class="row"> 
-        
+      <div class="row">
         <!-- Left Panel
         ============================================= -->
-        <aside class="col-lg-3"> 
+        <aside class="col-lg-3">
           
           <!-- Profile Details
           =============================== -->
@@ -99,7 +96,7 @@
             <p class="text-3 font-weight-500 mb-2">Hello, Smith Rhodes</p>
             <p class="mb-2"><a href="profile.html" class="text-5 text-light" data-toggle="tooltip" title="Edit Profile"><i class="fas fa-edit"></i></a></p>
           </div>
-          <!-- Profile Details End --> 
+          <!-- Profile Details End -->
           
           <!-- Available Balance
           =============================== -->
@@ -110,7 +107,7 @@
             <hr class="mx-n3">
             <div class="d-flex"><a href="#" class="btn-link mr-auto">Withdraw</a> <a href="#" class="btn-link ml-auto">Deposit</a></div>
           </div>
-          <!-- Available Balance End --> 
+          <!-- Available Balance End -->
           
           <!-- Need Help?
           =============================== -->
@@ -119,7 +116,8 @@
             <h3 class="text-3 font-weight-400 my-4">Need Help?</h3>
             <p class="text-muted opacity-8 mb-4">Have questions or concerns regrading your account?<br>
               Our experts are here to help!.</p>
-            <a href="#" class="btn btn-primary btn-block"><i style="transform: rotate(90deg);" class="fa fa-phone"></i>  0846001460</a> </div>
+              <a href="#" class="btn btn-primary btn-block"><i style="transform: rotate(90deg);" class="fa fa-phone"></i>  0846001460</a>
+          </div>
           <!-- Need Help? End -->
           
         </aside>
@@ -129,70 +127,40 @@
         ============================================= -->
         <div class="col-lg-9">
           
-          <h2 class="font-weight-400 mb-3">Transactions</h2>
-          
-          <!-- Filter
-          ============================================= -->
-          <div class="row">
-            <div class="col mb-2">
-              <form id="filterTransactions" method="post">
-                <div class="form-row">
-                  <!-- Date Range
-                  ========================= -->
-                  <div class="col-sm-6 col-md-5 form-group">
-                    <input id="dateRange" type="text" class="form-control" placeholder="Date Range">
-                    <span class="icon-inside"><i class="fas fa-calendar-alt"></i></span> 
-                  </div>
-                  <!-- All Filters Link
-                  ========================= -->
-                  <div class="col-auto d-flex align-items-center mr-auto form-group" data-toggle="collapse"> <a class="btn-link" data-toggle="collapse" href="#allFilters" aria-expanded="false" aria-controls="allFilters">All Filters<i class="fas fa-sliders-h text-3 ml-1"></i></a> </div>
-                  <!-- Statements Link
-                  ========================= -->
-                  <div class="col-auto d-flex align-items-center ml-auto form-group">
-                    <div class="dropdown"> <a class="text-muted btn-link" href="#" role="button" id="statements" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-download text-3 mr-1"></i>Statements</a>
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="statements"> <a class="dropdown-item" href="#">CSV</a> <a class="dropdown-item" href="#">PDF</a> </div>
-                    </div>
-                  </div>
-                  
-                  <!-- All Filters collapse
-                  ================================ -->
-                  <div class="col-12 collapse mb-3" id="allFilters">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="allTransactions" name="allFilters" class="custom-control-input" checked>
-                      <label class="custom-control-label" for="allTransactions">All Transactions</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="paymentsSend" name="allFilters" class="custom-control-input">
-                      <label class="custom-control-label" for="paymentsSend">Payments Send</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="paymentsReceived" name="allFilters" class="custom-control-input">
-                      <label class="custom-control-label" for="paymentsReceived">Payments Received</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="refunds" name="allFilters" class="custom-control-input">
-                      <label class="custom-control-label" for="refunds">Refunds</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="withdrawal" name="allFilters" class="custom-control-input">
-                      <label class="custom-control-label" for="withdrawal">Withdrawal</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="deposit" name="allFilters" class="custom-control-input">
-                      <label class="custom-control-label" for="deposit">Deposit</label>
-                    </div>
-                  </div>
-                  <!-- All Filters collapse End -->
+          <!-- Profile Completeness
+          =============================== -->
+          <div class="bg-light shadow-sm rounded p-4 mb-4">
+            <h3 class="text-5 font-weight-400 d-flex align-items-center mb-3">Profile Completeness <span class="bg-light-4 text-success rounded px-2 py-1 font-weight-400 text-2 ml-2">50%</span></h3>
+            <div class="row profile-completeness">
+              <div class="col-sm-6 col-md-3 mb-4 mb-md-0">
+                <div class="border rounded p-3 text-center"> <span class="d-block text-10 text-light mt-2 mb-3"><i class="fas fa-mobile-alt"></i></span> <span class="text-5 d-block text-success mt-4 mb-3"><i class="fas fa-check-circle"></i></span>
+                  <p class="mb-0">Mobile Added</p>
                 </div>
-              </form>
+              </div>
+              <div class="col-sm-6 col-md-3 mb-4 mb-md-0">
+                <div class="border rounded p-3 text-center"> <span class="d-block text-10 text-light mt-2 mb-3"><i class="fas fa-envelope"></i></span> <span class="text-5 d-block text-success mt-4 mb-3"><i class="fas fa-check-circle"></i></span>
+                  <p class="mb-0">Email Added</p>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 mb-4 mb-sm-0">
+                <div class="border rounded p-3 text-center"> <span class="d-block text-10 text-light mt-2 mb-3"><i class="fas fa-credit-card"></i></span> <span class="text-5 d-block text-light mt-4 mb-3"><i class="far fa-circle "></i></span>
+                  <p class="mb-0"><a class="btn-link stretched-link" href="">Add Card</a></p>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="border rounded p-3 text-center"> <span class="d-block text-10 text-light mt-2 mb-3"><i class="fas fa-university"></i></span> <span class="text-5 d-block text-light mt-4 mb-3"><i class="far fa-circle "></i></span>
+                  <p class="mb-0"><a class="btn-link stretched-link" href="">Add Bank Account</a></p>
+                </div>
+              </div>
             </div>
           </div>
-          <!-- Filter End -->
+          <!-- Profile Completeness End -->
           
-          <!-- All Transactions
-          ============================================= -->
+          <!-- Recent Activity
+          =============================== -->
           <div class="bg-light shadow-sm rounded py-4 mb-4">
-            <h3 class="text-5 font-weight-400 d-flex align-items-center px-4 mb-3">All Transactions</h3>
+            <h3 class="text-5 font-weight-400 d-flex align-items-center px-4 mb-3">Recent Activity</h3>
+            
             <!-- Title
             =============================== -->
             <div class="transaction-title py-2 px-4">
@@ -319,23 +287,15 @@
             </div>
             <!-- Transaction Item Details Modal End -->
             
-            <!-- Pagination
-            ============================================= -->
-            <ul class="pagination justify-content-center mt-4 mb-0">
-              <li class="page-item disabled"> <a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a> </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active"> <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a> </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item d-flex align-content-center flex-wrap text-muted text-5 mx-1">......</li>
-              <li class="page-item"><a class="page-link" href="#">15</a></li>
-              <li class="page-item"> <a class="page-link" href="#"><i class="fas fa-angle-right"></i></a> </li>
-            </ul>
-            <!-- Paginations end --> 
+            <!-- View all Link
+            =============================== -->
+            <div class="text-center mt-4"><a href="transactions.html" class="btn-link text-3">View all<i class="fas fa-chevron-right text-2 ml-2"></i></a></div>
+            <!-- View all Link End -->
             
           </div>
-          <!-- All Transactions End --> 
+          <!-- Recent Activity End -->
         </div>
-        <!-- Middle End --> 
+        <!-- Middle Panel End -->
       </div>
     </div>
   </div>
@@ -381,47 +341,18 @@
       </div>
     </div>
   </footer>
-  <!-- Footer end --> 
+  <!-- Footer end -->
   
 </div>
-<!-- Document Wrapper end --> 
+<!-- Document Wrapper end -->
 
 <!-- Back to Top
-============================================= --> 
-<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+============================================= -->
+<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a>
 
-<!-- Script --> 
+<!-- Script -->
 <script src="../../../../Payyed%20v1.1%20-%20Money%20Transfer%20and%20Online%20Payments%20HTML%20Template/HTML/vendor/jquery/jquery.min.js"></script>
 <script src="../../../../Payyed%20v1.1%20-%20Money%20Transfer%20and%20Online%20Payments%20HTML%20Template/HTML/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../../../../Payyed%20v1.1%20-%20Money%20Transfer%20and%20Online%20Payments%20HTML%20Template/HTML/vendor/daterangepicker/moment.min.js"></script>
-<script src="../../../../Payyed%20v1.1%20-%20Money%20Transfer%20and%20Online%20Payments%20HTML%20Template/HTML/vendor/daterangepicker/daterangepicker.js"></script>
-<script>
-$(function() {
- 'use strict';
- 
- // Date Range Picker
- $(function() {
-    var start = moment().subtract(29, 'days');
-    var end = moment();
-    function cb(start, end) {
-        $('#dateRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    }
-    $('#dateRange').daterangepicker({
-        startDate: start,
-        endDate: end,
-        ranges: {
-           'Today': [moment(), moment()],
-           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-           'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-    }, cb);
-    cb(start, end);
-});
-});
-</script> 
 <script src="../../../../Payyed%20v1.1%20-%20Money%20Transfer%20and%20Online%20Payments%20HTML%20Template/HTML/js/theme.js"></script>
 </body>
 </html>
