@@ -24,8 +24,9 @@ public class Transaction extends BaseEntity{
     private BankAccount bankAccountReceive;
 
     @Column (name = "TransactionCode" ,unique = true)
-    @Digits(message = "Transaction Code phải là chữ số!", fraction = 0, integer = 30)
-    @NotBlank(message = "Transaction Code không được trông!")
+    @NotBlank(message = "TransactionCode không được trông!")
+    @Max(value = 30, message = "TransactionCode tối đa 30 ký tự số")
+    @Pattern(regexp="^\\d+$", message = "TransactionCode chỉ chứa chữ số")
     private String transactionCode;
 
     @Column (name = "Amount")

@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
-public class User extends People {
+public class User extends Person {
 	
 	@Column(name = "EmployeeCode")
 	@NotBlank(message = "EmployeeCode không được để trống")

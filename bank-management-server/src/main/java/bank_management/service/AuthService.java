@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import bank_management.common.CustomUserDetails;
 import bank_management.common.JwtTokenProvider;
 import bank_management.entity.Account;
-import bank_management.entity.People;
+import bank_management.entity.Person;
 import bank_management.enumeration.Role;
 
 @Service
@@ -26,7 +26,7 @@ public class AuthService {
     JwtTokenProvider tokenProvider;
     
     // Lấy thông tin của người dùng đã đăng nhập
-    public People getAuthPeople() {
+    public Person getAuthPeople() {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     	CustomUserDetails customUserDetails = (CustomUserDetails) auth.getPrincipal();
     	return customUserDetails.getPeople();

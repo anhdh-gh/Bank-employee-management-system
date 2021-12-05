@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
@@ -26,13 +23,11 @@ public class Salary extends BaseEntity{
     @Column(name = "Month")
     @NotNull(message = "Month không được để trống!")
     @Positive(message = "Month phải là số dương")
-    @Digits(message = "Month phải là số nguyên.", fraction = 0, integer = 10)
     private int month;
 
     @Column(name = "Year")
     @NotNull(message = "Year không được để trống!")
     @Positive(message = "Year phải là số dương")
-    @Digits(message = "Year phải là số nguyên.", fraction = 0, integer = 10)
     private int Year;
 
     public Salary(String ID, Date createDate, Date editDate, double salary, int month, int year) {

@@ -10,18 +10,18 @@ import org.springframework.stereotype.Service;
 
 import bank_management.common.CustomUserDetails;
 import bank_management.entity.Account;
-import bank_management.entity.People;
+import bank_management.entity.Person;
 import bank_management.repository.AccountRepository;
 import bank_management.repository.CustomerRepository;
 import bank_management.repository.EmployeeRepository;
 import bank_management.repository.ManagerRepository;
-import bank_management.repository.PeopleRepository;
+import bank_management.repository.PersonRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	PeopleRepository peopleRepo;
+    PersonRepository peopleRepo;
 	
 	@Autowired
 	AccountRepository accountRepo;
@@ -42,7 +42,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     	if(account == null)
     		throw new UsernameNotFoundException(username);
     	
-    	People people = peopleRepo.findByAccount(account);
+    	Person people = peopleRepo.findByAccount(account);
     	if(people == null)
     		throw new UsernameNotFoundException(username);
     	
@@ -52,7 +52,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     // JWTAuthenticationFilter sẽ sử dụng hàm này
     @Transactional
     public UserDetails loadUserById(String id) {
-        People people = peopleRepo.findById(id).orElseThrow(
+        Person people = peopleRepo.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException("User not found with id : " + id)
         );
 

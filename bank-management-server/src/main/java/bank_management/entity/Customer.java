@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "customer")
-public class Customer extends People {
+public class Customer extends Person {
 	
 	@NotBlank(message = "CustomerCode không được để trống")
 	@Column(name = "CustomerCode")

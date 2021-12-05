@@ -10,10 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 import bank_management.enumeration.Gender;
 import lombok.AllArgsConstructor;
@@ -27,13 +24,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "people")
-@AttributeOverride(name = "ID", column = @Column(name = "PeopleID"))
-public class People extends BaseEntity {
+@Table(name = "person")
+@AttributeOverride(name = "ID", column = @Column(name = "PersonID"))
+public class Person extends BaseEntity {
 	
 	@Column(name = "IdentityNumber")
 	@NotBlank(message = "IdentityNumber không được để trống")
-	@Digits(message = "IdentityNumber chỉ chứa chữ số", fraction = 0, integer = 15)
+	@Pattern(regexp="^\\d+$", message = "IdentityNumber chỉ chứa chữ số")
+	@Size(min = 0, max = 15, message = "IdentityNumber tối đa 15 ký tự số")
 	protected String identityNumber; // CMND
 
 	@NotNull(message = "DateOfBirth không được để trống")
@@ -47,7 +45,9 @@ public class People extends BaseEntity {
 
 	@Column(name = "PhoneNumber")
 	@NotBlank(message = "PhoneNumber không được để trống")
-	@Digits(message = "PhoneNumber chỉ chứa chữ số", fraction = 0, integer = 15)
+	@Size(min = 0, max = 15, message = "PhoneNumber tối đa 15 ký tự số")
+//	@Max(value = 15, message = "PhoneNumber tối đa 15 ký tự số")
+	@Pattern(regexp="^\\d+$", message = "PhoneNumber chỉ chứa chữ số")
 	protected String phoneNumber;
 
 	@Column(name = "Gender")
@@ -66,7 +66,7 @@ public class People extends BaseEntity {
 	@JoinColumn(name = "FullNameID")
 	protected FullName fullName;
 
-	public People(String identityNumber, Date dateOfBirth, String email, String phoneNumber, Gender gender, String username, String password, String city, String district, String country, String houseNumber, String zipCode, String firstName, String lastName) {
+	public Person(String identityNumber, Date dateOfBirth, String email, String phoneNumber, Gender gender, String username, String password, String city, String district, String country, String houseNumber, String zipCode, String firstName, String lastName) {
 		this.identityNumber = identityNumber;
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;

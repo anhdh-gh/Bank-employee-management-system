@@ -4,10 +4,10 @@ import bank_management.enumeration.BankAccountType;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Date;
+
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,11 +16,13 @@ import java.util.Date;
 @AttributeOverride(name = "ID", column = @Column(name = "BankAccountID"))
 public class BankAccount extends BaseEntity{
     @Column(name = "AccountCode", unique = true)
-    @Digits(message = "accountCode chỉ chứa chữ số.", fraction = 0, integer = 30)
+    @Max(value = 30, message = "AccountCode tối đa 30 ký tự số")
+    @Pattern(regexp="^\\d+$", message = "AccountCode chỉ chứa chữ số")
     protected String accountCode;
 
     @Column(name = "AccountNumber", unique = true)
-    @Digits(message = "accountNumber chỉ chứa chữ số.", fraction = 0, integer = 30)
+    @Max(value = 30, message = "AccountNumber tối đa 30 ký tự số")
+    @Pattern(regexp="^\\d+$", message = "AccountNumber chỉ chứa chữ số")
     protected String accountNumber;
 
     @Column(name = "ExprideDate")
