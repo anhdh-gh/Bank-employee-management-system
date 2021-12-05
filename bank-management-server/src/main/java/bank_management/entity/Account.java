@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "account")
 public class Account extends BaseEntity {
-	
+
 	@NotBlank(message = "Username không được để trống")
 	@Size(max = 30, message = "Username tối đa 30 ký tự")
 	@Column(name = "Username")
@@ -31,9 +31,7 @@ public class Account extends BaseEntity {
 	@Column(name = "Password")
 	private String password;
 
-	public Account(String ID, Date createDate, Date editDate,
-			@NotBlank(message = "Username không được để trống") @Size(max = 30, message = "Username tối đa 30 ký tự") String username,
-			@NotBlank(message = "Password không được để trống") @Size(min = 8, message = "Password tối thiểu 8 ký tự") String password) {
+	public Account(String ID, Date createDate, Date editDate, String username, String password) {
 		super(ID, createDate, editDate);
 		this.username = username;
 		this.password = password;

@@ -9,10 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 
+import bank_management.enumeration.Gender;
 import bank_management.enumeration.Position;
 import bank_management.enumeration.Role;
 import lombok.AllArgsConstructor;
@@ -31,36 +30,33 @@ public class User extends People {
 	
 	@Column(name = "EmployeeCode")
 	@NotBlank(message = "EmployeeCode không được để trống")
+	@Size(max = 30, message = "EmployeeCode tối đa 30 ký tự")
 	protected String employeeCode;
-	
+
+	@NotNull(message = "Role không được để trống")
 	@Column(name = "Role")
 	@Enumerated(EnumType.STRING)
 	protected Role role;
-	
+
+	@PositiveOrZero(message = "Seniority phải lớn hơn 0")
 	@Column(name = "Seniority")
 	protected double seniority;
-	
+
+	@NotNull(message = "Position không được để trống")
 	@Column(name = "Position")
 	@Enumerated(EnumType.STRING)
 	protected Position position;
 
-	public User(String ID, Date createDate, Date editDate,
-			@Digits(message = "IdentityNumber chỉ chứa chữ số", fraction = 0, integer = 20) String identityNumber,
-			@NotBlank(message = "Name không được để trống") String name, String address, Date dateOfBirth,
-			@Email(message = "Email không đúng định dạng") String email, Account account,
-			@NotBlank(message = "EmployeeCode không được để trống") String employeeCode, Role role, double seniority,
-			Position position) {
-		super(ID, createDate, editDate, identityNumber, name, address, dateOfBirth, email, account);
+	public User(@NotBlank(message = "IdentityNumber không được để trống") @Digits(message = "IdentityNumber chỉ chứa chữ số", fraction = 0, integer = 15) String identityNumber, @NotNull(message = "DateOfBirth không được để trống") Date dateOfBirth, @NotBlank(message = "Email không được để trống") @Email(message = "Email không đúng định dạng") String email, @NotBlank(message = "PhoneNumber không được để trống") @Digits(message = "PhoneNumber chỉ chứa chữ số", fraction = 0, integer = 15) String phoneNumber, @NotNull(message = "Gender không được để trống") Gender gender, Account account, Address address, FullName fullName, String employeeCode, Role role, double seniority, Position position) {
+		super(identityNumber, dateOfBirth, email, phoneNumber, gender, account, address, fullName);
 		this.employeeCode = employeeCode;
 		this.role = role;
 		this.seniority = seniority;
 		this.position = position;
 	}
 
-	public User(String identityNumber, String name, String address, Date dateOfBirth, String email, Account account,
-			@NotBlank(message = "EmployeeCode không được để trống") String employeeCode, Role role, double seniority,
-			Position position) {
-		super(identityNumber, name, address, dateOfBirth, email, account);
+	public User(String identityNumber, Date dateOfBirth, String email, String phoneNumber, Gender gender, String username, String password, String city, String district, String country, String houseNumber, String zipCode, String firstName, String lastName, String employeeCode, Role role, double seniority, Position position) {
+		super(identityNumber, dateOfBirth, email, phoneNumber, gender, username, password, city, district, country, houseNumber, zipCode, firstName, lastName);
 		this.employeeCode = employeeCode;
 		this.role = role;
 		this.seniority = seniority;

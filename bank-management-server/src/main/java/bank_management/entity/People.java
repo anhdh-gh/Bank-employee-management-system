@@ -13,7 +13,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import bank_management.enumeration.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,37 +32,48 @@ import lombok.NoArgsConstructor;
 public class People extends BaseEntity {
 	
 	@Column(name = "IdentityNumber")
-	@Digits(message = "IdentityNumber chỉ chứa chữ số", fraction = 0, integer = 20)
+	@NotBlank(message = "IdentityNumber không được để trống")
+	@Digits(message = "IdentityNumber chỉ chứa chữ số", fraction = 0, integer = 15)
 	protected String identityNumber; // CMND
-	
-	@Column(name = "Name")
-	@NotBlank(message = "Name không được để trống")
-	protected String name;
 
-	@Column(name = "Address")
-	protected String address;
-	
+	@NotNull(message = "DateOfBirth không được để trống")
 	@Column(name = "DateOfBirth")
 	protected Date dateOfBirth;
-	
+
 	@Column(name = "Email")
+	@NotBlank(message = "Email không được để trống")
 	@Email (message = "Email không đúng định dạng")
 	protected String email;
+
+	@Column(name = "PhoneNumber")
+	@NotBlank(message = "PhoneNumber không được để trống")
+	@Digits(message = "PhoneNumber chỉ chứa chữ số", fraction = 0, integer = 15)
+	protected String phoneNumber;
+
+	@Column(name = "Gender")
+	@NotNull(message = "Gender không được để trống")
+	protected Gender gender;
 	
 	@OneToOne(targetEntity = Account.class)
 	@JoinColumn(name = "AccountID")
 	protected Account account;
 
-	public People(String ID, Date createDate, Date editDate,
-			@Digits(message = "IdentityNumber chỉ chứa chữ số", fraction = 0, integer = 20) String identityNumber,
-			@NotBlank(message = "Name không được để trống") String name, String address, Date dateOfBirth,
-			@Email(message = "Email không đúng định dạng") String email, Account account) {
-		super(ID, createDate, editDate);
+	@OneToOne(targetEntity = Address.class)
+	@JoinColumn(name = "AddressID")
+	protected Address address;
+
+	@OneToOne(targetEntity = FullName.class)
+	@JoinColumn(name = "FullNameID")
+	protected FullName fullName;
+
+	public People(String identityNumber, Date dateOfBirth, String email, String phoneNumber, Gender gender, String username, String password, String city, String district, String country, String houseNumber, String zipCode, String firstName, String lastName) {
 		this.identityNumber = identityNumber;
-		this.name = name;
-		this.address = address;
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
-		this.account = account;
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
+		this.account = new Account(username, password);
+		this.address = new Address(city, district, country, houseNumber, zipCode);
+		this.fullName = new FullName(firstName, lastName);
 	}
 }
