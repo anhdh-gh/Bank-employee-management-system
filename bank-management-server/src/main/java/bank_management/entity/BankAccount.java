@@ -1,5 +1,6 @@
 package bank_management.entity;
 
+import bank_management.enumeration.BankAccountType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class BankAccount extends BaseEntity{
     @Column (name = "Type")
     @NotBlank(message = "Type không được trống!")
     @Enumerated(EnumType.STRING)
-    protected String type;
+    protected BankAccountType type;
 
     @Column (name = "Status")
     @NotBlank(message = "Status không được trống!")
@@ -47,7 +48,7 @@ public class BankAccount extends BaseEntity{
     @JoinColumn (name = "MemberLevelID")
     protected MemberLevel memberLevel;
 
-    public BankAccount(String ID, Date createDate, Date editDate, String accountCode, String accountNumber, Date expireDate, String branch, String type, boolean status, Employee employee, MemberLevel memberLevel) {
+    public BankAccount(String ID, Date createDate, Date editDate, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee, MemberLevel memberLevel) {
         super(ID, createDate, editDate);
         this.accountCode = accountCode;
         this.accountNumber = accountNumber;

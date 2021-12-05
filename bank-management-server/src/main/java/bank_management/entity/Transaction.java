@@ -1,5 +1,6 @@
 package bank_management.entity;
 
+import bank_management.enumeration.TransactionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,9 +44,9 @@ public class Transaction extends BaseEntity{
     @Column (name = "Status")
     @NotBlank(message = "Status không được trống")
     @Enumerated(EnumType.STRING)
-    private String status;
+    private TransactionStatus status;
 
-    public Transaction(String ID, Date createDate, Date editDate, BankAccount bankAccountSent, BankAccount bankAccountReceive, String transactionCode, double amount, Date executeDate, String content, String status) {
+    public Transaction(String ID, Date createDate, Date editDate, BankAccount bankAccountSent, BankAccount bankAccountReceive, String transactionCode, double amount, Date executeDate, String content, TransactionStatus status) {
         super(ID, createDate, editDate);
         this.bankAccountSent = bankAccountSent;
         this.bankAccountReceive = bankAccountReceive;
