@@ -10,14 +10,15 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table (name = "bankaccount")
+@AttributeOverride(name = "ID", column = @Column(name = "BankAccountID"))
 public class BankAccount extends BaseEntity{
-    @Column(name = "AccountCode")
-    @Digits(message = "accountCode chỉ chứa chữ số.", fraction = 0, integer = 16)
+    @Column(name = "AccountCode", unique = true)
+    @Digits(message = "accountCode chỉ chứa chữ số.", fraction = 0, integer = 30)
     protected String accountCode;
 
-    @Column(name = "AccountNumber")
-    @Digits(message = "accountNumber chỉ chứa chữ số.", fraction = 0, integer = 16)
+    @Column(name = "AccountNumber", unique = true)
+    @Digits(message = "accountNumber chỉ chứa chữ số.", fraction = 0, integer = 30)
     protected String accountNumber;
 
     @Column(name = "ExprideDate")
@@ -29,7 +30,7 @@ public class BankAccount extends BaseEntity{
 
     @Column (name = "Type")
     @NotBlank(message = "Type không được trống!")
-    protected int type;
+    protected String type;
 
     @Column (name = "Status")
     @NotBlank(message = "Status không được trống!")
