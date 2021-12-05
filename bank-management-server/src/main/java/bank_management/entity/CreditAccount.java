@@ -7,23 +7,48 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table(name = "creditAccount")
 public class CreditAccount extends BankAccount{
     @Column(name = "CreditLimit")
-    @NotBlank(message = "creditLimit không được để trống!")
+    @NotNull(message = "creditLimit không được để trống!")
     private double creditLimit;
 
     @Column(name = "DebtAmount")
-    @NotBlank(message = "debtAmount không được để trống!")
+    @NotNull(message = "debtAmount không được để trống!")
     private double debtAmount;
 
     @Column(name = "InterestRate")
-    @NotBlank(message = "InterestRate không được để trống!")
+    @NotNull(message = "InterestRate không được để trống!")
     private double interestRate;
+
+    @NotBlank(message = "CVV không được để trống")
+    @Size(max = 10, message = "CVV tối đa 10 ký tự")
+    @Column(name = "CVV")
+    private String CVV;
+
+    public CreditAccount(@Digits(message = "accountCode chỉ chứa chữ số.", fraction = 0, integer = 30) String accountCode, @Digits(message = "accountNumber chỉ chứa chữ số.", fraction = 0, integer = 30) String accountNumber, @NotNull(message = "expireDate không được trống") Date expireDate, @NotBlank(message = "Branch không được trống!") String branch, @NotBlank(message = "Type không được trống!") String type, @NotBlank(message = "Status không được trống!") boolean status, Employee employee, MemberLevel memberLevel, double creditLimit, double debtAmount, double interestRate, String CVV) {
+        super(accountCode, accountNumber, expireDate, branch, type, status, employee, memberLevel);
+        this.creditLimit = creditLimit;
+        this.debtAmount = debtAmount;
+        this.interestRate = interestRate;
+        this.CVV = CVV;
+    }
+
+    public CreditAccount(String ID, Date createDate, Date editDate, String accountCode, String accountNumber, Date expireDate, String branch, String type, boolean status, Employee employee, MemberLevel memberLevel, double creditLimit, double debtAmount, double interestRate, String CVV) {
+        super(ID, createDate, editDate, accountCode, accountNumber, expireDate, branch, type, status, employee, memberLevel);
+        this.creditLimit = creditLimit;
+        this.debtAmount = debtAmount;
+        this.interestRate = interestRate;
+        this.CVV = CVV;
+    }
 }
