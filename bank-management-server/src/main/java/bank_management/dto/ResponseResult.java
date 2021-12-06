@@ -12,4 +12,9 @@ public class ResponseResult {
     private Object data;
     private String message;
     private ResponseStatus responseStatus;
+
+    public ResponseResult(String message, ResponseStatus responseStatus) {
+        this.message = message;
+        this.responseStatus = responseStatus;
+    }
 }
