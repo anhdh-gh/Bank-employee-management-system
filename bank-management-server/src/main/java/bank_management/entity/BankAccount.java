@@ -10,7 +10,6 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table (name = "bankaccount")
 @AttributeOverride(name = "ID", column = @Column(name = "BankAccountID"))
@@ -25,7 +24,7 @@ public class BankAccount extends BaseEntity{
     @Pattern(regexp="^\\d+$", message = "AccountNumber chỉ chứa chữ số")
     protected String accountNumber;
 
-    @Column(name = "ExprideDate")
+    @Column(name = "ExpireDate")
     @NotNull(message = "expireDate không được trống")
     protected Date expireDate;
 
@@ -52,6 +51,17 @@ public class BankAccount extends BaseEntity{
 
     public BankAccount(String ID, Date createDate, Date editDate, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee, MemberLevel memberLevel) {
         super(ID, createDate, editDate);
+        this.accountCode = accountCode;
+        this.accountNumber = accountNumber;
+        this.expireDate = expireDate;
+        this.branch = branch;
+        this.type = type;
+        this.status = status;
+        this.employee = employee;
+        this.memberLevel = memberLevel;
+    }
+
+    public BankAccount(String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee, MemberLevel memberLevel) {
         this.accountCode = accountCode;
         this.accountNumber = accountNumber;
         this.expireDate = expireDate;

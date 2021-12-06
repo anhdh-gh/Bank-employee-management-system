@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table (name = "salary")
 public class Salary extends BaseEntity{
 
     @Column(name = "Salary")
@@ -28,16 +28,19 @@ public class Salary extends BaseEntity{
     @Column(name = "Year")
     @NotNull(message = "Year không được để trống!")
     @Positive(message = "Year phải là số dương")
-    private int Year;
+    private int year;
 
-    @ManyToOne(targetEntity = Employee.class)
+    @ManyToOne(targetEntity = Employee.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "EmployeeID")
     private Employee employee;
 
-    public Salary(String ID, Date createDate, Date editDate, double salary, int month, int year) {
+    public Salary(String ID, Date createDate, Date editDate, double salary, int month, int year, Employee employee) {
         super(ID, createDate, editDate);
         this.salary = salary;
         this.month = month;
-        Year = year;
+        this.year = year;
+        this.employee = employee;
     }
+
+
 }
