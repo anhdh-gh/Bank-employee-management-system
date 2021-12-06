@@ -16,12 +16,12 @@ import java.util.Date;
 @AttributeOverride(name = "ID", column = @Column(name = "BankAccountID"))
 public class BankAccount extends BaseEntity{
     @Column(name = "AccountCode", unique = true)
-    @Max(value = 30, message = "AccountCode tối đa 30 ký tự số")
+    @Size(max = 30, message = "AccountCode tối đa 30 ký tự")
     @Pattern(regexp="^\\d+$", message = "AccountCode chỉ chứa chữ số")
     protected String accountCode;
 
     @Column(name = "AccountNumber", unique = true)
-    @Max(value = 30, message = "AccountNumber tối đa 30 ký tự số")
+    @Size(max = 30, message = "AccountNumber tối đa 30 ký tự")
     @Pattern(regexp="^\\d+$", message = "AccountNumber chỉ chứa chữ số")
     protected String accountNumber;
 
