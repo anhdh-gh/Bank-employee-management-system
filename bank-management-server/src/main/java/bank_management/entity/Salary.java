@@ -30,6 +30,10 @@ public class Salary extends BaseEntity{
     @Positive(message = "Year phải là số dương")
     private int Year;
 
+    @ManyToOne(targetEntity = Employee.class)
+    @JoinColumn(name = "EmployeeID")
+    private Employee employee;
+
     public Salary(String ID, Date createDate, Date editDate, double salary, int month, int year) {
         super(ID, createDate, editDate);
         this.salary = salary;

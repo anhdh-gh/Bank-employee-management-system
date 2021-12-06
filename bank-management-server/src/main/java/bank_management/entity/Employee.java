@@ -28,12 +28,10 @@ public class Employee extends User {
 	@NotNull(message = "BaseSalary không được để trống")
 	private double baseSalary;
 
-	@OneToMany(targetEntity = BankAccount.class)
-	@JoinColumn(name = "EmployeeID")
+	@OneToMany(targetEntity = BankAccount.class, mappedBy = "employee")
 	private List<BankAccount> bankAccountList;
 
-	@OneToMany(targetEntity = Salary.class)
-	@JoinColumn(name = "EmployeeID")
+	@OneToMany(targetEntity = Salary.class, mappedBy = "employee")
 	private List<Salary> salaryList;
 
 	public Employee(@NotBlank(message = "EmployeeCode không được để trống") @Size(max = 30, message = "EmployeeCode tối đa 30 ký tự") String employeeCode, @NotNull(message = "Role không được để trống") Role role, @PositiveOrZero(message = "Seniority phải lớn hơn 0") double seniority, @NotNull(message = "Position không được để trống") Position position, double baseSalary, List<BankAccount> bankAccountList, List<Salary> salaryList) {
