@@ -3,11 +3,15 @@ package bank_management.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import bank_management.repository.AccountRepository;
+import bank_management.repository.PersonRepository;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import bank_management.common.CustomUserDetails;
@@ -18,12 +22,21 @@ import bank_management.enumeration.Role;
 
 @Service
 public class AuthService {
+
+    @Autowired
+    AccountRepository accountRepo;
+
+    @Autowired
+    PersonRepository personRepo;
 	
     @Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
     JwtTokenProvider tokenProvider;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
     
     // Lấy thông tin của người dùng đã đăng nhập
     public Person getAuthPeople() {
@@ -59,6 +72,33 @@ public class AuthService {
         String jwtToken = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
         
         return jwtToken;
+    }
+
+    // Get Account bu username
+    public Account getAccountByUsername(String username) {
+        Account account = accountRepo.findByUsername(username);
+        return account;
+    }
+
+    // Get Person by Account
+    public Person getPersonByAccount(Account account) {
+        Person person = personRepo.findByAccount(account);
+        return person;
+    }
+
+    // Reset password
+    public String resetPassword(Person person) {
+        // Tạo ra 1 chuỗi bất kỳ có 8 ký tự
+        String newPassword = RandomStringUtils.randomAlphanumeric(8);
+
+        // Mã hóa mật khẩu mới
+        person.getAccount().setPassword(passwordEncoder.encode(newPassword));
+
+        // Lưu vào database
+        personRepo.save(person);
+
+        // Trả về mật khẩu mới
+        return newPassword;
     }
 }
 
