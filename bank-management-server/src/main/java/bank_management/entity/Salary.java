@@ -1,8 +1,10 @@
 package bank_management.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -30,7 +32,8 @@ public class Salary extends BaseEntity{
     @Positive(message = "Year phải là số dương")
     private int year;
 
-    @ManyToOne(targetEntity = Employee.class, fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EmployeeID")
     private Employee employee;
 

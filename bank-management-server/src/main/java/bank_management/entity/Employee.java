@@ -6,10 +6,13 @@ import javax.validation.constraints.*;
 import bank_management.enumeration.Gender;
 import bank_management.enumeration.Position;
 import bank_management.enumeration.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.Date;
 import java.util.List;
@@ -27,10 +30,13 @@ public class Employee extends User {
 	@NotNull(message = "BaseSalary không được để trống")
 	private double baseSalary;
 
-	@OneToMany(targetEntity = BankAccount.class, mappedBy = "employee")
+	@OneToMany(targetEntity = BankAccount.class, mappedBy = "employee", fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SUBSELECT)
 	private List<BankAccount> bankAccountList;
 
-	@OneToMany(targetEntity = Salary.class, mappedBy = "employee")
+
+	@OneToMany(targetEntity = Salary.class, mappedBy = "employee", fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Salary> salaryList;
 
 	public Employee(@NotBlank(message = "EmployeeCode không được để trống") @Size(max = 30, message = "EmployeeCode tối đa 30 ký tự") String employeeCode, @NotNull(message = "Role không được để trống") Role role, @PositiveOrZero(message = "Seniority phải lớn hơn 0") double seniority, @NotNull(message = "Position không được để trống") Position position, double baseSalary, List<BankAccount> bankAccountList, List<Salary> salaryList) {

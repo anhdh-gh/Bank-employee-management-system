@@ -19,8 +19,11 @@ public class EmployeeService {
     }
 
     public Employee findEmployeeById(String ID) {
-        Optional<Employee> employee = employeeRepository.findById(ID);
-        return employee.get();
+        Optional<Employee> optionalEmployee = employeeRepository.findById(ID);
+        if (optionalEmployee.isPresent()) {
+            return optionalEmployee.get();
+        }
+        return null;
     }
 
     public List<Employee> findAllEmployee() {
