@@ -46,7 +46,6 @@ public class Person extends BaseEntity {
 	@Column(name = "PhoneNumber")
 	@NotBlank(message = "PhoneNumber không được để trống")
 	@Size(min = 0, max = 15, message = "PhoneNumber tối đa 15 ký tự số")
-//	@Max(value = 15, message = "PhoneNumber tối đa 15 ký tự số")
 	@Pattern(regexp="^\\d+$", message = "PhoneNumber chỉ chứa chữ số")
 	protected String phoneNumber;
 

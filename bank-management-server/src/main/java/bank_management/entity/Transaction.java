@@ -25,7 +25,7 @@ public class Transaction extends BaseEntity{
 
     @Column (name = "TransactionCode" ,unique = true)
     @NotBlank(message = "TransactionCode không được trông!")
-    @Max(value = 30, message = "TransactionCode tối đa 30 ký tự số")
+    @Size(max = 30, message = "TransactionCode tối đa 30 ký tự")
     @Pattern(regexp="^\\d+$", message = "TransactionCode chỉ chứa chữ số")
     private String transactionCode;
 
