@@ -58,7 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             	
             	// Cho phép mọi người truy cập vào các đường dẫn này
                 .antMatchers(
-                	"/auth/login"
+                	"/auth/login",
+                    "/auth/forgot_password"
                 ).permitAll()
                 
 //                // Cho phép những người đã authenticate và là Manager truy cập vào các đường dẫn này

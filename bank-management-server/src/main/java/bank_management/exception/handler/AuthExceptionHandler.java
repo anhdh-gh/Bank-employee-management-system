@@ -1,5 +1,6 @@
 package bank_management.exception.handler;
 
+import bank_management.dto.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -18,10 +19,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @RestControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class AuthExceptionHandler { // Bắt những lỗi về Authentication, Authorization, Register, ForgotPassword
-	
-    @Autowired
-    ObjectMapper json;
-	
+
 	@ExceptionHandler({
 		BadCredentialsException.class,
 		LockedException.class,
@@ -29,8 +27,11 @@ public class AuthExceptionHandler { // Bắt những lỗi về Authentication, 
 		AuthenticationException.class
 	})
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public ObjectNode handleAuthException(Exception  e) {
-		return json.createObjectNode().putPOJO("errorMessage", "Username or password wrong");
+	public ResponseResult handleAuthException(Exception  e) {
+		return new ResponseResult (
+			"Username hoặc password không đúng",
+			bank_management.enumeration.ResponseStatus.Invalid
+		);
 	}
 }
 

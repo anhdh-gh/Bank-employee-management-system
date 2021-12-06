@@ -3,6 +3,7 @@ package bank_management.exception.handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import bank_management.dto.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -18,14 +19,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @RestControllerAdvice
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class ApiExceptionHandler { // Bắt những exception chung của hệ thống
-	
-    @Autowired
-    ObjectMapper json;
-	
+
 	// Xử lý lỗi validation bị fail
 	@ExceptionHandler(BindException.class) 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)  // Nếu validate fail thì trả về 400
-	public ObjectNode handleBindException(BindException e) {
+	public ResponseResult handleBindException(BindException e) {
 		String errorMessage = "Request không hợp lệ";
 		
 	    // Trả về message của lỗi đầu tiên    
@@ -34,19 +32,25 @@ public class ApiExceptionHandler { // Bắt những exception chung của hệ t
 	    					.getAllErrors()
 	    					.get(0)
 	    					.getDefaultMessage();
-	    
-	    return json.createObjectNode().putPOJO("errorMessage", errorMessage);
+
+		return new ResponseResult (
+			errorMessage,
+			bank_management.enumeration.ResponseStatus.Invalid
+		);
 	}
 
     // Bắt Exception.class
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ObjectNode handleUnwantedException(Exception e) {
+    public ResponseResult handleUnwantedException(Exception e) {
     	
         // Log lỗi ra và ẩn đi message thực sự của hệ thống    	
     	Logger.getLogger(ApiExceptionHandler.class.getName()).log(Level.SEVERE, null, e);
 
-        return json.createObjectNode().putPOJO("errorMessage", e.getMessage());
+		return new ResponseResult (
+			e.getMessage(),
+			bank_management.enumeration.ResponseStatus.Error
+		);
     }
 }
 
