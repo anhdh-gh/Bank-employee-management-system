@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
-@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
