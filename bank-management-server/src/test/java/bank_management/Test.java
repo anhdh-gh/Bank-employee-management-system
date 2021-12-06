@@ -1,20 +1,22 @@
 package bank_management;
 
-import java.util.Optional;
-
+import bank_management.entity.Account;
+import bank_management.entity.Address;
+import bank_management.entity.FullName;
+import bank_management.entity.Person;
+import bank_management.enumeration.Gender;
+import bank_management.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import bank_management.entity.Customer;
-import bank_management.repository.CustomerRepository;
-import bank_management.repository.EmployeeRepository;
-import bank_management.repository.ManagerRepository;
-import bank_management.repository.PeopleRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Date;
 
 @SpringBootTest
 public class Test {
     @Autowired
-    PeopleRepository peopleRepo;
+    PersonRepository personRepo;
     
     @Autowired
     CustomerRepository customerRepo;
@@ -24,12 +26,39 @@ public class Test {
     
     @Autowired
     EmployeeRepository employeeRepo;
-    
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    AccountRepository accountRepo;
+
+    @Autowired
+    AddressRepository addressRepo;
+
+    @Autowired
+    FullNameRepository fullNameRepo;
+
     @org.junit.jupiter.api.Test
     void test() {
-    	
-    	Optional<Customer> optCustomer = customerRepo.findById("064500d1-0866-4391-b170-4b6295fd5bb3");
-    	if(optCustomer.isPresent())
-    		System.out.println(optCustomer.get());
+//        Account account = new Account("dohunganh", passwordEncoder.encode("dohunganh"))
+//        Address address = new Address("ha noi", "ha dong", "vietnam", "123", "123456")
+//        FullName fullName = new FullName("do hung", "anh");
+
+        Person person = new Person(
+            "0123456789",
+            new Date(),
+            "dohunganh@gmail.com",
+            "0962507172",
+            Gender.Male,
+            "dohunganh1", passwordEncoder.encode("dohunganh"),
+            "ha noi", "ha dong", "vietnam", "123", "123456",
+            "do hung", "anh"
+        );
+
+        accountRepo.save(person.getAccount());
+        addressRepo.save(person.getAddress());
+        fullNameRepo.save(person.getFullName());
+        personRepo.save(person);
     }
 }

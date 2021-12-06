@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 
 @MappedSuperclass // Class cha không phải là entity. https://techmaster.vn/posts/36499/hibernate-inheritance-mapping
 @Data  // All together now: A shortcut for @ToString, @EqualsAndHashCode, @Getter on all fields, @Setter on all non-final fields, and @RequiredArgsConstructor!
-@NoArgsConstructor
 @AllArgsConstructor
 public class BaseEntity {
 	
@@ -27,10 +26,13 @@ public class BaseEntity {
 	
 	@Column(name = "EditDate")
 	protected Date editDate;
-	
+
+	public BaseEntity() {
+		this.ID = UUID.randomUUID().toString();
+	}
+
 	@PrePersist // Thực thi trước khi entity được persist (được lưu vào database) bởi method persist()
 	protected void init() {
-		this.ID = UUID.randomUUID().toString();
 		this.createDate = new Date();
 	}
 	

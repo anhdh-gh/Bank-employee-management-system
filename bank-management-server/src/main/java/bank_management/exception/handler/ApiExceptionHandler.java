@@ -46,7 +46,7 @@ public class ApiExceptionHandler { // Bắt những exception chung của hệ t
         // Log lỗi ra và ẩn đi message thực sự của hệ thống    	
     	Logger.getLogger(ApiExceptionHandler.class.getName()).log(Level.SEVERE, null, e);
 
-        return json.createObjectNode().putPOJO("errorMessage", "Unknow error");
+        return json.createObjectNode().putPOJO("errorMessage", e.getMessage());
     }
 }
 

@@ -2,14 +2,10 @@ package bank_management.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
+import bank_management.enumeration.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,10 +16,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Customer extends People {
+@Table(name = "customer")
+public class Customer extends Person {
 	
 	@NotBlank(message = "CustomerCode không được để trống")
 	@Column(name = "CustomerCode")
+	@Size(max = 30, message = "customerCode tối đa 30 ký tự")
 	private String customerCode;
 
 	@OneToOne(targetEntity = PaymentAccount.class)
@@ -34,18 +32,17 @@ public class Customer extends People {
 	@JoinColumn(name = "CreditAccountID")
 	private CreditAccount creditAccount;
 
-	public Customer(String identityNumber, String name, String address, Date dateOfBirth, String email, Account account,
-			@NotBlank(message = "CustomerCode không được để trống") String customerCode) {
-		super(identityNumber, name, address, dateOfBirth, email, account);
+	public Customer(@NotBlank(message = "IdentityNumber không được để trống") @Digits(message = "IdentityNumber chỉ chứa chữ số", fraction = 0, integer = 15) String identityNumber, @NotNull(message = "DateOfBirth không được để trống") Date dateOfBirth, @NotBlank(message = "Email không được để trống") @Email(message = "Email không đúng định dạng") String email, @NotBlank(message = "PhoneNumber không được để trống") @Digits(message = "PhoneNumber chỉ chứa chữ số", fraction = 0, integer = 15) String phoneNumber, @NotNull(message = "Gender không được để trống") Gender gender, Account account, Address address, FullName fullName, String customerCode, PaymentAccount paymentAccount, CreditAccount creditAccount) {
+		super(identityNumber, dateOfBirth, email, phoneNumber, gender, account, address, fullName);
 		this.customerCode = customerCode;
+		this.paymentAccount = paymentAccount;
+		this.creditAccount = creditAccount;
 	}
 
-	public Customer(String ID, Date createDate, Date editDate,
-			@Digits(message = "IdentityNumber chỉ chứa chữ số", fraction = 0, integer = 20) String identityNumber,
-			@NotBlank(message = "Name không được để trống") String name, String address, Date dateOfBirth,
-			@Email(message = "Email không đúng định dạng") String email, Account account,
-			@NotBlank(message = "CustomerCode không được để trống") String customerCode) {
-		super(ID, createDate, editDate, identityNumber, name, address, dateOfBirth, email, account);
+	public Customer(String identityNumber, Date dateOfBirth, String email, String phoneNumber, Gender gender, String username, String password, String city, String district, String country, String houseNumber, String zipCode, String firstName, String lastName, String customerCode, PaymentAccount paymentAccount, CreditAccount creditAccount) {
+		super(identityNumber, dateOfBirth, email, phoneNumber, gender, username, password, city, district, country, houseNumber, zipCode, firstName, lastName);
 		this.customerCode = customerCode;
+		this.paymentAccount = paymentAccount;
+		this.creditAccount = creditAccount;
 	}
 }

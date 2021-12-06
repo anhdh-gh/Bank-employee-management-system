@@ -12,12 +12,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import bank_management.entity.Customer;
 import bank_management.entity.Employee;
 import bank_management.entity.Manager;
-import bank_management.entity.People;
+import bank_management.entity.Person;
 import bank_management.enumeration.Role;
 import bank_management.repository.CustomerRepository;
 import bank_management.repository.EmployeeRepository;
 import bank_management.repository.ManagerRepository;
-import bank_management.repository.PeopleRepository;
+import bank_management.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -27,9 +27,9 @@ public class CustomUserDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
-	People people;
+	Person people;
 
-    PeopleRepository peopleRepo;
+    PersonRepository peopleRepo;
 
     CustomerRepository customerRepo;
 
