@@ -2,6 +2,7 @@ package bank_management.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import bank_management.repository.AccountRepository;
 import bank_management.repository.PersonRepository;
@@ -95,7 +96,7 @@ public class AuthService {
         person.getAccount().setPassword(passwordEncoder.encode(newPassword));
 
         // Lưu vào database
-        personRepo.save(person);
+        accountRepo.save(person.getAccount());
 
         // Trả về mật khẩu mới
         return newPassword;

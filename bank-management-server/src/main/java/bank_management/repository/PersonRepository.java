@@ -9,4 +9,7 @@ import bank_management.entity.Person;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, String>{
 	Person findByAccount(Account account);
+	Person findByIdentityNumber(String identityNumber);
+	Person findByEmail(String email);
+	Person findByPhoneNumber(String phoneNumber);
 }

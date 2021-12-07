@@ -2,14 +2,7 @@ package bank_management.entity;
 
 import java.util.Date;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import bank_management.enumeration.Gender;
@@ -53,7 +46,7 @@ public class Person extends BaseEntity {
 	@NotNull(message = "Gender không được để trống")
 	protected Gender gender;
 	
-	@OneToOne(targetEntity = Account.class)
+	@OneToOne(targetEntity = Account.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "AccountID")
 	protected Account account;
 
@@ -61,7 +54,7 @@ public class Person extends BaseEntity {
 	@JoinColumn(name = "AddressID")
 	protected Address address;
 
-	@OneToOne(targetEntity = FullName.class)
+	@OneToOne(targetEntity = FullName.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "FullNameID")
 	protected FullName fullName;
 
@@ -76,3 +69,5 @@ public class Person extends BaseEntity {
 		this.fullName = new FullName(firstName, lastName);
 	}
 }
+
+// https://hocspringboot.net/2020/10/23/onetomany-va-manytoone-trong-spring-boot/
