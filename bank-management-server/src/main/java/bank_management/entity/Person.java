@@ -50,7 +50,7 @@ public class Person extends BaseEntity {
 	@JoinColumn(name = "AccountID")
 	protected Account account;
 
-	@OneToOne(targetEntity = Address.class)
+	@OneToOne(targetEntity = Address.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "AddressID")
 	protected Address address;
 
