@@ -29,4 +29,26 @@ public class EmployeeService {
     public List<Employee> findAllEmployee() {
         return employeeRepository.findAll();
     }
+
+    public Employee editEmployee(Employee employee) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employee.getID());
+        if (optionalEmployee.isPresent()) {
+            return employeeRepository.save(employee);
+        }
+        return null;
+    }
+
+    public Employee addEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public boolean deleteEmployee(String ID) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(ID);
+        if (optionalEmployee.isPresent()) {
+            employeeRepository.delete(optionalEmployee.get());
+            return true;
+        }
+        return false;
+    }
+
 }

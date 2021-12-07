@@ -39,7 +39,6 @@ public class EmployeeController {
         return ResponseEntity
                 .ok()
                 .body(new ResponseResult(employee, "Lấy thông tin nhân viên có ID là " + ID + " thành công.", ResponseStatus.Success ));
-
     }
 
     @GetMapping
@@ -50,6 +49,40 @@ public class EmployeeController {
                 "Lấy tất cả nhân viên Thành công",
                 ResponseStatus.Success
         );
+    }
+
+    @PutMapping
+    public ResponseEntity<?> editEmployee(@Valid @RequestBody Employee employee) {
+        Employee employeeIsEdited = employeeService.editEmployee(employee);
+        if (employeeIsEdited == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseResult("Không thể chỉnh sửa do nhân viên có ID là " + employee.getID() + "không tồn tại!", ResponseStatus.Error));
+        }
+        else {
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseResult(
+                            employeeIsEdited,
+                            "Chỉnh sửa thông tin nhân viên thành công!",
+                            ResponseStatus.Success
+                            )
+                    );
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable(value = "id") String ID) {
+        boolean isDeleted = employeeService.deleteEmployee(ID);
+        if (isDeleted) {
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseResult("Xoá nhân viên có ID là " + ID + " thành công.", ResponseStatus.Success ));
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseResult("Không thể xóa do nhân viên có ID là " + ID + "không tồn tại!", ResponseStatus.Error));
+        }
     }
 
 }
