@@ -1,4 +1,4 @@
-class BaseForm{
+class BaseForm {
     constructor(formId){
         let me = this;
 

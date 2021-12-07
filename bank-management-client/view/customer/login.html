@@ -17,7 +17,13 @@
   ============================================= -->
   <link rel="stylesheet" type="text/css" href="../../assets/lib/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="../../assets/lib/font-awesome/css/all.min.css" />
-  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/customer/stylesheet.css" />
+ 
+  <!-- DevExtreme theme -->
+  <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/21.2.3/css/dx.light.css">
+
+  <!-- login css -->
+  <link rel="stylesheet" type="text/css" href="../../assets/css/customer/login.css">
 </head>
 <body>
 
@@ -62,23 +68,23 @@
               <h3 class="font-weight-400 mb-4">Log In</h3>
               <form id="loginForm" method="post">
                 <div class="form-group">
-                  <label for=userName">Username</label>
-                  <input type="text" class="form-control" id="userName" required placeholder="Enter Your Name">
+                  <label for="userName">Username</label>
+                  <input type="text" class="form-control" id="username" name="username" required placeholder="Enter Your Name">
                 </div>
                 <div class="form-group">
                   <label for="loginPassword">Password</label>
-                  <input type="password" class="form-control" id="loginPassword" required placeholder="Enter Password">
+                  <input type="password" class="form-control" id="password" name="password" required placeholder="Enter Password">
                 </div>
                 <div class="row">
                   <div class="col-sm">
                     <div class="form-check custom-control custom-checkbox">
-                      <input id="remember-me" name="remember" class="custom-control-input" type="checkbox">
-                      <label class="custom-control-label" for="remember-me">Remember Me</label>
+                      <input id="remember" name="remember" class="custom-control-input" type="checkbox">
+                      <label class="custom-control-label" for="remember">Remember Me</label>
                     </div>
                   </div>
                   <div class="col-sm text-right"><a class="btn-link" href="forgotPassword.html">Forgot Password ?</a></div>
                 </div>
-                <button class="btn btn-primary btn-block my-4" type="submit">Login</button>
+                <button class="btn btn-primary btn-block my-4" id="login-button" type="submit">Login</button>
               </form>
               <p class="text-3 text-center text-muted">Don't have an account? <a class="btn-link" href="signup.html">Sign Up</a></p>
             </div>
@@ -97,6 +103,19 @@
 <!-- Script -->
 <script src="../../assets/lib/jquery/jquery.min.js"></script>
 <script src="../../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../../assets/js/theme.js"></script>
+<script src="../../assets/js/customer/theme.js"></script>
+
+<!-- Thư viện dùng chung -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<script src="https://cdn3.devexpress.com/jslib/21.2.3/js/dx.all.js"></script>
+<script src="../../assets/js/common/Notify.js"></script>
+<script src="../../assets/js/common/ApiClient.js"></script>
+
+<!-- Login -->
+<script src="../../assets/js/common/pageNotAuth.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script src="../../assets/js/common/Form.js"></script>
+<script src="../../assets/js/customer/login.js"></script>
 </body>
 </html>
