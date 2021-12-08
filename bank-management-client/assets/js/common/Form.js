@@ -20,6 +20,11 @@ const Form = {
             const input = $(this)
             data[`${input.attr('name')}`] = Form.getValueInput(`#${input.attr('id')}`)
         })
+
+        $(`${idForm} select`).each(function () {
+            const select = $(this)
+            data[`${select.attr('name')}`] = $(`#${select.attr('id')} :selected`).text()
+        })
         return data
     }
 }

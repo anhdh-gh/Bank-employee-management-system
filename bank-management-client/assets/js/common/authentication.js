@@ -4,13 +4,16 @@ const origin = window.location.origin;   // Returns base URL (https://example.co
 
 const urlCustomerLoginPage = '/view/customer/login.html'
 
-const urlEmployeeLoginPage = ''
+const urlEmployeeLoginPage = '/view/employee/login.html'
 
 const urlManagerLoginPage = ''
 
 const urlsPageNotAuth = [
     '/view/customer/login.html',
-    '/view/customer/forgotPassword.html'
+    '/view/customer/forgotPassword.html',
+
+    '/view/employee/login.html',
+    '/view/employee/forgotPassword.html',
 ]
 
 const resetToken = () => {
