@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService {
+public class EmployeeService extends PersonService{
     @Autowired
     EmployeeRepository employeeRepository;
 
@@ -34,6 +34,7 @@ public class EmployeeService {
     }
 
     public Employee addEmployee(Employee employee) {
+//        if (checkEmailExist(employee.getEmail()))
         return employeeRepository.save(employee);
     }
 

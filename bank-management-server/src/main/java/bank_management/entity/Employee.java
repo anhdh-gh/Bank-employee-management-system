@@ -30,7 +30,7 @@ public class Employee extends User {
 	@NotNull(message = "BaseSalary không được để trống")
 	private double baseSalary;
 
-	@OneToMany(targetEntity = BankAccount.class, mappedBy = "employee", fetch = FetchType.LAZY)
+	@OneToMany(targetEntity = BankAccount.class, mappedBy = "employee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@Fetch(FetchMode.SUBSELECT)
 	private List<BankAccount> bankAccountList;
 

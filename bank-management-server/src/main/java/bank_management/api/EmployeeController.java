@@ -6,9 +6,7 @@ import bank_management.dto.ResponseResult;
 import bank_management.entity.Employee;
 import bank_management.enumeration.ResponseStatus;
 import bank_management.service.EmployeeService;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +18,33 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @Autowired
-    ObjectMapper json;
-
     @PostMapping
     public ResponseEntity<?> addEmployee(@Valid @RequestBody Employee employee) {
+        if (employeeService.checkUsernameExist(employee.getAccount().getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseResult("Username đã tồn tại!", ResponseStatus.Error));
+        }
+        if (employeeService.checkIdentityNumberExist(employee.getIdentityNumber())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseResult("IdentityNumber đã tồn tại!", ResponseStatus.Error));
+        }
+        if (employeeService.checkEmailExist(employee.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseResult("Email đã tồn tại!", ResponseStatus.Error));
+        }
+        if (employeeService.checkPhoneNumberExist(employee.getPhoneNumber())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseResult("Số điện thoại đã tồn tại!", ResponseStatus.Error));
+        }
+        Employee employeeSaved = employeeService.addEmployee(employee);
+        return  ResponseEntity
+                .ok()
+                .body(new ResponseResult(employeeSaved, "Tạo tài khoản nhân viên thành công.", ResponseStatus.Success ));
 
-        return null;
     }
 
     @GetMapping("/{id}")
@@ -47,7 +65,7 @@ public class EmployeeController {
         List<Employee> employees = employeeService.findAllEmployee();
         return new ResponseResult(
                 employees,
-                "Lấy tất cả nhân viên Thành công",
+                "Lấy tất cả nhân viên thành công",
                 ResponseStatus.Success
         );
     }
