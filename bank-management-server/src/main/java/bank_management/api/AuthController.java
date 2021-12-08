@@ -24,6 +24,18 @@ public class AuthController {
     
     @Autowired
     ObjectMapper json;
+
+    @GetMapping("/getRole")
+    public ResponseEntity<?> getRole() {
+        return ResponseEntity
+            .ok()
+            .body(new ResponseResult(
+                json.createObjectNode()
+                    .putPOJO("ROLE", authService.getAuthRole()),
+                "Lấy role thành công",
+                ResponseStatus.Success
+        ));
+    }
     
     @PostMapping("/login")
     public ResponseResult authenticateUser(@Valid @RequestBody Account account) {

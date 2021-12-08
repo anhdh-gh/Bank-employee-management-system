@@ -1,19 +1,18 @@
-const pathname = window.location.pathname; // Returns path only (/path/example.html)
-const url = window.location.href;     // Returns full URL (https://example.com/path/example.html)
-const origin = window.location.origin;   // Returns base URL (https://example.com)
-
-const urlCustomerLoginPage = '/view/customer/login.html'
-
-const urlEmployeeLoginPage = '/view/employee/login.html'
-
-const urlManagerLoginPage = ''
-
 const urlsPageNotAuth = [
     '/view/customer/login.html',
     '/view/customer/forgotPassword.html',
 
     '/view/employee/login.html',
     '/view/employee/forgotPassword.html',
+]
+
+const privateManager = [
+    '/view/employee/all-employees.html',
+    '/view/employee/salary.html',
+    '/view/employee/salary-view.html',
+    '/view/employee/add-employee.html',
+    '/view/employee/edit-employee.html',
+    '/view/employee/index.html',
 ]
 
 const resetToken = () => {
@@ -24,14 +23,42 @@ const resetToken = () => {
 if (urlsPageNotAuth.some(url => url === pathname))
     resetToken()
 
-if (urlsPageNotAuth.every(url => url !== pathname) && !Cookies.get("token") && !sessionStorage.getItem('token')) {
-    if (pathname.includes('/customer'))
-        window.location.replace(urlCustomerLoginPage)
-    if (pathname.includes('/employee'))
-        window.location.replace(urlEmployeeLoginPage)
-    if (pathname.includes('/manager'))
-        window.location.replace(urlManagerLoginPage)
+if (urlsPageNotAuth.every(url => url !== pathname)) {
+    if(!Cookies.get("token") && !sessionStorage.getItem('token'))
+        backLogin()
+    else {
+        ApiClient.get('/auth/getRole')
+        .then(resp => {
+            const role = resp.data.data.ROLE
+
+            if(role.some(i => i === 'Customer')) {
+                if(!pathname.includes('/customer'))
+                    backLogin()                
+            }
+            else {
+                if(!pathname.includes('/employee')) {
+                    backLogin()
+                }
+                else {
+                    if(role.some(i => i === 'Employee')) {
+                        if(privateManager.some(i => pathname.includes(i)))
+                            backLogin()
+                        else {
+                            const sidebar = $('#sidebar li')
+                            sidebar.eq(1).remove()
+                            sidebar.eq(2).remove()
+                            sidebar.eq(6).remove()
+                        }
+                    }
+                }
+            }   
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 }
+
 
 // ========================================================= Chú ý đối với các trang cần auth =========================================================
 /*

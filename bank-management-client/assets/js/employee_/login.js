@@ -39,13 +39,18 @@ $(idLoginForm).validate({
         ApiClient.post('/auth/login', { username: data.username, password: data.password })
             .then(resp => {
                 const role = resp.data.data.ROLE
-                if(role.some(i => i === 'Employee')) {
+                if(role.some(i => i === 'Employee' || i === 'Manager')) {
                     Notify.showSuccess(resp.data.message)
+                    
                     if (data.remember)
                         Cookies.set('token', resp.data.data.accessToken)
                     else
                         sessionStorage.setItem('token', resp.data.data.accessToken)
-                    window.location.replace(`${window.location.origin}/view/employee/index.html`)                    
+
+                    if(role.some(i => i === 'Employee'))
+                        window.location.replace(`${window.location.origin}/view/employee/all-customers.html`)     
+                    else if(role.some(i => i === 'Manager'))
+                        window.location.replace(`${window.location.origin}/view/employee/index.html`)               
                 }
                 else Notify.showError('Username và password không đúng')
             })

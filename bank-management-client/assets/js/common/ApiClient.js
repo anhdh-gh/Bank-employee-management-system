@@ -1,3 +1,24 @@
+const pathname = window.location.pathname; // Returns path only (/path/example.html)
+const url = window.location.href;     // Returns full URL (https://example.com/path/example.html)
+const origin = window.location.origin;   // Returns base URL (https://example.com)
+
+const urlCustomerLoginPage = '/view/customer/login.html'
+
+const urlEmployeeLoginPage = '/view/employee/login.html'
+
+const urlManagerLoginPage = '/view/employee/login.html'
+
+const backLogin = () => {
+    if (pathname.includes('/customer'))
+        window.location.replace(urlCustomerLoginPage)
+    if (pathname.includes('/employee'))
+        window.location.replace(urlEmployeeLoginPage)
+    if (pathname.includes('/manager'))
+        window.location.replace(urlManagerLoginPage)
+}
+
+// =============================================================== Axios =============================================================
+
 const END_POINT = "http://localhost:8080"
 
 const token = Cookies.get("token") || sessionStorage.getItem('token')
@@ -29,6 +50,12 @@ const handleResult = (api) => {
         .catch((err) => {
             if (err.msg) return Promise.reject({ ...err });
             return Promise.reject({ ...err, msg: err });
+        })
+        .catch(err => {
+            if(err.response.status === 403) {
+                backLogin()
+            }
+            return err;
         });
 };
 
