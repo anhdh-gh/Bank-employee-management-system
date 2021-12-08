@@ -24,7 +24,8 @@ public class EmployeeController {
     ObjectMapper json;
 
     @PostMapping
-    public ObjectNode addEmployee(@Valid @RequestBody Employee employee) {
+    public ResponseEntity<?> addEmployee(@Valid @RequestBody Employee employee) {
+
         return null;
     }
 

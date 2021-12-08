@@ -13,11 +13,6 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public boolean isExistEmail(String email) {
-        Employee employee = employeeRepository.findEmployeeByEmail(email);
-        return employee != null;
-    }
-
     public Employee findEmployeeById(String ID) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(ID);
         if (optionalEmployee.isPresent()) {

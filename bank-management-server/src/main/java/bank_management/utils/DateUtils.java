@@ -17,6 +17,6 @@ public class DateUtils {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int year = cal.get(Calendar.YEAR);
-        return year;
+        return year + 1900;
     }
 }

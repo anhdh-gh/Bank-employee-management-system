@@ -1,6 +1,7 @@
 package bank_management.entity;
 
 import bank_management.enumeration.BankAccountType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,10 +39,11 @@ public class BankAccount extends BaseEntity{
     protected BankAccountType type;
 
     @Column (name = "Status")
-    @NotBlank(message = "Status không được trống!")
+    @NotBlank(message = "Status không được trống!") // true: đã được cộng hoa hồng cho nhân viên, false: ngược lại
     protected boolean status;
 
-    @ManyToOne (targetEntity = Employee.class)
+    @JsonIgnore
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "EmployeeID")
     protected Employee employee;
 

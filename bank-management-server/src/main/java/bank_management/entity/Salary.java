@@ -12,7 +12,6 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table (name = "salary")
 public class Salary extends BaseEntity{
@@ -45,5 +44,10 @@ public class Salary extends BaseEntity{
         this.employee = employee;
     }
 
-
+    public Salary(double salary, int month, int year, Employee employee) {
+        this.salary = salary;
+        this.month = month;
+        this.year = year;
+        this.employee = employee;
+    }
 }
