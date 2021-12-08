@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/add-employee.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:59 GMT -->
+<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/my-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:59 GMT -->
 
 <head>
 	<meta charset="utf-8">
@@ -16,10 +16,6 @@
 
 	<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-
-	<link rel="stylesheet" href="assets/css/select2.min.css">
-
-	<link rel="stylesheet" href="assets/plugins/datetimepicker/css/tempusdominus-bootstrap-4.min.css">
 
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!--[if lt IE 9]>
@@ -157,8 +153,8 @@
 						</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="profile.html">My Profile</a>
-							<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-							<a class="dropdown-item" href="settings.html">Settings</a>
+							<a class="dropdown-item" href="#">Edit Profile</a>
+							<a class="dropdown-item" href="#">Settings</a>
 							<a class="dropdown-item" href="login.html">Logout</a>
 						</div>
 					</li>
@@ -168,8 +164,8 @@
 							class="fas fa-ellipsis-v"></i></a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
+						<a class="dropdown-item" href="#">Edit Profile</a>
+						<a class="dropdown-item" href="#">Settings</a>
 						<a class="dropdown-item" href="login.html">Logout</a>
 					</div>
 				</div>
@@ -177,7 +173,6 @@
 		</div>
 
 
-		<!-- 	Side bar custom dùng chung cho tất cả các trang -->
 		<div class="sidebar" id="sidebar">
 			<div class="sidebar-inner slimscroll">
 				<div id="sidebar-menu" class="sidebar-menu">
@@ -193,11 +188,11 @@
 							<a href="index.html"><img src="assets/img/sidebar/icon-1.png"
 									alt="icon"><span>Dashboard</span></a>
 						</li>
-						<li class="active">
+						<li class="">
 							<a href="all-employees.html"><img src="assets/img/sidebar/icon-2.png" alt="icon"><span>
 									Employees</span></a>
 						</li>
-						<li class="">
+						<li class="active">
 							<a href="all-customers.html"><img src="assets/img/sidebar/icon-3.png" alt="icon"> <span>
 									Customers</span>
 							</a>
@@ -226,123 +221,71 @@
 				<div class="page-header">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-							<h5 class="text-uppercase mb-0 mt-0 page-title">Add Employee</h5>
+							<h5 class="text-uppercase mb-0 mt-0 page-title">Customer Profile</h5>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 							<ul class="breadcrumb float-right p-0 mb-0">
 								<li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home"></i> Home</a>
 								</li>
-								<li class="breadcrumb-item"><a href="#">Employees</a></li>
-								<li class="breadcrumb-item"><span> Add Employee</span></li>
+								<li class="breadcrumb-item"><a href="#">Customers</a></li>
+								<li class="breadcrumb-item"><span> Profile</span></li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<div class="page-content1">
+				<div class="row">
+					<div class="col-sm-7">
+						<h4 class="page-title">Customer Profile</h4>
+					</div>
+					<div class="col-sm-5 text-right m-b-30">
+						<a href="#" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i> Edit
+							Profile</a>
+					</div>
+				</div>
+				<div class="card-box m-b-0">
 					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-							<div class="card">
-								<div class="card-body">
-									<form>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-
-												<div class="form-group">
-													<label>Firstname</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Password</label>
-													<input type="password" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Email</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Username</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Gender</label>
-													<select class="form-control select">
-														<option>Male</option>
-														<option>Female</option>
-														<option>Other</option>
-													</select>
-												</div>
-												<div class="form-group">
-													<label>Birth Date</label>
-													<input class="form-control datetimepicker-input datetimepicker"
-														type="text" data-toggle="datetimepicker">
-												</div>
-												<div class="form-group">
-													<label>City</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Number House</label>
-													<input type="text" class="form-control">
-												</div>
+						<div class="col-md-12">
+							<div class="profile-view">
+								<div class="profile-img-wrap">
+									<div class="profile-img">
+										<a href="#"><img class="avatar" src="assets/img/user.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="profile-basic">
+									<div class="row">
+										<div class="col-md-5">
+											<div class="profile-info-left">
+												<h3 class="user-name m-t-0">Jeffrey M. Wong</h3>
+												<h5 class="company-role m-t-0 m-b-0">Standard Member</h5>
+												<small class="text-muted">Male</small>
+												<div class="staff-id">Customer ID : CLT-0001</div>
 											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-												<!-- <form> -->
-												<div class="form-group">
-													<label>Lastname</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Confirm Password</label>
-													<input type="password" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Identity Number</label>
-													<input type="password" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Mobile number</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Position </label>
-													<select class="form-control select">
-														<option>Sales Executive</option>
-														<option>Teller</option>
-														<option>Accountant</option>
-														<option>Technician</option>
-														<option>Security</option>
-													</select>
-												</div>
-												<div class="form-group">
-													<label>Country</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>District</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Zip Code</label>
-													<input type="text" class="form-control">
-												</div>
-												<!-- </form> -->
-											</div>
-									</form>
-									<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-											<form>
-												<div class="form-group">
-													<label>Upload Image</label>
-													<input type="file" name="pic" accept="image/*" class="form-control">
-												</div>
-											</form>
-										</div> -->
-									<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-										<form>
-											<div class="form-group text-center">
-												<button class="btn btn-primary mr-2" type="submit">Submit</button>
-												<button class="btn btn-secondary" type="reset">Cancel</button>
-											</div>
-										</form>
+										</div>
+										<div class="col-md-7">
+											<ul class="personal-info">
+												<li>
+													<span class="title">Phone:</span>
+													<span class="text"><a href="#">973-584-58700</a></span>
+												</li>
+												<li>
+													<span class="title">Email:</span>
+													<span class="text"><a href="#"><span class="__cf_email__"
+																data-cfemail="b3d1d2c1c1cad0c6d7d2f3d6cbd2dec3dfd69dd0dcde">[email&#160;protected]</span></a></span>
+												</li>
+												<li>
+													<span class="title">Birthday:</span>
+													<span class="text">2nd August</span>
+												</li>
+												<li>
+													<span class="title">Address:</span>
+													<span class="text">5754 Airport Rd, Coosada, AL, 36020</span>
+												</li>
+												<li>
+													<span class="title">Identity Number:</span>
+													<span class="text">XXXXXXX-28950</span>
+												</li>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -573,24 +516,20 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
 	</div>
 
+	<script data-cfasync="false"
+		src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 	<script src="assets/js/jquery-3.6.0.min.js"></script>
 
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
 
 	<script src="assets/js/jquery.slimscroll.js"></script>
 
-	<script src="assets/js/select2.min.js"></script>
-	<script src="assets/js/moment.min.js"></script>
-
-	<script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
-
 	<script src="assets/js/app.js"></script>
 </body>
 
-<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/add-employee.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:59 GMT -->
+<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/my-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:59 GMT -->
 
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/add-employee.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:59 GMT -->
+<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/bank-account-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:54 GMT -->
 
 <head>
 	<meta charset="utf-8">
@@ -16,11 +16,7 @@
 
 	<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-
-	<link rel="stylesheet" href="assets/css/select2.min.css">
-
-	<link rel="stylesheet" href="assets/plugins/datetimepicker/css/tempusdominus-bootstrap-4.min.css">
-
+	<link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
@@ -177,7 +173,6 @@
 		</div>
 
 
-		<!-- 	Side bar custom dùng chung cho tất cả các trang -->
 		<div class="sidebar" id="sidebar">
 			<div class="sidebar-inner slimscroll">
 				<div id="sidebar-menu" class="sidebar-menu">
@@ -193,7 +188,7 @@
 							<a href="index.html"><img src="assets/img/sidebar/icon-1.png"
 									alt="icon"><span>Dashboard</span></a>
 						</li>
-						<li class="active">
+						<li class="">
 							<a href="all-employees.html"><img src="assets/img/sidebar/icon-2.png" alt="icon"><span>
 									Employees</span></a>
 						</li>
@@ -202,7 +197,7 @@
 									Customers</span>
 							</a>
 						</li>
-						<li class="">
+						<li class="active">
 							<a href="bank-accounts-list.html"><img src="assets/img/sidebar/icon-4.png" alt="icon">
 								<span>Bank
 									Accounts</span></a>
@@ -226,123 +221,431 @@
 				<div class="page-header">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-							<h5 class="text-uppercase mb-0 mt-0 page-title">Add Employee</h5>
+							<h5 class="text-uppercase mb-0 mt-0 page-title">Bank Account Details</h5>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 							<ul class="breadcrumb float-right p-0 mb-0">
 								<li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home"></i> Home</a>
 								</li>
-								<li class="breadcrumb-item"><a href="#">Employees</a></li>
-								<li class="breadcrumb-item"><span> Add Employee</span></li>
+								<li class="breadcrumb-item"><a href="#">Bank Account</a></li>
+								<li class="breadcrumb-item"><span>Details</span></li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<div class="page-content1">
+				<div class="card-box m-b-0">
 					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-							<div class="card">
-								<div class="card-body">
-									<form>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="col-md-12">
+							<div class="profile-view">
+								<div class="profile-img-wrap">
+									<div class="profile-img">
+										<a href="#"><img class="avatar" src="assets/img/user.jpg" alt=""></a>
+									</div>
+								</div>
+								<div class="profile-basic">
+									<div class="row">
+										<div class="col-md-5">
+											<div class="profile-info-left">
+												<h3 class="user-name m-t-0">Michael S. Porch</h3>
+												<h5 class="company-role m-t-0 m-b-0">Gold Member</h5>
+												<small class="text-muted">Female</small>
+												<div class="staff-id"> ID : PT-0001</div>
+											</div>
+										</div>
+										<div class="col-md-7">
+											<ul class="personal-info">
+												<li>
+													<span class="title">Account Number:</span>
+													<span class="text"><a href="#">XXXXXXXXXXXX-8700</a></span>
+												</li>
+												<li>
+													<span class="title">Account Type:</span>
+													<span class="text">Credit Account</span>
+												</li>
+												<li>
+													<span class="title">Create Date:</span>
+													<span class="text">12/05/2021</span>
+												</li>
+												<li>
+													<span class="title">Expire Date:</span>
+													<span class="text">05/2025</span>
+												</li>
+												<li>
+													<span class="title">Branch</span>
+													<span class="text">5754 Airport Rd, Coosada, AL, 36020</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-												<div class="form-group">
-													<label>Firstname</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Password</label>
-													<input type="password" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Email</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Username</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Gender</label>
-													<select class="form-control select">
-														<option>Male</option>
-														<option>Female</option>
-														<option>Other</option>
-													</select>
-												</div>
-												<div class="form-group">
-													<label>Birth Date</label>
-													<input class="form-control datetimepicker-input datetimepicker"
-														type="text" data-toggle="datetimepicker">
-												</div>
-												<div class="form-group">
-													<label>City</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Number House</label>
-													<input type="text" class="form-control">
-												</div>
-											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-												<!-- <form> -->
-												<div class="form-group">
-													<label>Lastname</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Confirm Password</label>
-													<input type="password" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Identity Number</label>
-													<input type="password" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Mobile number</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Position </label>
-													<select class="form-control select">
-														<option>Sales Executive</option>
-														<option>Teller</option>
-														<option>Accountant</option>
-														<option>Technician</option>
-														<option>Security</option>
-													</select>
-												</div>
-												<div class="form-group">
-													<label>Country</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>District</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Zip Code</label>
-													<input type="text" class="form-control">
-												</div>
-												<!-- </form> -->
-											</div>
-									</form>
-									<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-											<form>
-												<div class="form-group">
-													<label>Upload Image</label>
-													<input type="file" name="pic" accept="image/*" class="form-control">
-												</div>
-											</form>
-										</div> -->
-									<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-										<form>
-											<div class="form-group text-center">
-												<button class="btn btn-primary mr-2" type="submit">Submit</button>
-												<button class="btn btn-secondary" type="reset">Cancel</button>
-											</div>
-										</form>
+				</div>
+				<div class="mt-3">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="text-uppercase mb-0 mt-0 page-title">Transactions</h5>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table custom-table datatable">
+											<thead class="thead-light">
+												<tr>
+													<th>Date</th>
+													<th>Description</th>
+													<th>Status</th>
+													<th>Amount</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Tiger Nixon</td>
+													<td>System Architect</td>
+													<td>2011/04/25</td>
+													<td>$320,800</td>
+												</tr>
+												<tr>
+													<td>Garrett Winters</td>
+													<td>Accountant</td>
+													<td>2011/07/25</td>
+													<td>$170,750</td>
+												</tr>
+												<tr>
+													<td>Ashton Cox</td>
+													<td>Junior Technical Author</td>
+													<td>2009/01/12</td>
+													<td>$86,000</td>
+												</tr>
+												<tr>
+													<td>Cedric Kelly</td>
+													<td>Senior Javascript Developer</td>
+													<td>2012/03/29</td>
+													<td>$433,060</td>
+												</tr>
+												<tr>
+													<td>Airi Satou</td>
+													<td>Accountant</td>
+													<td>2008/11/28</td>
+													<td>$162,700</td>
+												</tr>
+												<tr>
+													<td>Brielle Williamson</td>
+													<td>Integration Specialist</td>
+													<td>2012/12/02</td>
+													<td>$372,000</td>
+												</tr>
+												<tr>
+													<td>Herrod Chandler</td>
+													<td>Sales Assistant</td>
+													<td>2012/08/06</td>
+													<td>$137,500</td>
+												</tr>
+												<tr>
+													<td>Rhona Davidson</td>
+													<td>Integration Specialist</td>
+													<td>2010/10/14</td>
+													<td>$327,900</td>
+												</tr>
+												<tr>
+													<td>Colleen Hurst</td>
+													<td>Javascript Developer</td>
+													<td>2009/09/15</td>
+													<td>$205,500</td>
+												</tr>
+												<tr>
+													<td>Sonya Frost</td>
+													<td>Software Engineer</td>
+													<td>2008/12/13</td>
+													<td>$103,600</td>
+												</tr>
+												<tr>
+													<td>Jena Gaines</td>
+													<td>school Manager</td>
+													<td>2008/12/19</td>
+													<td>$90,560</td>
+												</tr>
+												<tr>
+													<td>Quinn Flynn</td>
+													<td>Support Lead</td>
+													<td>2013/03/03</td>
+													<td>$342,000</td>
+												</tr>
+												<tr>
+													<td>Charde Marshall</td>
+													<td>Regional Director</td>
+													<td>2008/10/16</td>
+													<td>$470,600</td>
+												</tr>
+												<tr>
+													<td>Haley Kennedy</td>
+													<td>Senior Marketing Designer</td>
+													<td>2012/12/18</td>
+													<td>$313,500</td>
+												</tr>
+												<tr>
+													<td>Tatyana Fitzpatrick</td>
+													<td>Regional Director</td>
+													<td>2010/03/17</td>
+													<td>$385,750</td>
+												</tr>
+												<tr>
+													<td>Michael Silva</td>
+													<td>Marketing Designer</td>
+													<td>2012/11/27</td>
+													<td>$198,500</td>
+												</tr>
+												<tr>
+													<td>Paul Byrd</td>
+													<td>Chief Financial schoolr (CFO)</td>
+													<td>2010/06/09</td>
+													<td>$725,000</td>
+												</tr>
+												<tr>
+													<td>Gloria Little</td>
+													<td>Systems Administrator</td>
+													<td>2009/04/10</td>
+													<td>$237,500</td>
+												</tr>
+												<tr>
+													<td>Bradley Greer</td>
+													<td>Software Engineer</td>
+													<td>2012/10/13</td>
+													<td>$132,000</td>
+												</tr>
+												<tr>
+													<td>Tiger Nixon</td>
+													<td>System Architect</td>
+													<td>2011/04/25</td>
+													<td>$320,800</td>
+												</tr>
+												<tr>
+													<td>Garrett Winters</td>
+													<td>Accountant</td>
+													<td>2011/07/25</td>
+													<td>$170,750</td>
+												</tr>
+												<tr>
+													<td>Ashton Cox</td>
+													<td>Junior Technical Author</td>
+													<td>2009/01/12</td>
+													<td>$86,000</td>
+												</tr>
+												<tr>
+													<td>Cedric Kelly</td>
+													<td>Senior Javascript Developer</td>
+													<td>2012/03/29</td>
+													<td>$433,060</td>
+												</tr>
+												<tr>
+													<td>Airi Satou</td>
+													<td>Accountant</td>
+													<td>2008/11/28</td>
+													<td>$162,700</td>
+												</tr>
+												<tr>
+													<td>Brielle Williamson</td>
+													<td>Integration Specialist</td>
+													<td>2012/12/02</td>
+													<td>$372,000</td>
+												</tr>
+												<tr>
+													<td>Herrod Chandler</td>
+													<td>Sales Assistant</td>
+													<td>2012/08/06</td>
+													<td>$137,500</td>
+												</tr>
+												<tr>
+													<td>Rhona Davidson</td>
+													<td>Integration Specialist</td>
+													<td>2010/10/14</td>
+													<td>$327,900</td>
+												</tr>
+												<tr>
+													<td>Colleen Hurst</td>
+													<td>Javascript Developer</td>
+													<td>2009/09/15</td>
+													<td>$205,500</td>
+												</tr>
+												<tr>
+													<td>Sonya Frost</td>
+													<td>Software Engineer</td>
+													<td>2008/12/13</td>
+													<td>$103,600</td>
+												</tr>
+												<tr>
+													<td>Jena Gaines</td>
+													<td>school Manager</td>
+													<td>2008/12/19</td>
+													<td>$90,560</td>
+												</tr>
+												<tr>
+													<td>Quinn Flynn</td>
+													<td>Support Lead</td>
+													<td>2013/03/03</td>
+													<td>$342,000</td>
+												</tr>
+												<tr>
+													<td>Charde Marshall</td>
+													<td>Regional Director</td>
+													<td>2008/10/16</td>
+													<td>$470,600</td>
+												</tr>
+												<tr>
+													<td>Haley Kennedy</td>
+													<td>Senior Marketing Designer</td>
+													<td>2012/12/18</td>
+													<td>$313,500</td>
+												</tr>
+												<tr>
+													<td>Tatyana Fitzpatrick</td>
+													<td>Regional Director</td>
+													<td>2010/03/17</td>
+													<td>$385,750</td>
+												</tr>
+												<tr>
+													<td>Michael Silva</td>
+													<td>Marketing Designer</td>
+													<td>2012/11/27</td>
+													<td>$198,500</td>
+												</tr>
+												<tr>
+													<td>Paul Byrd</td>
+													<td>Chief Financial schoolr (CFO)</td>
+													<td>2010/06/09</td>
+													<td>$725,000</td>
+												</tr>
+												<tr>
+													<td>Gloria Little</td>
+													<td>Systems Administrator</td>
+													<td>2009/04/10</td>
+													<td>$237,500</td>
+												</tr>
+												<tr>
+													<td>Bradley Greer</td>
+													<td>Software Engineer</td>
+													<td>2012/10/13</td>
+													<td>$132,000</td>
+												</tr>
+												<tr>
+													<td>Tiger Nixon</td>
+													<td>System Architect</td>
+													<td>2011/04/25</td>
+													<td>$320,800</td>
+												</tr>
+												<tr>
+													<td>Garrett Winters</td>
+													<td>Accountant</td>
+													<td>2011/07/25</td>
+													<td>$170,750</td>
+												</tr>
+												<tr>
+													<td>Ashton Cox</td>
+													<td>Junior Technical Author</td>
+													<td>2009/01/12</td>
+													<td>$86,000</td>
+												</tr>
+												<tr>
+													<td>Cedric Kelly</td>
+													<td>Senior Javascript Developer</td>
+													<td>2012/03/29</td>
+													<td>$433,060</td>
+												</tr>
+												<tr>
+													<td>Airi Satou</td>
+													<td>Accountant</td>
+													<td>2008/11/28</td>
+													<td>$162,700</td>
+												</tr>
+												<tr>
+													<td>Brielle Williamson</td>
+													<td>Integration Specialist</td>
+													<td>2012/12/02</td>
+													<td>$372,000</td>
+												</tr>
+												<tr>
+													<td>Herrod Chandler</td>
+													<td>Sales Assistant</td>
+													<td>2012/08/06</td>
+													<td>$137,500</td>
+												</tr>
+												<tr>
+													<td>Rhona Davidson</td>
+													<td>Integration Specialist</td>
+													<td>2010/10/14</td>
+													<td>$327,900</td>
+												</tr>
+												<tr>
+													<td>Colleen Hurst</td>
+													<td>Javascript Developer</td>
+													<td>2009/09/15</td>
+													<td>$205,500</td>
+												</tr>
+												<tr>
+													<td>Sonya Frost</td>
+													<td>Software Engineer</td>
+													<td>2008/12/13</td>
+													<td>$103,600</td>
+												</tr>
+												<tr>
+													<td>Jena Gaines</td>
+													<td>school Manager</td>
+													<td>2008/12/19</td>
+													<td>$90,560</td>
+												</tr>
+												<tr>
+													<td>Quinn Flynn</td>
+													<td>Support Lead</td>
+													<td>2013/03/03</td>
+													<td>$342,000</td>
+												</tr>
+												<tr>
+													<td>Charde Marshall</td>
+													<td>Regional Director</td>
+													<td>2008/10/16</td>
+													<td>$470,600</td>
+												</tr>
+												<tr>
+													<td>Haley Kennedy</td>
+													<td>Senior Marketing Designer</td>
+													<td>2012/12/18</td>
+													<td>$313,500</td>
+												</tr>
+												<tr>
+													<td>Tatyana Fitzpatrick</td>
+													<td>Regional Director</td>
+													<td>2010/03/17</td>
+													<td>$385,750</td>
+												</tr>
+												<tr>
+													<td>Michael Silva</td>
+													<td>Marketing Designer</td>
+													<td>2012/11/27</td>
+													<td>$198,500</td>
+												</tr>
+												<tr>
+													<td>Paul Byrd</td>
+													<td>Chief Financial schoolr (CFO)</td>
+													<td>2010/06/09</td>
+													<td>$725,000</td>
+												</tr>
+												<tr>
+													<td>Gloria Little</td>
+													<td>Systems Administrator</td>
+													<td>2009/04/10</td>
+													<td>$237,500</td>
+												</tr>
+												<tr>
+													<td>Bradley Greer</td>
+													<td>Software Engineer</td>
+													<td>2012/10/13</td>
+													<td>$132,000</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
@@ -573,24 +876,20 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
 	</div>
 
+	<script data-cfasync="false"
+		src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 	<script src="assets/js/jquery-3.6.0.min.js"></script>
 
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
-
 	<script src="assets/js/jquery.slimscroll.js"></script>
-
-	<script src="assets/js/select2.min.js"></script>
-	<script src="assets/js/moment.min.js"></script>
-
-	<script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
-
+	<script src="assets/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/dataTables.bootstrap4.min.js"></script>
 	<script src="assets/js/app.js"></script>
 </body>
 
-<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/add-employee.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:59 GMT -->
+<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/bank-account-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:54 GMT -->
 
 </html>

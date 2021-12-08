@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/parent-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:54 GMT -->
+<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/add-bank-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:55:58 GMT -->
 
 <head>
 	<meta charset="utf-8">
@@ -16,6 +16,10 @@
 
 	<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+
+	<link rel="stylesheet" href="assets/plugins/datetimepicker/css/tempusdominus-bootstrap-4.min.css">
+
+	<link rel="stylesheet" href="assets/css/select2.min.css">
 
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!--[if lt IE 9]>
@@ -184,7 +188,7 @@
 					</div>
 					<ul class="sidebar-ul">
 						<li class="menu-title">Menu</li>
-						<li class="active">
+						<li>
 							<a href="index.html"><img src="assets/img/sidebar/icon-1.png"
 									alt="icon"><span>Dashboard</span></a>
 						</li>
@@ -193,151 +197,22 @@
 									Employees</span></a>
 						</li>
 						<li class="">
-							<a href="all-students.html"><img src="assets/img/sidebar/icon-3.png" alt="icon"> <span>
+							<a href="all-customers.html"><img src="assets/img/sidebar/icon-3.png" alt="icon"> <span>
 									Customers</span>
 							</a>
 						</li>
-						<li class="">
-							<a href="all-teachers.html"><img src="assets/img/sidebar/icon-4.png" alt="icon"> <span>Bank
+						<li class="active">
+							<a href="bank-accounts-list.html"><img src="assets/img/sidebar/icon-4.png" alt="icon">
+								<span>Bank
 									Accounts</span></a>
 						</li>
 						<li>
 							<a href="calendar.html"><img src="assets/img/sidebar/icon-6.png" alt="icon">
 								<span>Calendar</span></a>
 						</li>
-						<li class="submenu">
-							<a href="#"><img src="assets/img/sidebar/icon-11.png" alt="icon"><span> Payroll </span>
-								<span class="menu-arrow"></span></a>
-							<ul class="list-unstyled" style="display: none;">
-								<li><a href="salary.html"><span> Employee Salary </span></a></li>
-								<li><a href="salary-view.html"><span> Payslip </span></a></li>
-							</ul>
-						</li>
-						<li class="submenu">
-							<a href="javascript:void(0);" class="noti-dot"><img src="assets/img/sidebar/icon-13.png"
-									alt="icon"> <span>Management </span> <span class="menu-arrow"></span></a>
-							<ul style="display: none;">
-								<li class="submenu">
-									<a href="#"><span> Employees</span> <span class="menu-arrow"></span></a>
-									<ul class="list-unstyled" style="display: none;">
-										<li><a href="all-employees.html"><span>All Employees</span></a></li>
-										<li><a href="holidays.html"><span>Holidays</span></a></li>
-										<li><a href="leaves.html"><span>Leave Requests</span> <span
-													class="badge badge-pill bg-primary float-right">1</span></a></li>
-										<li><a href="attendance.html"><span>Attendance</span></a></li>
-										<li><a href="departments.html"><span>Departments</span></a></li>
-										<li><a href="designations.html"><span>Designations</span></a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="activities.html"><span>Activities</span></a>
-								</li>
-								<li>
-									<a href="users.html"><span>Users</span></a>
-								</li>
-							</ul>
-						</li>
-						<li class="menu-title">UI Elements</li>
-						<li class="submenu">
-							<a href="#"><img src="assets/img/sidebar/icon-15.png" alt="icon"> <span> Components</span>
-								<span class="menu-arrow"></span></a>
-							<ul class="list-unstyled" style="display: none;">
-								<li><a href="uikit.html"><span>UI Kit</span></a></li>
-								<li><a href="typography.html"><span>Typography</span></a></li>
-								<li><a href="tabs.html"><span>Tabs</span></a></li>
-							</ul>
-						</li>
-						<li class="submenu">
-							<a href="#"><img src="assets/img/sidebar/icon-26.png" alt="icon"> <span> Elements</span>
-								<span class="menu-arrow"></span></a>
-							<ul class="list-unstyled" style="display: none;">
-								<li><a href="sweetalerts.html">Sweet Alerts</a></li>
-								<li><a href="tooltip.html">Tooltip</a></li>
-								<li><a href="popover.html">Popover</a></li>
-								<li><a href="ribbon.html">Ribbon</a></li>
-								<li><a href="clipboard.html">Clipboard</a></li>
-								<li><a href="drag-drop.html">Drag & Drop</a></li>
-								<li><a href="rangeslider.html">Range Slider</a></li>
-								<li><a href="rating.html">Rating</a></li>
-								<li><a href="toastr.html">Toastr</a></li>
-								<li><a href="text-editor.html">Text Editor</a></li>
-								<li><a href="counter.html">Counter</a></li>
-								<li><a href="scrollbar.html">Scrollbar</a></li>
-								<li><a href="spinner.html">Spinner</a></li>
-								<li><a href="notification.html">Notification</a></li>
-								<li><a href="lightbox.html">Lightbox</a></li>
-								<li><a href="stickynote.html">Sticky Note</a></li>
-								<li><a href="timeline.html">Timeline</a></li>
-								<li><a href="horizontal-timeline.html">Horizontal Timeline</a></li>
-								<li><a href="form-wizard.html">Form Wizard</a></li>
-							</ul>
-						</li>
-						<li class="submenu">
-							<a href="#"><img src="assets/img/sidebar/icon-27.png" alt="icon"> <span> Chart</span> <span
-									class="menu-arrow"></span></a>
-							<ul class="list-unstyled" style="display: none;">
-								<li><a href="chart-apex.html">Apex Charts</a></li>
-								<li><a href="chart-js.html">Chart Js</a></li>
-								<li><a href="chart-morris.html">Morris Charts</a></li>
-								<li><a href="chart-flot.html">Flot Charts</a></li>
-								<li><a href="chart-peity.html">Peity Charts</a></li>
-								<li><a href="chart-c3.html">C3 Charts</a></li>
-							</ul>
-						</li>
-						<li class="submenu">
-							<a href="#"><img src="assets/img/sidebar/icon-28.png" alt="icon"> <span>Icons</span> <span
-									class="menu-arrow"></span></a>
-							<ul class="list-unstyled" style="display: none;">
-								<li><a href="icon-fontawesome.html">Fontawesome Icons</a></li>
-								<li><a href="icon-feather.html">Feather Icons</a></li>
-								<li><a href="icon-ionic.html">Ionic Icons</a></li>
-								<li><a href="icon-material.html">Material Icons</a></li>
-								<li><a href="icon-pe7.html">Pe7 Icons</a></li>
-								<li><a href="icon-simpleline.html">Simpleline Icons</a></li>
-								<li><a href="icon-themify.html">Themify Icons</a></li>
-								<li><a href="icon-weather.html">Weather Icons</a></li>
-								<li><a href="icon-typicon.html">Typicon Icons</a></li>
-								<li><a href="icon-flag.html">Flag Icons</a></li>
-							</ul>
-						</li>
-						<li class="submenu">
-							<a href="#"><img src="assets/img/sidebar/icon-17.png" alt="icon"> <span> Forms</span> <span
-									class="menu-arrow"></span></a>
-							<ul class="list-unstyled" style="display: none;">
-								<li><a href="basic-inputs.html"><span>Basic Input</span></a></li>
-								<li><a href="form-basic-inputs.html"><span>Basic Inputs</span></a></li>
-								<li><a href="form-input-groups.html"><span>Input Groups</span></a></li>
-								<li><a href="form-horizontal.html"><span>Horizontal Form</span></a></li>
-								<li><a href="form-vertical.html"><span>Vertical Form</span></a></li>
-								<li><a href="form-validation.html"> Form Validation </a></li>
-								<li><a href="form-select2.html">Form Select2 </a></li>
-								<li><a href="form-fileupload.html">File Upload </a></li>
-							</ul>
-						</li>
-						<li class="submenu">
-							<a href="#"><img src="assets/img/sidebar/icon-18.png" alt="icon"> <span> Tables</span> <span
-									class="menu-arrow"></span></a>
-							<ul class="list-unstyled" style="display: none;">
-								<li><a href="tables-basic.html"><span>Basic Tables</span></a></li>
-								<li><a href="tables-datatables.html"><span>Data Table</span></a></li>
-							</ul>
-						</li>
-						<li class="menu-title"><span>Extras</span></li>
-						<li class="submenu">
-							<a href="#"><img src="assets/img/sidebar/icon-19.png" alt="icon"> <span>Pages</span> <span
-									class="menu-arrow"></span></a>
-							<ul class="list-unstyled" style="display: none;">
-								<li><a href="login.html"> <span>Login </span></a></li>
-								<li><a href="register.html"><span> Register </span></a></li>
-								<li><a href="forgot-password.html"> <span>Forgot Password</span> </a></li>
-								<li><a href="change-password2.html"> <span>Change Password</span> </a></li>
-								<li><a href="lock-screen.html"> <span>Lock Screen </span></a></li>
-								<li><a href="profile.html"> <span>Profile</span> </a></li>
-								<li><a href="gallery.html"> <span>Gallery </span></a></li>
-								<li><a href="error-404.html"><span>404 Error </span></a></li>
-								<li><a href="error-500.html"><span>500 Error </span></a></li>
-								<li><a href="blank-page.html"><span> Blank Page</span> </a></li>
-							</ul>
+						<li>
+							<a href="salary.html"><img src="assets/img/sidebar/icon-11.png" alt="icon">
+								<span>Salary</span></a>
 						</li>
 					</ul>
 				</div>
@@ -350,61 +225,76 @@
 				<div class="page-header">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-							<h5 class="text-uppercase mb-0 mt-0 page-title">my Profile</h5>
+							<h5 class="text-uppercase mb-0 mt-0 page-title">Add Bank Account</h5>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 							<ul class="breadcrumb float-right p-0 mb-0">
-								<li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home"></i> Home</a>
+								<li class="breadcrumb-item"><a href="index.html"><I class="fas fa-home"></i> Home</a>
 								</li>
-								<li class="breadcrumb-item"><a href="#">Pages</a></li>
-								<li class="breadcrumb-item"><span> Profile</span></li>
+								<li class="breadcrumb-item"><a href="index.html">Bank Account</a></li>
+								<li class="breadcrumb-item"><span> Add Bank Account</span></li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<div class="card-box m-b-0">
+				<div class="page-content">
 					<div class="row">
-						<div class="col-md-12">
-							<div class="profile-view">
-								<div class="profile-img-wrap">
-									<div class="profile-img">
-										<a href="#"><img class="avatar" src="assets/img/user.jpg" alt=""></a>
-									</div>
-								</div>
-								<div class="profile-basic">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="card">
+								<div class="card-body">
 									<div class="row">
-										<div class="col-md-5">
-											<div class="profile-info-left">
-												<h3 class="user-name m-t-0">Michael S. Porch</h3>
-												<h5 class="company-role m-t-0 m-b-0">Preschool</h5>
-												<small class="text-muted">Parent</small>
-												<div class="staff-id"> ID : PT-0001</div>
-											</div>
+										<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+											<form>
+												<div class="form-group">
+													<label>Customer Code</label>
+													<input type="text" class="form-control">
+												</div>
+												<div class="form-group">
+													<label>Account Type</label>
+													<select class="form-control select">
+														<option>Credit Card</option>
+														<option>Payment Card</option>
+													</select>
+												</div>								
+												<div class="form-group">
+													<label>Expire Date</label>
+													<input class="form-control datetimepicker-input datetimepicker"
+														type="text" data-toggle="datetimepicker">
+												</div>
+											</form>
 										</div>
-										<div class="col-md-7">
-											<ul class="personal-info">
-												<li>
-													<span class="title">Phone:</span>
-													<span class="text"><a href="#">973-584-58700</a></span>
-												</li>
-												<li>
-													<span class="title">Email:</span>
-													<span class="text"><a href="#"><span class="__cf_email__"
-																data-cfemail="a0cdc9c3c8c1c5ccf3d0cfd2c3c8e0c5d8c1cdd0ccc58ec3cfcd">[email&#160;protected]</span></a></span>
-												</li>
-												<li>
-													<span class="title">Birthday:</span>
-													<span class="text">2nd August</span>
-												</li>
-												<li>
-													<span class="title">Address:</span>
-													<span class="text">5754 Airport Rd, Coosada, AL, 36020</span>
-												</li>
-												<li>
-													<span class="title">Gender:</span>
-													<span class="text">Male</span>
-												</li>
-											</ul>
+										<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+											<form>
+												<div class="form-group">
+													<label>Branch</label>
+													<select class="form-control select">
+														<option>Ha Noi</option>
+														<option>Hai Phong</option>
+														<option>Da Nang</option>
+														<option>Ho Chi Minh</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>CVV</label>
+													<input type="password" class="form-control">
+												</div>
+												<div class="form-group">
+													<label>Member level</label>
+													<select class="form-control select">
+														<option>Standard</option>
+														<option>Gold</option>
+														<option>Platinum</option>
+													</select>
+												</div>	
+											</form>
+										</div>
+										<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+											<form>
+												<div class="form-group text-center custom-mt-form-group">
+													<button class="btn btn-primary mr-2" type="submit">Submit</button>
+													<button class="btn btn-secondary" type="reset">Cancel</button>
+												</div>
+											</form>
 										</div>
 									</div>
 								</div>
@@ -639,17 +529,20 @@
 
 	</div>
 
-	<script data-cfasync="false"
-		src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 	<script src="assets/js/jquery-3.6.0.min.js"></script>
 
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
 
 	<script src="assets/js/jquery.slimscroll.js"></script>
 
+	<script src="assets/js/select2.min.js"></script>
+	<script src="assets/js/moment.min.js"></script>
+
+	<script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
+
 	<script src="assets/js/app.js"></script>
 </body>
 
-<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/parent-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:54 GMT -->
+<!-- Mirrored from dreamguystech.com/preadmin/html/school/light/add-bank-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:55:58 GMT -->
 
 </html>
