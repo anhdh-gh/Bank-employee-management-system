@@ -38,12 +38,16 @@ $(idLoginForm).validate({
 
         ApiClient.post('/auth/login', { username: data.username, password: data.password })
             .then(resp => {
-                Notify.showSuccess(resp.data.message)
-                if (data.remember)
-                    Cookies.set('token', resp.data.data.accessToken)
-                else
-                    sessionStorage.setItem('token', resp.data.data.accessToken)
-                window.location.replace(`${window.location.origin}/view/customer/dashboard.html`)
+                const role = resp.data.data.ROLE
+                if(role.some(i => i === 'Customer')) {
+                    Notify.showSuccess(resp.data.message)
+                    if (data.remember)
+                        Cookies.set('token', resp.data.data.accessToken)
+                    else
+                        sessionStorage.setItem('token', resp.data.data.accessToken)
+                    window.location.replace(`${window.location.origin}/view/customer/dashboard.html`)                    
+                }
+                else Notify.showError('Username và password không đúng')
             })
             .catch(err => {
                 Notify.showError(err.response.data.message)

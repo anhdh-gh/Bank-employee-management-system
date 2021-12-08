@@ -6,6 +6,7 @@ const Form = {
         switch (type) {
             case 'text':
             case 'password':
+            case 'email':
                 return input.val()
 
             case 'checkbox':
