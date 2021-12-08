@@ -64,7 +64,7 @@ $(idForgotPasswordForm).validate({
         // Lấy dữ liệu
         const data = Form.getData(idForgotPasswordForm)
 
-        ApiClient.post('/auth/forgot_password', data)
+        ApiClient.post('/person/forgot_password', data)
             .then(resp => {
                 Notify.showSuccess(`Mật khẩu mới của bạn là: ${resp.data.data}`)
             })

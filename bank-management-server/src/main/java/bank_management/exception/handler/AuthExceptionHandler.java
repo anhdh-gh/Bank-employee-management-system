@@ -1,7 +1,6 @@
 package bank_management.exception.handler;
 
-import bank_management.dto.ResponseResult;
-import org.springframework.beans.factory.annotation.Autowired;
+import bank_management.payload.ResponseResult;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -12,9 +11,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)

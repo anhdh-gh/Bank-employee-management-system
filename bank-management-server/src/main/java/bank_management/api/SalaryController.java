@@ -1,7 +1,7 @@
 package bank_management.api;
 
 import bank_management.dto.DetailSalaryDto;
-import bank_management.dto.ResponseResult;
+import bank_management.payload.ResponseResult;
 import bank_management.dto.SalaryDto;
 import bank_management.enumeration.ResponseStatus;
 import bank_management.service.SalaryService;

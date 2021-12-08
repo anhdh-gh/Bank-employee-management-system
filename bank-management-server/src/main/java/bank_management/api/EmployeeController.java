@@ -2,7 +2,7 @@ package bank_management.api;
 
 import javax.validation.Valid;
 
-import bank_management.dto.ResponseResult;
+import bank_management.payload.ResponseResult;
 import bank_management.entity.Employee;
 import bank_management.enumeration.ResponseStatus;
 import bank_management.service.EmployeeService;

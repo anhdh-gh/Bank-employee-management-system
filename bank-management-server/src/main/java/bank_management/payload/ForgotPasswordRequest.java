@@ -1,4 +1,4 @@
-package bank_management.dto;
+package bank_management.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonDto {
+public class ForgotPasswordRequest {
 
 	@NotBlank(message = "IdentityNumber không được để trống")
 	@Pattern(regexp="^\\d+$", message = "IdentityNumber chỉ chứa chữ số")

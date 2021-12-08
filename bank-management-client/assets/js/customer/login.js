@@ -36,7 +36,7 @@ $(idLoginForm).validate({
         // Lấy dữ liệu
         const data = Form.getData(idLoginForm)
 
-        ApiClient.post('/auth/login', { username: data.username, password: data.password })
+        ApiClient.post('/person/login', { username: data.username, password: data.password })
             .then(resp => {
                 const role = resp.data.data.ROLE
                 if(role.some(i => i === 'Customer')) {

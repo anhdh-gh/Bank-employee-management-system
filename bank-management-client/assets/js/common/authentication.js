@@ -27,7 +27,7 @@ if (urlsPageNotAuth.every(url => url !== pathname)) {
     if(!Cookies.get("token") && !sessionStorage.getItem('token'))
         backLogin()
     else {
-        ApiClient.get('/auth/getRole')
+        ApiClient.get('/person/getRole')
         .then(resp => {
             const role = resp.data.data.ROLE
 

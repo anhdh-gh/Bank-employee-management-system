@@ -1,4 +1,4 @@
-package bank_management.dto;
+package bank_management.payload;
 
 import bank_management.enumeration.ResponseStatus;
 import lombok.AllArgsConstructor;
