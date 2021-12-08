@@ -33,7 +33,8 @@ public class AuthController {
             json
                 .createObjectNode()
                 .putPOJO("accessToken", token)
-                .putPOJO("tokenType", "Bearer"),
+                .putPOJO("tokenType", "Bearer")
+                .putPOJO("ROLE", authService.getAuthRole()),
             "Đăng nhập thành công",
             ResponseStatus.Success
         );

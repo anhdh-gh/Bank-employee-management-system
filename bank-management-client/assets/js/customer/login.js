@@ -7,11 +7,13 @@ $(idLoginForm).validate({
     rules: {
         username: {
             required: true,
+            notBlank: true,
             maxlength: 30
         },
 
         password: {
             required: true,
+            notBlank: true,
             minlength: 8
         }
     },
@@ -19,11 +21,13 @@ $(idLoginForm).validate({
     messages: {
         username: {
             required: "Username không được để trống",
+            notBlank: "Username không được để trống",
             maxlength: "Username tối đa 30 ký tự"
         },
 
         password: {
             required: "Password không được để trống",
+            notBlank: "Password không được để trống",
             minlength: "Password tối thiểu 8 ký tự"
         }
     },
