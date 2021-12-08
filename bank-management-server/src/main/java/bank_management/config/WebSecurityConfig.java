@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 	"/auth/login",
                     "/auth/forgot_password",
                         "/employee",
-                        "employee/*",
+                        "/employee/*",
                         "/salary",
                         "/salary/*",
                         "/salary/detail/*"
