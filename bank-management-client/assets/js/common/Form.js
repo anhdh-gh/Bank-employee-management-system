@@ -23,7 +23,7 @@ const Form = {
 
         $(`${idForm} select`).each(function () {
             const select = $(this)
-            data[`${select.attr('name')}`] = select.text()
+            data[`${select.attr('name')}`] = $(`${idForm} select :selected`).text()
         })
         return data
     }
