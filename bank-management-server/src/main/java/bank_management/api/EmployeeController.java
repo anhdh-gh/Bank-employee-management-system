@@ -7,6 +7,7 @@ import bank_management.entity.Employee;
 import bank_management.enumeration.ResponseStatus;
 import bank_management.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class EmployeeController {
         }
         Employee employeeSaved = employeeService.addEmployee(employee);
         return  ResponseEntity
-                .ok()
+                .status(HttpStatus.CREATED)
                 .body(new ResponseResult(employeeSaved, "Tạo tài khoản nhân viên thành công.", ResponseStatus.Success ));
 
     }
