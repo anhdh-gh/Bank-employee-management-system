@@ -55,7 +55,9 @@ const handleResult = (api) => {
             if(err.response.status === 403) {
                 backLogin()
             }
-            return err;
+
+            if (err.msg) return Promise.reject({ ...err });
+            return Promise.reject({ ...err, msg: err });
         });
 };
 
