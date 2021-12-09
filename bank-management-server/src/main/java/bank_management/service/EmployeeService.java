@@ -1,10 +1,12 @@
 package bank_management.service;
 
+import bank_management.dto.EmployeeDto;
 import bank_management.entity.Employee;
 import bank_management.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,16 +15,21 @@ public class EmployeeService extends PersonService{
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public Employee findEmployeeById(String ID) {
+    public EmployeeDto findEmployeeById(String ID) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(ID);
         if (optionalEmployee.isPresent()) {
-            return optionalEmployee.get();
+            return new EmployeeDto(optionalEmployee.get());
         }
         return null;
     }
 
-    public List<Employee> findAllEmployee() {
-        return employeeRepository.findAll();
+    public List<EmployeeDto> findAllEmployee() {
+        List<EmployeeDto> employeeDtoList = new ArrayList<>();
+        List<Employee> employeeList = employeeRepository.findAll();
+        for (Employee employee : employeeList) {
+            employeeDtoList.add(new EmployeeDto(employee));
+        }
+        return employeeDtoList;
     }
 
     public Employee editEmployee(Employee employee) {
@@ -33,9 +40,12 @@ public class EmployeeService extends PersonService{
         return null;
     }
 
-    public Employee addEmployee(Employee employee) {
-//        if (checkEmailExist(employee.getEmail()))
-        return employeeRepository.save(employee);
+    public EmployeeDto addEmployee(EmployeeDto employeeDto) {
+        employeeDto.setEmployeeCode("NV21");
+        employeeDto.setBaseSalary(3300000);
+        employeeDto.setSeniority(0);
+        Employee employee = new Employee(employeeDto);
+        return new EmployeeDto(employeeRepository.save(employee));
     }
 
     public boolean deleteEmployee(String ID) {
