@@ -1,10 +1,13 @@
-const idFormAddCustomer = "#addEmployee";
-ApiClient.get("/employee/info", {})
-  .then((resp) => {})
+ApiClient.get("/employee/profile", {})
+  .then((resp) => {
+    const profile = resp.data.data.account.username;
+    $("#profile").text(profile);
+  })
   .catch((err) => {});
 
 //set vao nav bar
 
+const idFormAddCustomer = "#addEmployee";
 $(idFormAddCustomer).validate({
   rules: {
     username: {

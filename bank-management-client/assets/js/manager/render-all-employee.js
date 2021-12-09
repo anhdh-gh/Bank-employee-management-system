@@ -1,6 +1,6 @@
 ApiClient.get("/employee", {})
   .then((resp) => {
-    const data = resp.data;
+    const data = resp.data.data;
     console.log(data);
   })
   .catch((err) => {
