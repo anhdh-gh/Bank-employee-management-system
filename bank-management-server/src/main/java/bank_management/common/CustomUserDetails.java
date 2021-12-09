@@ -45,15 +45,15 @@ public class CustomUserDetails implements UserDetails {
     	Optional<Customer> optCustomer = customerRepo.findById(people.getID());
     	if(optCustomer.isPresent())
     		roles.add(new SimpleGrantedAuthority(Role.Customer.name()));
-    	
+
     	Optional<Employee> optEmployee = employeeRepo.findById(people.getID());
     	if(optEmployee.isPresent())
     		roles.add(new SimpleGrantedAuthority(Role.Employee.name()));
-    	
+
     	Optional<Manager> optManager = managerRepo.findById(people.getID());
     	if(optManager.isPresent())
-    		roles.add(new SimpleGrantedAuthority(Role.Manager.name()));    	
-    	
+    		roles.add(new SimpleGrantedAuthority(Role.Manager.name()));
+
         return roles;
     }
 
