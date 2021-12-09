@@ -1,4 +1,10 @@
 const idFormAddCustomer = "#addEmployee";
+ApiClient.get("/employee/info", {})
+  .then((resp) => {})
+  .catch((err) => {});
+
+//set vao nav bar
+
 $(idFormAddCustomer).validate({
   rules: {
     username: {
@@ -184,13 +190,14 @@ $(idFormAddCustomer).validate({
 
     ApiClient.post("/employee", employee)
       .then((resp) => {
-        Notify.showSuccess(resp.message);
         if (resp.responseStatus == "Success") {
+          Notify.showSuccess(resp.message);
           window.location.replace(
             `${window.location.origin}/view/employee/all-employee.html`
           );
+        } else {
+          Notify.showError(resp.message);
         }
-        console.log(resp.data);
       })
       .catch((err) => {
         Notify.showError(err.response.data.message);
