@@ -77,7 +77,7 @@ public class EmployeeController {
         if (employeeIsEdited == null) {
             return ResponseEntity
                     .badRequest()
-                    .body(new ResponseResult("Không thể chỉnh sửa do nhân viên có ID là " + employeeDto.getID() + "không tồn tại!", ResponseStatus.Error));
+                    .body(new ResponseResult("Có lỗi xảy ra khi sửa đổi thông tin nhân viên!", ResponseStatus.Error));
         }
         else {
             return ResponseEntity

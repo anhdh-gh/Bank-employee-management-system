@@ -47,7 +47,7 @@ public class EmployeeService extends PersonService{
     }
 
     public EmployeeDto addEmployee(EmployeeDto employeeDto) {
-        employeeDto.setEmployeeCode(getLatestEmployeeCode());
+        employeeDto.setEmployeeCode(generateEmployeeCode());
         employeeDto.setBaseSalary(3000000);
         employeeDto.setSeniority(0);
         Employee employee = new Employee(employeeDto);
@@ -63,7 +63,7 @@ public class EmployeeService extends PersonService{
         return false;
     }
 
-    private String getLatestEmployeeCode() {
+    private String generateEmployeeCode() {
         List<User> list = userRepository.findAll();
         int latest = 0;
         for (User user : list) {
