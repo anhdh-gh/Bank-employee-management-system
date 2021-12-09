@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import bank_management.dto.CustomerDto;
 import bank_management.enumeration.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,5 +45,15 @@ public class Customer extends Person {
 		this.customerCode = customerCode;
 		this.paymentAccount = paymentAccount;
 		this.creditAccount = creditAccount;
+	}
+	public Customer(CustomerDto customerDto){
+		super(customerDto.getIdentityNumber(), customerDto.getDateOfBirth(), customerDto.getEmail(), customerDto.getPhoneNumber(),
+				customerDto.getGender(), customerDto.getAccount().getUsername(), customerDto.getAccount().getPassword(),
+				customerDto.getAddress().getCity(), customerDto.getAddress().getDistrict(), customerDto.getAddress().getCountry(),
+				customerDto.getAddress().getHouseNumber(), customerDto.getAddress().getZipCode(), customerDto.getFullName().getFirstName(),
+				customerDto.getFullName().getLastName());
+		this.customerCode = customerDto.getCustomerCode();
+		this.paymentAccount = customerDto.getPaymentAccount();
+		this.creditAccount = customerDto.getCreditAccount();
 	}
 }
