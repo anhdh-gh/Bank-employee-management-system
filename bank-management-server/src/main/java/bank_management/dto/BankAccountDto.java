@@ -1,6 +1,7 @@
 package bank_management.dto;
 
 import bank_management.entity.BankAccount;
+import bank_management.entity.Customer;
 import bank_management.entity.Employee;
 import bank_management.entity.MemberLevel;
 import bank_management.enumeration.BankAccountType;
@@ -39,6 +40,8 @@ public class BankAccountDto {
     private boolean status;
 
     private Employee employee;
+
+    private Customer customer;
 
     private MemberLevel memberLevel;
 

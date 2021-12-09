@@ -7,5 +7,5 @@ import bank_management.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, String>{
-	
+	Customer getCustomerByAccount_ID(String accountID);
 }
