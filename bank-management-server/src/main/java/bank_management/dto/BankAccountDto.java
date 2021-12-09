@@ -66,5 +66,4 @@ public class BankAccountDto {
         this.status = bankAccount.isStatus();
         this.memberLevel = bankAccount.getMemberLevel();
     }
-
 }

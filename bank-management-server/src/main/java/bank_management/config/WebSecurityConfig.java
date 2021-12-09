@@ -60,6 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                 	"/person/login",
                     "/person/forgot_password",
+                    "/bankAccount",
+                    "/bankAccount/*",
+
                     "/employee",
                     "/employee/*",
                     "/salary",

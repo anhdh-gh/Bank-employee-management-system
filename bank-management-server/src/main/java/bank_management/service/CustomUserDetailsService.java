@@ -38,14 +38,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
         // Kiểm tra xem People có tồn tại trong database không?
-    	Account account = accountRepo.findByUsername(username);
+
+		Account account = accountRepo.findByUsername(username);
+
     	if(account == null)
     		throw new UsernameNotFoundException(username);
     	
     	Person people = peopleRepo.findByAccount(account);
     	if(people == null)
     		throw new UsernameNotFoundException(username);
-    	
+
         return new CustomUserDetails(people, peopleRepo, customerRepo, managerRepo, employeeRepo);
     }
     

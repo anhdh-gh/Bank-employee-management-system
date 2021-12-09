@@ -16,7 +16,8 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Entity
 @Table
-public class MemberLevel extends BaseEntity{
+public class MemberLevel extends BaseEntity {
+
     @Column(name = "Name")
     @NotBlank(message = "Title không được trống!")
     private String name;

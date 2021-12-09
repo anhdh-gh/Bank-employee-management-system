@@ -37,16 +37,16 @@ public class CreditAccount extends BankAccount{
     @Column(name = "CVV")
     private String CVV;
 
-    public CreditAccount(@Digits(message = "accountCode chỉ chứa chữ số.", fraction = 0, integer = 30) String accountCode, @Digits(message = "accountNumber chỉ chứa chữ số.", fraction = 0, integer = 30) String accountNumber, @NotNull(message = "expireDate không được trống") Date expireDate, @NotBlank(message = "Branch không được trống!") String branch, @NotBlank(message = "Type không được trống!") BankAccountType type, @NotBlank(message = "Status không được trống!") boolean status, Employee employee, MemberLevel memberLevel, double creditLimit, double debtAmount, double interestRate, String CVV) {
-        super(accountCode, accountNumber, expireDate, branch, type, status, employee, memberLevel);
+    public CreditAccount(MemberLevel memberLevel, @Size(max = 30, message = "AccountCode tối đa 30 ký tự") @Pattern(regexp = "^\\d+$", message = "AccountCode chỉ chứa chữ số") String accountCode, @Size(max = 30, message = "AccountNumber tối đa 30 ký tự") @Pattern(regexp = "^\\d+$", message = "AccountNumber chỉ chứa chữ số") String accountNumber, @NotNull(message = "expireDate không được trống") Date expireDate, @NotBlank(message = "Branch không được trống!") String branch, @NotBlank(message = "Type không được trống!") BankAccountType type, @NotBlank(message = "Status không được trống!") boolean status, Employee employee, double creditLimit, double debtAmount, double interestRate, String CVV) {
+        super(memberLevel, accountCode, accountNumber, expireDate, branch, type, status, employee);
         this.creditLimit = creditLimit;
         this.debtAmount = debtAmount;
         this.interestRate = interestRate;
         this.CVV = CVV;
     }
 
-    public CreditAccount(String ID, Date createDate, Date editDate, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee, MemberLevel memberLevel, double creditLimit, double debtAmount, double interestRate, String CVV) {
-        super(ID, createDate, editDate, accountCode, accountNumber, expireDate, branch, type, status, employee, memberLevel);
+    public CreditAccount(String ID, Date createDate, Date editDate, MemberLevel memberLevel, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee, double creditLimit, double debtAmount, double interestRate, String CVV) {
+        super(ID, createDate, editDate, memberLevel, accountCode, accountNumber, expireDate, branch, type, status, employee);
         this.creditLimit = creditLimit;
         this.debtAmount = debtAmount;
         this.interestRate = interestRate;

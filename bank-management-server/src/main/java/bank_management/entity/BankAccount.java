@@ -11,10 +11,17 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table (name = "bankaccount")
 @AttributeOverride(name = "ID", column = @Column(name = "BankAccountID"))
-public class BankAccount extends BaseEntity{
+
+public class BankAccount extends BaseEntity {
+
+    @ManyToOne (targetEntity = MemberLevel.class)
+    @JoinColumn (name = "MemberLevelID")
+    protected MemberLevel memberLevel;
+
     @Column(name = "AccountCode", unique = true)
     @Size(max = 30, message = "AccountCode tối đa 30 ký tự")
     @Pattern(regexp="^\\d+$", message = "AccountCode chỉ chứa chữ số")
@@ -47,12 +54,9 @@ public class BankAccount extends BaseEntity{
     @JoinColumn (name = "EmployeeID")
     protected Employee employee;
 
-    @ManyToOne (targetEntity = MemberLevel.class)
-    @JoinColumn (name = "MemberLevelID")
-    protected MemberLevel memberLevel;
-
-    public BankAccount(String ID, Date createDate, Date editDate, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee, MemberLevel memberLevel) {
+    public BankAccount(String ID, Date createDate, Date editDate, MemberLevel memberLevel, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee) {
         super(ID, createDate, editDate);
+        this.memberLevel = memberLevel;
         this.accountCode = accountCode;
         this.accountNumber = accountNumber;
         this.expireDate = expireDate;
@@ -60,17 +64,5 @@ public class BankAccount extends BaseEntity{
         this.type = type;
         this.status = status;
         this.employee = employee;
-        this.memberLevel = memberLevel;
-    }
-
-    public BankAccount(String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee, MemberLevel memberLevel) {
-        this.accountCode = accountCode;
-        this.accountNumber = accountNumber;
-        this.expireDate = expireDate;
-        this.branch = branch;
-        this.type = type;
-        this.status = status;
-        this.employee = employee;
-        this.memberLevel = memberLevel;
     }
 }

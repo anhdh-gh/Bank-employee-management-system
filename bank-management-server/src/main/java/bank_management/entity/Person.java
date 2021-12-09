@@ -44,6 +44,7 @@ public class Person extends BaseEntity {
 
 	@Column(name = "Gender")
 	@NotNull(message = "Gender không được để trống")
+	@Enumerated(EnumType.STRING)
 	protected Gender gender;
 	
 	@OneToOne(targetEntity = Account.class, cascade = CascadeType.ALL)

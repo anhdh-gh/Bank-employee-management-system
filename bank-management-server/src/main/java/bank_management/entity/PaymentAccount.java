@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
@@ -19,42 +16,33 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "paymentAccount")
-public class PaymentAccount extends BankAccount{
+public class PaymentAccount extends BankAccount {
+
     @Column(name = "InterestRate")
-    @NotNull(message = "InterestRate không được để trống!")
+    @NotNull(message = "InterestRate không được để trống")
     @Positive(message = "InterestRate phải là số dương")
-    private double interesRate;
+    private double interestRate;
 
     @Column(name = "MinBalance")
-    @NotNull(message = "MinBalance không được để trống!")
+    @NotNull(message = "MinBalance không được để trống")
     @Positive(message = "MinBalance phải là số dương")
-    private  double minBalance;
+    private double minBalance;
 
     @Column(name = "Amount")
-    @NotNull(message = "Amount không được để trống!")
+    @NotNull(message = "Amount không được để trống")
     @Positive(message = "Amount phải là số dương")
     private double amount;
 
-    public PaymentAccount(@Digits(message = "accountCode chỉ chứa chữ số.", fraction = 0, integer = 30) String accountCode,
-                          @Digits(message = "accountNumber chỉ chứa chữ số.", fraction = 0, integer = 30) String accountNumber,
-                          @NotNull(message = "expireDate không được trống") Date expireDate,
-                          @NotBlank(message = "Branch không được trống!") String branch,
-                          @NotBlank(message = "Type không được trống!") BankAccountType type,
-                          @NotBlank(message = "Status không được trống!") boolean status,
-                          Employee employee,
-                          MemberLevel memberLevel,
-                          double interesRate,
-                          double minBalance,
-                          double amount) {
-        super(accountCode, accountNumber, expireDate, branch, type, status, employee, memberLevel);
-        this.interesRate = interesRate;
+    public PaymentAccount(MemberLevel memberLevel, @Size(max = 30, message = "AccountCode tối đa 30 ký tự") @Pattern(regexp = "^\\d+$", message = "AccountCode chỉ chứa chữ số") String accountCode, @Size(max = 30, message = "AccountNumber tối đa 30 ký tự") @Pattern(regexp = "^\\d+$", message = "AccountNumber chỉ chứa chữ số") String accountNumber, @NotNull(message = "expireDate không được trống") Date expireDate, @NotBlank(message = "Branch không được trống!") String branch, @NotBlank(message = "Type không được trống!") BankAccountType type, @NotBlank(message = "Status không được trống!") boolean status, Employee employee, double interestRate, double minBalance, double amount) {
+        super(memberLevel, accountCode, accountNumber, expireDate, branch, type, status, employee);
+        this.interestRate = interestRate;
         this.minBalance = minBalance;
         this.amount = amount;
     }
 
-    public PaymentAccount(String ID, Date createDate, Date editDate, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee, MemberLevel memberLevel, double interesRate, double minBalance, double amount) {
-        super(ID, createDate, editDate, accountCode, accountNumber, expireDate, branch, type, status, employee, memberLevel);
-        this.interesRate = interesRate;
+    public PaymentAccount(String ID, Date createDate, Date editDate, MemberLevel memberLevel, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, Employee employee, double interestRate, double minBalance, double amount) {
+        super(ID, createDate, editDate, memberLevel, accountCode, accountNumber, expireDate, branch, type, status, employee);
+        this.interestRate = interestRate;
         this.minBalance = minBalance;
         this.amount = amount;
     }
