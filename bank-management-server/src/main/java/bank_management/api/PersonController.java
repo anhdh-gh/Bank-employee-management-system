@@ -2,6 +2,7 @@ package bank_management.api;
 
 import javax.validation.Valid;
 
+import bank_management.payload.ChangePasswordRequest;
 import bank_management.payload.ForgotPasswordRequest;
 import bank_management.payload.ResponseResult;
 import bank_management.entity.Person;
@@ -36,19 +37,49 @@ public class PersonController {
                 ResponseStatus.Success
         ));
     }
+
+    @PostMapping("/change_password")
+    public ResponseEntity<?> processChangePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
+        if(!personService.comparePassword(changePasswordRequest.getCurrentPassword()))
+            return ResponseEntity
+                .badRequest()
+                .body(new ResponseResult(
+                    "Mật khẩu hiện tại không đúng",
+                    ResponseStatus.Invalid
+                ));
+
+        if(!changePasswordRequest.getNewPassword().equals(changePasswordRequest.getConfirmNewPassword()))
+            return ResponseEntity
+                .badRequest()
+                .body(new ResponseResult(
+                    "Mật khẩu mới và xác nhận mật khẩu mới không khớp",
+                    ResponseStatus.Invalid
+                ));
+
+        Person currentPerson = personService.getAuthPerson();
+        currentPerson.getAccount().setPassword(personService.encode(changePasswordRequest.getNewPassword()));
+        personService.editPerson(currentPerson);
+
+        return ResponseEntity.ok(new ResponseResult(
+            "Thay đổi mật khẩu thành công",
+            ResponseStatus.Success
+        ));
+    }
     
     @PostMapping("/login")
-    public ResponseResult authenticateUser(@Valid @RequestBody Account account) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody Account account) {
 		String token = personService.processLogin(account);
 		
-		return new ResponseResult (
-            json
-                .createObjectNode()
-                .putPOJO("accessToken", token)
-                .putPOJO("tokenType", "Bearer")
-                .putPOJO("ROLE", personService.getAuthRole()),
-            "Đăng nhập thành công",
-            ResponseStatus.Success
+		return ResponseEntity.ok(
+            new ResponseResult (
+                json
+                    .createObjectNode()
+                    .putPOJO("accessToken", token)
+                    .putPOJO("tokenType", "Bearer")
+                    .putPOJO("ROLE", personService.getAuthRole()),
+                "Đăng nhập thành công",
+                ResponseStatus.Success
+            )
         );
     }
 

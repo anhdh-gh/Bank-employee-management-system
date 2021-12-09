@@ -62,7 +62,7 @@ public class PersonService {
 
 
     // Lấy thông tin của người dùng đã đăng nhập
-    public Person getAuthPeople() {
+    public Person getAuthPerson() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails customUserDetails = (CustomUserDetails) auth.getPrincipal();
         return customUserDetails.getPeople();
@@ -81,10 +81,10 @@ public class PersonService {
     public String processLogin(Account account) {
         // Xác thực từ username và password.
         Authentication authentication = authenticationManager.authenticate (
-                new UsernamePasswordAuthenticationToken(
-                        account.getUsername(),
-                        account.getPassword()
-                )
+            new UsernamePasswordAuthenticationToken(
+                account.getUsername(),
+                account.getPassword()
+            )
         );
 
         // Nếu không xảy ra exception tức là thông tin hợp lệ
@@ -122,6 +122,21 @@ public class PersonService {
 
         // Trả về mật khẩu mới
         return newPassword;
+    }
+
+    // Edit person
+    public Person editPerson(Person person) {
+        return personRepo.save(person);
+    }
+
+    // Compare password
+    public boolean comparePassword(String password) {
+        return passwordEncoder.matches(password, this.getAuthPerson().getAccount().getPassword());
+    }
+
+    // Mã hóa string
+    public String encode(String rawString) {
+        return passwordEncoder.encode(rawString);
     }
 }
 
