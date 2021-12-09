@@ -1,11 +1,10 @@
 package bank_management.api;
 
 import bank_management.dto.BankAccountDto;
-import bank_management.dto.ResponseResult;
-import bank_management.dto.SalaryDto;
-import bank_management.entity.Account;
+
 import bank_management.entity.BankAccount;
 import bank_management.enumeration.ResponseStatus;
+import bank_management.payload.ResponseResult;
 import bank_management.service.BankAccountService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

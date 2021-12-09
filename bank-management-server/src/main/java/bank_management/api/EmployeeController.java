@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import bank_management.dto.EmployeeDto;
 import bank_management.payload.ResponseResult;
-import bank_management.entity.Employee;
 import bank_management.enumeration.ResponseStatus;
 import bank_management.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,12 +72,12 @@ public class EmployeeController {
     }
 
     @PutMapping
-    public ResponseEntity<?> editEmployee(@Valid @RequestBody Employee employee) {
-        Employee employeeIsEdited = employeeService.editEmployee(employee);
+    public ResponseEntity<?> editEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
+        EmployeeDto employeeIsEdited = employeeService.editEmployee(employeeDto);
         if (employeeIsEdited == null) {
             return ResponseEntity
                     .badRequest()
-                    .body(new ResponseResult("Không thể chỉnh sửa do nhân viên có ID là " + employee.getID() + "không tồn tại!", ResponseStatus.Error));
+                    .body(new ResponseResult("Không thể chỉnh sửa do nhân viên có ID là " + employeeDto.getID() + "không tồn tại!", ResponseStatus.Error));
         }
         else {
             return ResponseEntity
@@ -93,16 +92,16 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable(value = "id") String ID) {
-        boolean isDeleted = employeeService.deleteEmployee(ID);
+    public ResponseEntity<?> deleteEmployee(@PathVariable(value = "id") String employeeID) {
+        boolean isDeleted = employeeService.deleteEmployee(employeeID);
         if (isDeleted) {
             return ResponseEntity
                     .ok()
-                    .body(new ResponseResult("Xoá nhân viên có ID là " + ID + " thành công.", ResponseStatus.Success ));
+                    .body(new ResponseResult("Xoá nhân viên có ID là " + employeeID + " thành công.", ResponseStatus.Success ));
         } else {
             return ResponseEntity
                     .badRequest()
-                    .body(new ResponseResult("Không thể xóa do nhân viên có ID là " + ID + "không tồn tại!", ResponseStatus.Error));
+                    .body(new ResponseResult("Không thể xóa do nhân viên có ID là " + employeeID + "không tồn tại!", ResponseStatus.Error));
         }
     }
 
