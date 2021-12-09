@@ -74,4 +74,11 @@ public class EmployeeService extends PersonService{
         return "NV"+(latest+1);
     }
 
+    public EmployeeDto getEmployeeById(String employeeID) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeID);
+        if (optionalEmployee.isPresent()) {
+            return new EmployeeDto(optionalEmployee.get());
+        }
+        else return null;
+    }
 }

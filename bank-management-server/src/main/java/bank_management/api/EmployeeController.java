@@ -3,9 +3,11 @@ package bank_management.api;
 import javax.validation.Valid;
 
 import bank_management.dto.EmployeeDto;
+import bank_management.entity.Person;
 import bank_management.payload.ResponseResult;
 import bank_management.enumeration.ResponseStatus;
 import bank_management.service.EmployeeService;
+import bank_management.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    PersonService personService;
 
     @PostMapping
     public ResponseEntity<?> addEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
@@ -102,6 +107,22 @@ public class EmployeeController {
             return ResponseEntity
                     .badRequest()
                     .body(new ResponseResult("Không thể xóa do nhân viên có ID là " + employeeID + "không tồn tại!", ResponseStatus.Error));
+        }
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getCurrentEmployee() {
+        Person person = personService.getAuthPerson();
+        EmployeeDto employeeDto = employeeService.getEmployeeById(person.getID());
+        if (employeeDto == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseResult("Không thể lấy thông tin nhân viên!", ResponseStatus.Error));
+        }
+        else {
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseResult(employeeDto ,"Lấy thông tin thành công.", ResponseStatus.Success ));
         }
     }
 
