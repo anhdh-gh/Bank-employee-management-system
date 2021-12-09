@@ -2,6 +2,7 @@ package bank_management.api;
 
 import javax.validation.Valid;
 
+import bank_management.dto.EmployeeDto;
 import bank_management.payload.ResponseResult;
 import bank_management.entity.Employee;
 import bank_management.enumeration.ResponseStatus;
@@ -20,37 +21,37 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<?> addEmployee(@Valid @RequestBody Employee employee) {
-        if (employeeService.checkUsernameExist(employee.getAccount().getUsername())) {
+    public ResponseEntity<?> addEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
+        if (employeeService.checkUsernameExist(employeeDto.getAccount().getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new ResponseResult("Username đã tồn tại!", ResponseStatus.Error));
         }
-        if (employeeService.checkIdentityNumberExist(employee.getIdentityNumber())) {
+        if (employeeService.checkIdentityNumberExist(employeeDto.getIdentityNumber())) {
             return ResponseEntity
                     .badRequest()
                     .body(new ResponseResult("IdentityNumber đã tồn tại!", ResponseStatus.Error));
         }
-        if (employeeService.checkEmailExist(employee.getEmail())) {
+        if (employeeService.checkEmailExist(employeeDto.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new ResponseResult("Email đã tồn tại!", ResponseStatus.Error));
         }
-        if (employeeService.checkPhoneNumberExist(employee.getPhoneNumber())) {
+        if (employeeService.checkPhoneNumberExist(employeeDto.getPhoneNumber())) {
             return ResponseEntity
                     .badRequest()
                     .body(new ResponseResult("Số điện thoại đã tồn tại!", ResponseStatus.Error));
         }
-        Employee employeeSaved = employeeService.addEmployee(employee);
+        EmployeeDto employeeDtoSaved = employeeService.addEmployee(employeeDto);
         return  ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ResponseResult(employeeSaved, "Tạo tài khoản nhân viên thành công.", ResponseStatus.Success ));
+                .body(new ResponseResult(employeeDtoSaved, "Tạo tài khoản nhân viên thành công.", ResponseStatus.Success ));
 
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getEmployee(@PathVariable(value = "id") String ID) {
-        Employee employee = employeeService.findEmployeeById(ID);
+        EmployeeDto employee = employeeService.findEmployeeById(ID);
         if (employee == null) {
             return ResponseEntity
                     .badRequest()
@@ -63,7 +64,7 @@ public class EmployeeController {
 
     @GetMapping
     public ResponseResult getAllEmployee() {
-        List<Employee> employees = employeeService.findAllEmployee();
+        List<EmployeeDto> employees = employeeService.findAllEmployee();
         return new ResponseResult(
                 employees,
                 "Lấy tất cả nhân viên thành công",

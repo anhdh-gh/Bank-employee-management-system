@@ -3,6 +3,7 @@ package bank_management.entity;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import bank_management.dto.EmployeeDto;
 import bank_management.enumeration.Gender;
 import bank_management.enumeration.Position;
 import bank_management.enumeration.Role;
@@ -65,5 +66,17 @@ public class Employee extends User {
 		this.bankAccountList = bankAccountList;
 		this.salaryList = salaryList;
 		this.manager = manager;
+	}
+
+	public Employee(EmployeeDto employeeDto) {
+		super(employeeDto.getIdentityNumber(), employeeDto.getDateOfBirth(), employeeDto.getEmail(), employeeDto.getPhoneNumber(),
+			employeeDto.getGender(), employeeDto.getAccount().getUsername(), employeeDto.getAccount().getPassword(),
+				employeeDto.getAddress().getCity(), employeeDto.getAddress().getDistrict(), employeeDto.getAddress().getCountry(),
+				employeeDto.getAddress().getHouseNumber(), employeeDto.getAddress().getZipCode(), employeeDto.getFullname().getFirstName(),
+				employeeDto.getFullname().getLastName(), employeeDto.getEmployeeCode(), employeeDto.getRole(), employeeDto.getSeniority(), employeeDto.getPosition());
+		this.baseSalary = employeeDto.getBaseSalary();
+		this.bankAccountList = employeeDto.getBankAccountList();
+		this.salaryList = employeeDto.getSalaryList();
+		this.manager = employeeDto.getManager();
 	}
 }
