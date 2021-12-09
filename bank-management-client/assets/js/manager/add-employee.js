@@ -7,8 +7,8 @@ ApiClient.get("/employee/profile", {})
 
 //set vao nav bar
 
-const idFormAddCustomer = "#addEmployee";
-$(idFormAddCustomer).validate({
+const idFormAddEmployee = "#addEmployee";
+$(idFormAddEmployee).validate({
   rules: {
     username: {
       required: true,
@@ -156,8 +156,7 @@ $(idFormAddCustomer).validate({
 
   submitHandler: (form) => {
     // Lấy dữ liệu
-    const data = Form.getData(idFormAddCustomer);
-    console.log(data);
+    const data = Form.getData(idFormAddEmployee);
     const employee = {
       account: {
         username: data.username,
@@ -193,13 +192,14 @@ $(idFormAddCustomer).validate({
 
     ApiClient.post("/employee", employee)
       .then((resp) => {
-        if (resp.responseStatus == "Success") {
-          Notify.showSuccess(resp.message);
+        console.log(resp.data.data);
+        if (resp.data.responseStatus == "Success") {
+          Notify.showSuccess(resp.data.message);
           window.location.replace(
-            `${window.location.origin}/view/employee/all-employee.html`
+            `${window.location.origin}/view/employee/all-employees.html`
           );
         } else {
-          Notify.showError(resp.message);
+          Notify.showError(resp.data.message);
         }
       })
       .catch((err) => {
