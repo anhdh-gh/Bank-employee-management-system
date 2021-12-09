@@ -36,6 +36,7 @@ public class EmployeeDto {
     private List<BankAccount> bankAccountList;
     private List<Salary> salaryList;
     private Manager manager;
+    private Date createDate;
 
     public EmployeeDto(Employee employee) {
         employee.getAccount().setPassword("");
@@ -56,5 +57,6 @@ public class EmployeeDto {
         this.bankAccountList = employee.getBankAccountList();
         this.salaryList = employee.getSalaryList();
         this.manager = employee.getManager();
+        this.createDate = employee.getCreateDate();
     }
 }

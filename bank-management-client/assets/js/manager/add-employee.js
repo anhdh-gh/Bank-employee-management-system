@@ -39,7 +39,7 @@ $(idFormAddEmployee).validate({
       notBlank: true,
       email: true,
     },
-    indentityNumber: {
+    identityNumber: {
       required: true,
       notBlank: true,
       digits: true,
@@ -112,7 +112,7 @@ $(idFormAddEmployee).validate({
       notBlank: "Email không được để trống",
       email: "Email không hợp lệ",
     },
-    indentityNumber: {
+    identityNumber: {
       required: "Identity number không được để trống",
       notBlank: "Identity number không được để trống",
       digits: "Identity number chỉ chứa kí tự số",
