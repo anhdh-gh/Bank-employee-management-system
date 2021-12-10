@@ -2,10 +2,13 @@ package bank_management.api;
 
 
 import bank_management.dto.CustomerDto;
+import bank_management.dto.EmployeeDto;
 import bank_management.entity.Customer;
+import bank_management.entity.Person;
 import bank_management.enumeration.ResponseStatus;
 import bank_management.payload.ResponseResult;
 import bank_management.service.CustomerService;
+import bank_management.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,9 @@ import java.util.List;
 public class CustomerController {
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    PersonService personService;
 
     @PostMapping
     public ResponseEntity<?> addCustomer(@Valid @RequestBody CustomerDto customerDto) {
@@ -74,6 +80,22 @@ public class CustomerController {
                     "Chỉnh sửa thông tin khách hàng thành công!",
                     ResponseStatus.Success
             ));
+        }
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getCurrentEmployee() {
+        Person person = personService.getAuthPerson();
+        CustomerDto customerDto = customerService.getCustomerById(person.getID());
+        if (customerDto == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseResult("Không thể lấy thông tin khách hàng!", ResponseStatus.Error));
+        }
+        else {
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseResult(customerDto ,"Lấy thông tin thành công.", ResponseStatus.Success ));
         }
     }
 }
