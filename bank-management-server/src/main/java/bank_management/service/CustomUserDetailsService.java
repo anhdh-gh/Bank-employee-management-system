@@ -21,7 +21,7 @@ import bank_management.repository.PersonRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-    PersonRepository peopleRepo;
+    PersonRepository personRepo;
 	
 	@Autowired
 	AccountRepository accountRepo;
@@ -37,27 +37,27 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
     @Override
     public UserDetails loadUserByUsername(String username) {
-        // Kiểm tra xem People có tồn tại trong database không?
+        // Kiểm tra xem person có tồn tại trong database không?
 
 		Account account = accountRepo.findByUsername(username);
 
     	if(account == null)
     		throw new UsernameNotFoundException(username);
     	
-    	Person people = peopleRepo.findByAccount(account);
-    	if(people == null)
+    	Person person = personRepo.findByAccount(account);
+    	if(person == null)
     		throw new UsernameNotFoundException(username);
 
-        return new CustomUserDetails(people, peopleRepo, customerRepo, managerRepo, employeeRepo);
+        return new CustomUserDetails(person, personRepo, customerRepo, managerRepo, employeeRepo);
     }
     
     // JWTAuthenticationFilter sẽ sử dụng hàm này
     @Transactional
     public UserDetails loadUserById(String id) {
-        Person people = peopleRepo.findById(id).orElseThrow(
+        Person person = personRepo.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException("User not found with id : " + id)
         );
 
-        return new CustomUserDetails(people, peopleRepo, customerRepo, managerRepo, employeeRepo);
+        return new CustomUserDetails(person, personRepo, customerRepo, managerRepo, employeeRepo);
     }
 }

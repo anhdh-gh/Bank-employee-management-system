@@ -24,8 +24,6 @@ public class CustomerDto {
    private String customerCode;
    private FullnameDto fullName;
    private AddressDto address;
-   private CreditAccount creditAccount;
-   private PaymentAccount paymentAccount;
 
    public CustomerDto(Customer customer){
        customer.getAccount().setPassword("");
@@ -39,7 +37,5 @@ public class CustomerDto {
        this.customerCode = customer.getCustomerCode();
        this.fullName = new FullnameDto(customer.getFullName());
        this.address = new AddressDto(customer.getAddress());
-       this.creditAccount = customer.getCreditAccount();
-       this.paymentAccount = customer.getPaymentAccount();
    }
 }

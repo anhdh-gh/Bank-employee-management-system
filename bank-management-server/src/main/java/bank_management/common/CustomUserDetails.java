@@ -27,9 +27,9 @@ public class CustomUserDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
-	Person people;
+	Person person;
 
-    PersonRepository peopleRepo;
+    PersonRepository personRepo;
 
     CustomerRepository customerRepo;
 
@@ -39,18 +39,18 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-    	// Add ROLE của people
+    	// Add ROLE của person
     	List<GrantedAuthority> roles = new ArrayList<>();
     	
-    	Optional<Customer> optCustomer = customerRepo.findById(people.getID());
+    	Optional<Customer> optCustomer = customerRepo.findById(person.getID());
     	if(optCustomer.isPresent())
     		roles.add(new SimpleGrantedAuthority(Role.Customer.name()));
 
-    	Optional<Employee> optEmployee = employeeRepo.findById(people.getID());
+    	Optional<Employee> optEmployee = employeeRepo.findById(person.getID());
     	if(optEmployee.isPresent())
     		roles.add(new SimpleGrantedAuthority(Role.Employee.name()));
 
-    	Optional<Manager> optManager = managerRepo.findById(people.getID());
+    	Optional<Manager> optManager = managerRepo.findById(person.getID());
     	if(optManager.isPresent())
     		roles.add(new SimpleGrantedAuthority(Role.Manager.name()));
 
@@ -59,12 +59,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return people.getAccount().getPassword();
+        return person.getAccount().getPassword();
     }
 
     @Override
     public String getUsername() {
-        return people.getAccount().getUsername();
+        return person.getAccount().getUsername();
     }
 
     @Override
