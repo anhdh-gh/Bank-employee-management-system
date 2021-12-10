@@ -67,7 +67,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     "/employee/*",
                     "/salary",
                     "/salary/*",
-                    "/salary/detail/*"
+                    "/salary/detail/*",
+                        "/customer"
+
                 ).permitAll()
                 
 //                // Cho phép những người đã authenticate và là Manager truy cập vào các đường dẫn này

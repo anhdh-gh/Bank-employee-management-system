@@ -33,10 +33,11 @@ public class BankAccountService {
     CreditAccountRepository creditAccountRepo;
 
     public Customer getCustomerByBankAccountID(String id) {
-        Customer customer = customerRepo.findFirstCustomerByPaymentAccountID(id);
-        if(customer == null)
-            customer = customerRepo.findFirstCustomerByCreditAccountID(id);
-        return customer;
+//        Customer customer = customerRepo.findFirstCustomerByPaymentAccountID(id);
+//        if(customer == null)
+//            customer = customerRepo.findFirstCustomerByCreditAccountID(id);
+//        return customer;
+        return null;
     }
 
     public List<BankAccountDto> getAllBankAccount() {
