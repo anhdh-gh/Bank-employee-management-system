@@ -65,7 +65,7 @@ public class PersonService {
     public Person getAuthPerson() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails customUserDetails = (CustomUserDetails) auth.getPrincipal();
-        return customUserDetails.getPeople();
+        return customUserDetails.getPerson();
     }
 
     // Lấy các role (quyền) của người dùng đã đăng nhập

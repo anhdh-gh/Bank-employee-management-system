@@ -31,6 +31,7 @@ public class User extends Person {
 	@Column(name = "EmployeeCode")
 	@NotBlank(message = "EmployeeCode không được để trống")
 	@Size(max = 30, message = "EmployeeCode tối đa 30 ký tự")
+	@Pattern(regexp = "^NV-\\d{5}+$", message = "EmployeeCode không đúng định dạng")
 	protected String employeeCode;
 
 	@NotNull(message = "Role không được để trống")

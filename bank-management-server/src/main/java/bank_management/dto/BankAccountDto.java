@@ -66,4 +66,16 @@ public class BankAccountDto {
         this.status = bankAccount.isStatus();
         this.memberLevel = bankAccount.getMemberLevel();
     }
+
+    public BankAccountDto(BankAccount bankAccount, Customer customer) {
+        this.ID = bankAccount.getID();
+        this.accountCode = bankAccount.getAccountCode();
+        this.accountNumber = bankAccount.getAccountNumber();
+        this.expireDate = bankAccount.getExpireDate();
+        this.branch = bankAccount.getBranch();
+        this.type = bankAccount.getType();
+        this.status = bankAccount.isStatus();
+        this.memberLevel = bankAccount.getMemberLevel();
+        this.customer = customer;
+    }
 }

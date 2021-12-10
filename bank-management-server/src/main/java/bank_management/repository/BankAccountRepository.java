@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BankAccountRepository extends JpaRepository<BankAccount, String>{
     BankAccount getBankAccountByAccountNumber(String accountNumber);
+    BankAccount getBankAccountByAccountCode(String accountCode);
 }
