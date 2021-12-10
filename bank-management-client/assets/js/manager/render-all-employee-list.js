@@ -11,13 +11,14 @@ ApiClient.get("/employee", {})
     let data = resp.data.data;
     let html = "";
     data.forEach((employee) => {
+      let firstLetter = employee.fullname.firstName.substring(0, 1);
       let employeeRow = `<tr>
                         <td>
                           <h2>
                             <a href="profile.html?id=${
                               employee.id
                             }" class="avatar text-white"
-                              >J</a
+                              >${firstLetter}</a
                             ><a href="profile.html?id=${employee.id}"
                               >${
                                 employee.fullname.firstName +
@@ -47,7 +48,9 @@ ApiClient.get("/employee", {})
                             type="submit"
                             data-toggle="modal"
                             data-target="#delete_employee"
-                            class="btn btn-danger btn-sm mb-1"
+                            class="btn btn-danger btn-sm mb-1" class="delete" value="${
+                              employee.id
+                            }"
                           >
                             <i class="far fa-trash-alt"></i>
                           </button>
@@ -60,3 +63,8 @@ ApiClient.get("/employee", {})
   .catch((err) => {
     Notify.showError(err.response.data.data.message);
   });
+
+$(".delete").on("click", () => {
+  console.log(12345);
+  console.log($("#delete").attr("value"));
+});

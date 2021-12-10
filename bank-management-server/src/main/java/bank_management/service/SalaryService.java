@@ -27,7 +27,7 @@ public class SalaryService {
     TransactionRepository transactionRepository;
 
     public List<SalaryDto> getAllSalary() {
-        List<Salary> salaries = salaryRepository.findAll();
+        List<Salary> salaries = salaryRepository.findAllOrderByMonthAndYear();
         List<SalaryDto> salaryDtoList = new ArrayList<>();
         for (Salary salary : salaries) {
             SalaryDto salaryDto = new SalaryDto(salary);

@@ -33,10 +33,10 @@ ApiClient.get("/employee", {})
                     >
                     <a
                       class="dropdown-item"
-                      href="#"
+                      href="${employee.id}"
                       data-toggle="modal"
                       data-target="#delete_employee"
-                      ><i class="fas fa-trash-alt m-r-5"></i> Delete</a
+                      id="delete" ><i class="fas fa-trash-alt m-r-5" ></i> Delete</a
                     >
                   </div>
                 </div>
@@ -55,3 +55,13 @@ ApiClient.get("/employee", {})
   .catch((err) => {
     Notify.showError(err.response.data.data.message);
   });
+
+$("#delete").on("click", () => {
+  var employeeID = $(this).attr("href");
+  //$("#delete-confirm").attr("value", employeeID);
+  console.log(employeeID);
+});
+$("#delete-confirm").on("click", () => {
+  var employeeID = $(this).attr("value");
+  console.log(employeeID);
+});
