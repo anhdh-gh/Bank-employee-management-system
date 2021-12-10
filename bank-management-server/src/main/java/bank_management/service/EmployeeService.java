@@ -68,10 +68,10 @@ public class EmployeeService extends PersonService{
         int latest = 0;
         for (User user : list) {
             String employeeCode = user.getEmployeeCode();
-            int number = Integer.parseInt(employeeCode.substring(2));
+            int number = Integer.parseInt(employeeCode.substring(3));
             latest = (number > latest) ? number : latest;
         }
-        return "NV"+(latest+1);
+        return "NV-"+(latest+1);
     }
 
     public EmployeeDto getEmployeeById(String employeeID) {

@@ -3,6 +3,7 @@ package bank_management.api;
 import javax.validation.Valid;
 
 import bank_management.dto.EmployeeDto;
+import bank_management.entity.Manager;
 import bank_management.entity.Person;
 import bank_management.payload.ResponseResult;
 import bank_management.enumeration.ResponseStatus;
@@ -46,6 +47,7 @@ public class EmployeeController {
                     .badRequest()
                     .body(new ResponseResult("Số điện thoại đã tồn tại!", ResponseStatus.Error));
         }
+        employeeDto.setManager((Manager) personService.getAuthPerson());
         EmployeeDto employeeDtoSaved = employeeService.addEmployee(employeeDto);
         return  ResponseEntity
                 .status(HttpStatus.CREATED)
