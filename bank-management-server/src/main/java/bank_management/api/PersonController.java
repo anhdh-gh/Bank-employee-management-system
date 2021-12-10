@@ -26,6 +26,17 @@ public class PersonController {
     @Autowired
     ObjectMapper json;
 
+    @GetMapping("/info")
+    public ResponseEntity<?> getCurrentPerson() {
+        return ResponseEntity
+            .ok()
+            .body(new ResponseResult(
+                personService.getAuthPerson(),
+                "Lấy thông tin thành công",
+                ResponseStatus.Success
+            ));
+    }
+
     @GetMapping("/getRole")
     public ResponseEntity<?> getRole() {
         return ResponseEntity
