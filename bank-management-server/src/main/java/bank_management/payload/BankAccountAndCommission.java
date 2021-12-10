@@ -1,5 +1,6 @@
-package bank_management.dto;
+package bank_management.payload;
 
+import bank_management.dto.BankAccountDto;
 import lombok.Data;
 
 //class chứa thông tin tài khoản và hoa hồng được hưởng

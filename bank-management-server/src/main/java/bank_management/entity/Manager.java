@@ -6,6 +6,7 @@ import javax.validation.constraints.*;
 import bank_management.enumeration.Gender;
 import bank_management.enumeration.Position;
 import bank_management.enumeration.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,7 @@ public class Manager extends User {
 	@NotNull(message = "rate không được để trống!")
 	private double rate;
 
+	@JsonIgnore
 	@OneToMany(targetEntity = Employee.class)
 	@JoinColumn(name = "ManagerID")
 	private List<Employee> employeeList;

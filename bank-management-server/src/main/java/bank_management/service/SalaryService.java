@@ -1,8 +1,8 @@
 package bank_management.service;
 
-import bank_management.dto.BankAccountAndCommission;
+import bank_management.payload.BankAccountAndCommission;
 import bank_management.dto.BankAccountDto;
-import bank_management.dto.DetailSalaryDto;
+import bank_management.payload.DetailSalary;
 import bank_management.dto.SalaryDto;
 import bank_management.entity.*;
 import bank_management.enumeration.BankAccountType;
@@ -51,7 +51,7 @@ public class SalaryService {
         return null;
     }
 
-    public DetailSalaryDto getDetailSalary(String salaryID) {
+    public DetailSalary getDetailSalary(String salaryID) {
         Optional<Salary> optionalSalary = salaryRepository.findById(salaryID);
         if (optionalSalary.isPresent()) {
             List<BankAccountAndCommission> list = new ArrayList<>();
@@ -83,8 +83,8 @@ public class SalaryService {
                     }
                 }
             }
-            DetailSalaryDto detailSalaryDto = new DetailSalaryDto(employee.getEmployeeCode(), salary.getMonth(), salary.getYear(), employee.getBaseSalary(), list);
-            return detailSalaryDto;
+            DetailSalary detailSalary = new DetailSalary(employee.getEmployeeCode(), salary.getMonth(), salary.getYear(), employee.getBaseSalary(), list);
+            return detailSalary;
         }
         return null;
     }

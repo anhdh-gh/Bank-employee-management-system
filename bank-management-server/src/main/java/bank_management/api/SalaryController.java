@@ -1,6 +1,6 @@
 package bank_management.api;
 
-import bank_management.dto.DetailSalaryDto;
+import bank_management.payload.DetailSalary;
 import bank_management.payload.ResponseResult;
 import bank_management.dto.SalaryDto;
 import bank_management.enumeration.ResponseStatus;
@@ -66,15 +66,15 @@ public class SalaryController {
 
     @GetMapping("/detail/{id}")
     public ResponseEntity getDetailSalary(@PathVariable(value = "id") String salaryID) {
-        DetailSalaryDto detailSalaryDto = salaryService.getDetailSalary(salaryID);
-        if (detailSalaryDto == null) {
+        DetailSalary detailSalary = salaryService.getDetailSalary(salaryID);
+        if (detailSalary == null) {
             return ResponseEntity
                     .badRequest()
                     .body(new ResponseResult("Không tồn tại bảng lương có ID là " + salaryID, ResponseStatus.Error));
         } else return ResponseEntity
                 .ok()
                 .body(new ResponseResult(
-                        detailSalaryDto,
+                        detailSalary,
                         "Lấy thông tin chi tiết lương thành công!",
                         ResponseStatus.Success));
     }
