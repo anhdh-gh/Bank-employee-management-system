@@ -68,11 +68,9 @@ function fillModalDelete(employeeID) {
 //xoa
 $("#delete-confirm").on("click", () => {
   let employeeID = $("#delete-confirm").attr("value");
-  console.log(employeeID);
   ApiClient.delete("/employee/" + employeeID)
     .then((resp) => {
       let data = resp.data;
-      console.log("object");
       console.log(data.message);
       if (data.responseStatus == "Success") {
         Notify.showSuccess(resp.data.message);
