@@ -28,7 +28,9 @@ ApiClient.get("/employee", {})
                     ><i class="fas fa-ellipsis-v"></i
                   ></a>
                   <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="edit-employee.html"
+                    <a class="dropdown-item" href="edit-employee.html?id=${
+                      employee.id
+                    }"
                       ><i class="fas fa-pencil-alt m-r-5"></i> Edit</a
                     >
                     <a
@@ -36,7 +38,9 @@ ApiClient.get("/employee", {})
                       href="${employee.id}"
                       data-toggle="modal"
                       data-target="#delete_employee"
-                      id="delete" ><i class="fas fa-trash-alt m-r-5" ></i> Delete</a
+                      class="delete" onclick="fillModalDelete(${
+                        employee.id
+                      })" ><i class="fas fa-trash-alt m-r-5" ></i> Delete</a
                     >
                   </div>
                 </div>
@@ -56,12 +60,25 @@ ApiClient.get("/employee", {})
     Notify.showError(err.response.data.data.message);
   });
 
-$("#delete").on("click", () => {
-  var employeeID = $(this).attr("href");
-  //$("#delete-confirm").attr("value", employeeID);
-  console.log(employeeID);
-});
+//fill id vao modal de xoa
+function fillModalDelete(employeeID) {
+  $("#delete-confirm").attr("value", employeeID);
+}
+
+//xoa
 $("#delete-confirm").on("click", () => {
-  var employeeID = $(this).attr("value");
+  let employeeID = $("#delete-confirm").attr("value");
   console.log(employeeID);
+  ApiClient.delete("/employee/" + employeeID)
+    .then((resp) => {
+      let data = resp.data;
+      console.log("object");
+      console.log(data.message);
+      if (data.responseStatus == "Success") {
+        Notify.showSuccess(resp.data.message);
+      } else {
+        Notify.showError(resp.data.message);
+      }
+    })
+    .catch((err) => {});
 });
