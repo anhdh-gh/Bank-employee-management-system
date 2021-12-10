@@ -66,4 +66,12 @@ public class CustomerService extends PersonService {
         }
         return "KH-" + (lastest+1);
     }
+
+    public CustomerDto getCustomerById(String customerId) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+        if(optionalCustomer.isPresent()){
+            return new CustomerDto((optionalCustomer.get()));
+        }
+        return null;
+    }
 }
