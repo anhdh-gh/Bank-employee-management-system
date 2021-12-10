@@ -56,7 +56,6 @@ public class EmployeeDto {
         this.address = new AddressDto(employee.getAddress());
         this.bankAccountList = employee.getBankAccountList();
         this.salaryList = employee.getSalaryList();
-        this.manager = employee.getManager();
         this.createDate = employee.getCreateDate();
     }
 }

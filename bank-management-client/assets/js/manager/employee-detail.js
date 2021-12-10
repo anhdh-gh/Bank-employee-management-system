@@ -1,4 +1,4 @@
-ApiClient.get("/employee/profile", {})
+ApiClient.get("/manager/profile", {})
   .then((resp) => {
     const profile = resp.data.data.account.username;
     $("#profile").text(profile);
