@@ -61,9 +61,9 @@ public class CustomerService extends PersonService {
         int lastest = 0;
         for(Customer customer: customerList){
             String customerCode = customer.getCustomerCode();
-            int number = Integer.parseInt(customerCode.substring(2));
+            int number = Integer.parseInt(customerCode.substring(3));
             lastest = (number > lastest) ? number : lastest;
         }
-        return "KH" + (lastest+1);
+        return "KH-" + (lastest+1);
     }
 }

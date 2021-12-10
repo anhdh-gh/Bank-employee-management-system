@@ -23,6 +23,7 @@ public class Customer extends Person {
 	@NotBlank(message = "CustomerCode không được để trống")
 	@Column(name = "CustomerCode")
 	@Size(max = 30, message = "customerCode tối đa 30 ký tự")
+	@Pattern(regexp = "^KH-\\d{5}+$", message = "CustomerCode không đúng định dạng")
 	private String customerCode;
 
 	public Customer(@NotBlank(message = "IdentityNumber không được để trống") @Digits(message = "IdentityNumber chỉ chứa chữ số", fraction = 0, integer = 15) String identityNumber, @NotNull(message = "DateOfBirth không được để trống") Date dateOfBirth, @NotBlank(message = "Email không được để trống") @Email(message = "Email không đúng định dạng") String email, @NotBlank(message = "PhoneNumber không được để trống") @Digits(message = "PhoneNumber chỉ chứa chữ số", fraction = 0, integer = 15) String phoneNumber, @NotNull(message = "Gender không được để trống") Gender gender, Account account, Address address, FullName fullName, String customerCode) {
