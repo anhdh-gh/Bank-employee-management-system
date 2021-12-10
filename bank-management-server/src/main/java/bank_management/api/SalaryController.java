@@ -4,14 +4,13 @@ import bank_management.dto.DetailSalaryDto;
 import bank_management.payload.ResponseResult;
 import bank_management.dto.SalaryDto;
 import bank_management.enumeration.ResponseStatus;
+import bank_management.payload.SalaryRequest;
 import bank_management.service.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,7 +30,9 @@ public class SalaryController {
     }
 
     @GetMapping("/calcSalary")
-    public ResponseEntity calcBatchSalary(int month, int year) {
+    public ResponseEntity calcBatchSalary(@Valid @RequestBody SalaryRequest salaryRequest) {
+        int month = salaryRequest.getMonth();
+        int year = salaryRequest.getYear();
         List<SalaryDto> salaryDtoList = salaryService.calcSalary(month, year);
         if (salaryDtoList == null) {
             return ResponseEntity
