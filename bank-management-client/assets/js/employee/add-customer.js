@@ -1,4 +1,7 @@
 const idFormAddCustomer = "#addCustomer";
+function convertDate(dateInput){
+  return dateInput.split("-").reverse().join("-");
+}
 $(idFormAddCustomer).validate({
   rules: {
     username: {
@@ -169,7 +172,7 @@ $(idFormAddCustomer).validate({
         id: null,
       },
       identityNumber: data.identityNumber,
-      dateOfBirth: "2000-12-12", // note
+      dateOfBirth: convertDate(data.dateOfBirth), // note
       email: data.email,
       phoneNumber: data.phoneNumber,
       gender: data.gender,
