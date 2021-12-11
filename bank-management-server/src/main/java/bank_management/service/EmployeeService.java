@@ -1,8 +1,9 @@
 package bank_management.service;
 
 import bank_management.dto.EmployeeDto;
-import bank_management.entity.Employee;
-import bank_management.entity.User;
+import bank_management.entity.*;
+import bank_management.enumeration.Position;
+import bank_management.payload.SearchEmployeeRequest;
 import bank_management.repository.EmployeeRepository;
 import bank_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +76,31 @@ public class EmployeeService extends PersonService {
         if (optionalEmployee.isPresent()) {
             return new EmployeeDto(optionalEmployee.get());
         } else return null;
+    }
+
+    public List<EmployeeDto> searchEmployee(SearchEmployeeRequest searchEmployeeRequest) {
+        List<Employee> res = employeeRepository.findAll();
+        String employeeCode = searchEmployeeRequest.getEmployeeCode();
+        String employeeName = searchEmployeeRequest.getEmployeeName();
+        String position = searchEmployeeRequest.getPosition();
+
+        if(!position.equals("All"))
+            res.removeIf(b -> !b.getPosition().name().contains(position));
+
+        if(employeeCode != null)
+            res.removeIf(b -> !b.getEmployeeCode().contains(employeeCode));
+
+        if(employeeName != null)
+            res.removeIf(b -> {
+                Optional<Employee> optionalEmployee = employeeRepository.findById(b.getID());
+                return
+                        (optionalEmployee.isPresent() && !optionalEmployee.get().getFullName().toString().contains(employeeName));
+
+            });
+        List<EmployeeDto> employeeDtoList = new ArrayList<>();
+        for (Employee employee : res) {
+            employeeDtoList.add(new EmployeeDto(employee));
+        }
+        return employeeDtoList;
     }
 }
