@@ -1,10 +1,3 @@
-ApiClient.get("/person/info", {})
-  .then((resp) => {
-    const profile = resp.data.data.account.username;
-    $("#profile").text(profile);
-  })
-  .catch((err) => {});
-
 // get id
 const currentURL = window.location.href;
 
@@ -139,10 +132,10 @@ ApiClient.get("/salary/detail/" + salaryID, {})
     data.list.forEach((item) => {
       let bankAccountRow = `<tr>
                                     <td>${index++}</td>
-                                    <td>Date</td>
+                                    <td>${item.bankAccountDto.expireDate}</td>
                                     <td>${item.bankAccountDto.accountCode}</td>
                                     <td>${item.bankAccountDto.type}</td>
-                                    <td>${item.commission}</td>
+                                    <td>+ ${item.commission}</td>
                                   </tr>`;
       htmlBankAccountList += bankAccountRow;
     });

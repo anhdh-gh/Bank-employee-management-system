@@ -1,10 +1,3 @@
-ApiClient.get("/person/info", {})
-  .then((resp) => {
-    const profile = resp.data.data.account.username;
-    $("#profile").text(profile);
-  })
-  .catch((err) => {});
-
 const idSalaryComponent = "#salary-component";
 ApiClient.get("/salary", {})
   .then((resp) => {

@@ -1,11 +1,3 @@
-ApiClient.get("/person/info", {})
-  .then((resp) => {
-    const profile = resp.data.data.account.username;
-    $("#profile").text(profile);
-  })
-  .catch((err) => {});
-
-//set vao nav bar
 function convertDate(dateInput) {
   return dateInput.split("-").reverse().join("-");
 }
