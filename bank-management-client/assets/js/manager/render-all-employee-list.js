@@ -59,6 +59,15 @@ ApiClient.get("/employee", {})
       html += employeeRow;
     });
     $(employeeGrid).html(html);
+
+    (function ($) {
+      "use strict";
+      if ($(".datatable").length > 0) {
+        $(".datatable").DataTable({
+          bFilter: false,
+        });
+      }
+    })(jQuery);
   })
   .catch((err) => {
     Notify.showError(err.response.data.data.message);

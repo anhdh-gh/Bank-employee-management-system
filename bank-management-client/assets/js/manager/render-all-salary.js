@@ -71,5 +71,14 @@ ApiClient.get("/salary", {})
       html += salaryRow;
     });
     $(idSalaryComponent).html(html);
+
+    (function ($) {
+      "use strict";
+      if ($(".datatable").length > 0) {
+        $(".datatable").DataTable({
+          bFilter: false,
+        });
+      }
+    })(jQuery);
   })
   .catch((err) => {});
