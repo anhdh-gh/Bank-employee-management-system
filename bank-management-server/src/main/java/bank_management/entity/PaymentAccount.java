@@ -51,4 +51,19 @@ public class PaymentAccount extends BankAccount {
         this.amount = amount;
         this.customer = customer;
     }
+
+    public PaymentAccount(BankAccount bankAccount) {
+        this.ID = bankAccount.getID();
+        this.createDate = bankAccount.getCreateDate();
+        this.editDate = bankAccount.getEditDate();
+        this.memberLevel = bankAccount.getMemberLevel();
+        this.accountCode = bankAccount.getAccountCode();
+        this.accountNumber = bankAccount.getAccountNumber();
+        this.expireDate = bankAccount.getExpireDate();
+        this.branch = bankAccount.getBranch();
+        this.type = bankAccount.getType();
+        this.status = bankAccount.isStatus();
+        this.employee = bankAccount.getEmployee();
+        this.CVV = bankAccount.getCVV();
+    }
 }
