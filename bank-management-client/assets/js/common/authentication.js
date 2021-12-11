@@ -27,9 +27,10 @@ if (urlsPageNotAuth.every(url => url !== pathname)) {
     if(!Cookies.get("token") && !sessionStorage.getItem('token'))
         backLogin()
     else {
-        ApiClient.get('/person/getRole')
+        ApiClient.get('/person/info')
         .then(resp => {
-            const role = resp.data.data.ROLE
+            const role = resp.data.data.role
+            const info = resp.data.data.info
 
             if(role.some(i => i === 'Customer')) {
                 if(!pathname.includes('/customer'))
@@ -52,6 +53,8 @@ if (urlsPageNotAuth.every(url => url !== pathname)) {
                     }
                 }
             }   
+
+            $('#profile').text(info.account.username)
         })
         .catch(err => {
             console.log(err)

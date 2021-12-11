@@ -31,22 +31,12 @@ public class PersonController {
         return ResponseEntity
             .ok()
             .body(new ResponseResult(
-                personService.getAuthPerson(),
+                json.createObjectNode()
+                    .putPOJO("info", personService.getAuthPerson())
+                    .putPOJO("role", personService.getAuthRole()),
                 "Lấy thông tin thành công",
                 ResponseStatus.Success
             ));
-    }
-
-    @GetMapping("/getRole")
-    public ResponseEntity<?> getRole() {
-        return ResponseEntity
-            .ok()
-            .body(new ResponseResult(
-                json.createObjectNode()
-                    .putPOJO("ROLE", personService.getAuthRole()),
-                "Lấy role thành công",
-                ResponseStatus.Success
-        ));
     }
 
     @PostMapping("/change_password")

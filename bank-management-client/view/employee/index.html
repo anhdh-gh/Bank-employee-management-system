@@ -1421,14 +1421,6 @@
     <script src="../../assets/js/common/Notify.js"></script>
     <script src="../../assets/js/common/ApiClient.js"></script>
     <script src="../../assets/js/common/authentication.js"></script>
-    <script>
-      ApiClient.get("/person/info", {})
-        .then((resp) => {
-          const profile = resp.data.data.account.username;
-          $("#profile").text(profile);
-        })
-        .catch((err) => {});
-    </script>
   </body>
 
   <!-- Mirrored from dreamguystech.com/preadmin/html/school/light/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:55:14 GMT -->

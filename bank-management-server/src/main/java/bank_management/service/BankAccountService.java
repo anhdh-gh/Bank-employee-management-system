@@ -32,6 +32,11 @@ public class BankAccountService {
     @Autowired
     EmployeeRepository employeeRepo;
 
+    public PaymentAccount getPaymentAccountByCustomerID(String customerID) {
+        PaymentAccount paymentAccount = paymentAccountRepo.getPaymentAccountByCustomerID(customerID);
+        return paymentAccount;
+    }
+
     public List<BankAccount> getAllBankAccount() {
         List<BankAccount> bankAccountList = bankAccountRepo.findAll();
         return bankAccountList;
@@ -144,25 +149,6 @@ public class BankAccountService {
         }
         return false;
     }
-
-
-//    public Customer getCustomerByBankAccountID(String id) {
-//        Customer customer = customerRepo.findFirstCustomerByPaymentAccountID(id);
-//        if(customer == null)
-//            customer = customerRepo.findFirstCustomerByCreditAccountID(id);
-//        return customer;
-//        return null;
-//    }
-
-//    public List<BankAccountDto> getAllBankAccount() {
-
-
-//    public Customer getCustomerByBankAccountID(String id) {
-//        Customer customer = customerRepo.findFirstCustomerByPaymentAccountID(id);
-//        if(customer == null)
-//            customer = customerRepo.findFirstCustomerByCreditAccountID(id);
-//        return customer;
-//    }
 
     public List<BankAccount> processSearch(String accountCode, String customerCode, String type) {
         List<BankAccount> res = bankAccountRepo.findAll();

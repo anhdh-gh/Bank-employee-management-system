@@ -26,6 +26,9 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+
+	<!-- DevExtreme theme -->
+	<link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/21.2.3/css/dx.light.css">
 </head>
 
 <body>
@@ -153,7 +156,7 @@
 							<span class="user-img"><img class="rounded-circle" src="assets/img/user-06.jpg" width="30"
 									alt="Admin">
 								<span class="status online"></span></span>
-							<span>Admin</span>
+							<span id="profile">Admin</span>
 						</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="profile.html">My Profile</a>
@@ -246,450 +249,54 @@
 					</div>
 				</div>
 				<div class="content-page">
-					<div class="row filter-row">
+
+					<form class="row filter-row" id="form-search-bank-account">
 						<div class="col-sm-6 col-md-3">
 							<div class="form-group form-focus">
-								<input type="text" class="form-control floating">
-								<label class="focus-label">Bank Account ID</label>
+								<input type="text" class="form-control floating" id="accountCode" name="accountCode">
+								<label class="focus-label">Account code</label>
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
 							<div class="form-group form-focus">
-								<input type="text" class="form-control floating">
-								<label class="focus-label">Card Holder Name</label>
+								<input type="text" class="form-control floating" id="customerCode" name="customerCode">
+								<label class="focus-label">Customer code</label>
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-3">
 							<div class="form-group form-focus select-focus">
-								<select class="select form-control">
-									<option>Credit Account</option>
-									<option>Payment Account</option>
+								<select class="select form-control" id="type" name="type">
+									<option>Credit</option>
+									<option>Payment</option>
 								</select>
 								<label class="focus-label">Type</label>
 							</div>
-						</div>
+						</div>			
+						
 						<div class="col-sm-6 col-md-3">
-							<a href="#" class="btn btn-search rounded btn-block mb-3"> search </a>
-						</div>
-					</div>
+							<button type="submit" id="bt-search" class="btn btn-search rounded btn-block mb-3"> search </button>
+						</div>							
+					</form>
+
 					<div class="row">
 						<div class="col-md-12 mb-3">
 							<div class="table-responsive">
 								<table class="table custom-table datatable">
 									<thead class="thead-light">
-										<tr>
-											<th>Card Holder Name</th>
-											<th>Card ID</th>
+										<tr class="text-center">
+											<th>Customer code</th>
+											<th>Account code</th>
 											<th>Type</th>
 											<th>Branch</th>
 											<th>Create Date</th>
 											<th>Expire Date</th>
 											<th>Member Level</th>
 											<th>Create By</th>
-											<th class="text-right">Action</th>
+											<th>Action</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">J</a><a
-														href="profile.html">Jeffrey M. Wong <span></span></a></h2>
-											</td>
-											<td>PT-0d001</td>
-											<td>Male</td>
-											<td>Parker</td>
-											<td>Mathematical technician</td>
-											<td>913 Deer Ridge Drive,Succasunna, NJ 07876</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="355f50535347504c58425a5b5275504d54584559501b565a58">[email&#160;protected]</a>
-											</td>
-											<td>973-584-5870</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">M</a><a
-														href="profile.html">Michael S. Porch<span></span></a></h2>
-											</td>
-											<td>PT-0d002</td>
-											<td>Male</td>
-											<td> Smith</td>
-											<td>Commodities trader</td>
-											<td>3148 Melody Lane,Mckenney, VA 23872</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="54393d373c35313827243b26373c14312c35392438317a373b39">[email&#160;protected]</a>
-											</td>
-											<td>804-478-7698</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2> <a href="profile.html" class="avatar text-white">E</a><a
-														href="profile.html">Elaine A. Keenum<span></span></a></h2>
-											</td>
-											<td>PT-0d003</td>
-											<td>Male</td>
-											<td>Hensley</td>
-											<td>Plasma cutter</td>
-											<td>665 Isaacs Creek Road,Golden, IL 62339</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="c2a7aea3abaca7a3a9a7a7acb7af82a7baa3afb2aea7eca1adaf">[email&#160;protected]</a>
-											</td>
-											<td>217-509-0538</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">M</a><a
-														href="profile.html">Marion S. Shannon<span></span></a></h2>
-											</td>
-											<td>PT-0d004</td>
-											<td>Male</td>
-											<td>Parker</td>
-											<td>Friesen</td>
-											<td>3821 Ash street,Lewisville, TX 75067</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="fc919d8e9593928f8f949d92929392bc99849d918c9099d29f9391">[email&#160;protected]</a>
-											</td>
-											<td>972-874-9653</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2> <a href="profile.html" class="avatar text-white">E</a><a
-														href="profile.html">Erin A. Collins<span></span></a></h2>
-											</td>
-											<td>PT-0d005</td>
-											<td>Male</td>
-											<td>Jackson</td>
-											<td>Management information systems director</td>
-											<td>3076 Gandy street,Syracuse, NY 13224</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="0a6f7863646b696566666364794a6f726b677a666f24696567">[email&#160;protected]</a>
-											</td>
-											<td>315-224-9840</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">W</a><a
-														href="profile.html">William D. Jones<span></span></a></h2>
-											</td>
-											<td>PT-0d006</td>
-											<td>Male</td>
-											<td>Mason</td>
-											<td>Aircraft structure assembler</td>
-											<td>4633 Wilson street,San Diego, CA 92111</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="88ffe1e4e4e1e9e5ece2e7e6edfbc8edf0e9e5f8e4eda6ebe7e5">[email&#160;protected]</a>
-											</td>
-											<td>973-584-58700</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">J</a><a
-														href="profile.html">Jennifer M. Walker<span></span></a></h2>
-											</td>
-											<td>PT-0d006</td>
-											<td>Male</td>
-											<td>Garrett</td>
-											<td>Bill and account collector</td>
-											<td>2281 Whispering Pines Circle,Dallas, TX 75207</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="470d2229292e2122350a10262b2c2235072d2832353526372e23226924282a">[email&#160;protected]</a>
-											</td>
-											<td>972-372-5354</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">C</a><a
-														href="profile.html">Christopher S. Ramirez<span></span></a></h2>
-											</td>
-											<td>PT-0d007</td>
-											<td>Male</td>
-											<td>Perry</td>
-											<td>Independent agent</td>
-											<td>1875 Charles street,Plymouth, MI 48170</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="400328322933342f302825323332212d2932253a00">[email&#160;protected]</a>@example.com
-											</td>
-											<td>734-459-5639</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">D</a><a
-														href="profile.html">Danielle D. Hickson<span></span></a></h2>
-											</td>
-											<td>PT-0d008</td>
-											<td>Male</td>
-											<td>Williams</td>
-											<td>Plant manager</td>
-											<td>2230 Paul Wayne Haggerty Road,Marrero, LA 70072</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="98f2f7f0f6fcf7fdd8fde0f9f5e8f4fdb6fbf7f5">[email&#160;protected]</a>
-											</td>
-											<td>504-371-7703</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">J</a><a
-														href="profile.html">Jacqueline C. Green<span></span></a></h2>
-											</td>
-											<td>PT-0d010</td>
-											<td>Male</td>
-											<td>Kulick</td>
-											<td>Civil engineer</td>
-											<td>4796 Froe street,Wheeling, WV 26003</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="315b50524044545d585f5452564354545f715449505c415d541f525e5c">[email&#160;protected]</a>
-											</td>
-											<td>304-370-7153</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2> <a href="profile.html" class="avatar text-white">J</a><a
-														href="profile.html">Parker <span></span></a></h2>
-											</td>
-											<td>PT-0d001</td>
-											<td>Male</td>
-											<td>Parker</td>
-											<td>Mathematical technician</td>
-											<td>1645 Gateway Avenue,California</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="a7cdc8cfc9c3c8c2e7c2dfc6cad7cbc289c4c8ca">[email&#160;protected]</a>
-											</td>
-											<td>973-584-58700</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">J</a><a
-														href="profile.html">Jeffrey M. Wong <span></span></a></h2>
-											</td>
-											<td>PT-0d001</td>
-											<td>Male</td>
-											<td>Parker</td>
-											<td>Mathematical technician</td>
-											<td>913 Deer Ridge Drive,Succasunna, NJ 07876</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="4f252a29293d2a3622382021280f2a372e223f232a612c2022">[email&#160;protected]</a>
-											</td>
-											<td>973-584-5870</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">M</a><a
-														href="profile.html">Michael S. Porch<span></span></a></h2>
-											</td>
-											<td>PT-0d002</td>
-											<td>Male</td>
-											<td> Smith</td>
-											<td>Commodities trader</td>
-											<td>3148 Melody Lane,Mckenney, VA 23872</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="422f2b212a23272e31322d30212a02273a232f322e276c212d2f">[email&#160;protected]</a>
-											</td>
-											<td>804-478-7698</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">E</a><a
-														href="profile.html">Elaine A. Keenum<span></span></a></h2>
-											</td>
-											<td>PT-0d003</td>
-											<td>Male</td>
-											<td>Hensley</td>
-											<td>Plasma cutter</td>
-											<td>665 Isaacs Creek Road,Golden, IL 62339</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="ddb8b1bcb4b3b8bcb6b8b8b3a8b09db8a5bcb0adb1b8f3beb2b0">[email&#160;protected]</a>
-											</td>
-											<td>217-509-0538</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar">M</a><a
-														href="profile.html">Marion S. Shannon<span></span></a></h2>
-											</td>
-											<td>PT-0d004</td>
-											<td>Male</td>
-											<td>Parker</td>
-											<td>Friesen</td>
-											<td>3821 Ash street,Lewisville, TX 75067</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="ef828e9d8680819c9c878e81818081af8a978e829f838ac18c8082">[email&#160;protected]</a>
-											</td>
-											<td>972-874-9653</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<h2><a href="profile.html" class="avatar text-white">E</a><a
-														href="profile.html">Erin A. Collins<span></span></a></h2>
-											</td>
-											<td>PT-0d005</td>
-											<td>Male</td>
-											<td>Jackson</td>
-											<td>Management information systems director</td>
-											<td>3076 Gandy street,Syracuse, NY 13224</td>
-											<td><a href="https://dreamguystech.com/cdn-cgi/l/email-protection"
-													class="__cf_email__"
-													data-cfemail="4623342f282725292a2a2f283506233e272b362a236825292b">[email&#160;protected]</a>
-											</td>
-											<td>315-224-9840</td>
-											<td class="text-right">
-												<a href="bank-account-profile.html" class="btn btn-info btn-sm mb-1">
-													<i class="far fa-eye"></i>
-												</a>
-												<button type="submit" data-toggle="modal" data-target="#delete_employee"
-													class="btn btn-danger btn-sm mb-1">
-													<i class="far fa-trash-alt"></i>
-												</button>
-											</td>
-										</tr>
+									<tbody id="table-bank-account">
+
 									</tbody>
 								</table>
 							</div>
@@ -925,13 +532,13 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content modal-md">
 					<div class="modal-header">
-						<h4 class="modal-title">Delete Student</h4>
+						<h4 class="modal-title">Delete bank account</h4>
 					</div>
 					<form>
 						<div class="modal-body">
 							<p>Are you sure want to delete this?</p>
 							<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-								<button type="submit" class="btn btn-danger">Delete</button>
+								<button id="bt-delete" type="submit" class="btn btn-danger">Delete</button>
 							</div>
 						</div>
 					</form>
@@ -947,9 +554,7 @@
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
 
 	<script src="assets/js/jquery.slimscroll.js"></script>
-	<script src="assets/js/jquery.dataTables.min.js"></script>
-	<script src="assets/js/dataTables.bootstrap4.min.js"></script>
-
+	
 	<script src="assets/js/select2.min.js"></script>
 	<script src="assets/js/moment.min.js"></script>
 
@@ -964,6 +569,13 @@
 	<script src="../../assets/js/common/Notify.js"></script>
 	<script src="../../assets/js/common/ApiClient.js"></script>
 	<script src="../../assets/js/common/authentication.js"></script>
+
+	<!-- Bank account -->
+	<script src="../../assets/js/common/convertDate.js"></script>
+	<script src="../../assets/js/common/Form.js"></script>
+	<script src="../../assets/js/employee/bank-accounts-list.js"></script>
+	<script src="assets/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/dataTables.bootstrap4.min.js"></script>
 </body>
 
 <!-- Mirrored from dreamguystech.com/preadmin/html/school/light/bank-accounts-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:54 GMT -->

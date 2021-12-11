@@ -135,8 +135,19 @@ public class BankAccountController {
                     ));
             }
             case Credit: {
+                // Kiểm tra người dùng đã tạo payment account ?
+                PaymentAccount paymentAccount = bankAccountService.getPaymentAccountByCustomerID(customer.getID());
+                if(paymentAccount == null)
+                    return ResponseEntity
+                        .badRequest()
+                        .body(new ResponseResult(
+                            "Customer chưa tạo payment account",
+                            ResponseStatus.Invalid
+                        ));
+
                 CreditAccount creditAccount = new CreditAccount(bankAccount);
                 creditAccount.setCustomer(customer);
+
                 creditAccount = bankAccountService.insertCreditAccount(creditAccount);
                 if(creditAccount == null)
                     return ResponseEntity
