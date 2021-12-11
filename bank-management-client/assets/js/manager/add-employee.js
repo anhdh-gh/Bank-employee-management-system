@@ -83,6 +83,14 @@ $(idFormAddEmployee).validate({
       notBlank: true,
       maxlength: 20,
     },
+    baseSalary: {
+      required: true,
+      notBlank: true,
+    },
+    seniority: {
+      required: true,
+      notBlank: true,
+    },
   },
 
   messages: {
@@ -155,11 +163,20 @@ $(idFormAddEmployee).validate({
       notBlank: "zipCode không được để trống",
       maxlength: "zipCode tối đa 20 kí tự",
     },
+    baseSalary: {
+      required: "baseSalary không được để trống",
+      notBlank: "baseSalary không được để trống",
+    },
+    seniority: {
+      required: "seniority không được để trống",
+      notBlank: "seniority không được để trống",
+    },
   },
 
   submitHandler: (form) => {
     // Lấy dữ liệu
     const data = Form.getData(idFormAddEmployee);
+    console.log(data);
     const employee = {
       account: {
         username: data.username,
@@ -173,9 +190,9 @@ $(idFormAddEmployee).validate({
       gender: data.gender,
       employeeCode: null,
       role: "Employee",
-      seniority: 0,
+      seniority: data.seniority,
       position: data.position,
-      baseSalary: 0,
+      baseSalary: data.baseSalary,
       fullname: {
         firstName: data.firstName,
         lastName: data.lastName,

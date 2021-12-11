@@ -51,8 +51,6 @@ public class EmployeeService extends PersonService {
 
     public EmployeeDto addEmployee(EmployeeDto employeeDto) {
         employeeDto.setEmployeeCode(generateEmployeeCode());
-        employeeDto.setBaseSalary(3000000);
-        employeeDto.setSeniority(0);
         Employee employee = new Employee(employeeDto);
         return new EmployeeDto(employeeRepository.save(employee));
     }
@@ -67,14 +65,9 @@ public class EmployeeService extends PersonService {
     }
 
     private String generateEmployeeCode() {
-        List<User> list = userRepository.findAll();
-        int latest = 0;
-        for (User user : list) {
-            String employeeCode = user.getEmployeeCode();
-            int number = Integer.parseInt(employeeCode.substring(3));
-            latest = (number > latest) ? number : latest;
-        }
-        return "NV-" + (latest + 1);
+        String latestEmployeeCode = userRepository.getLatestEmployeeCode();
+        int number = Integer.parseInt(latestEmployeeCode.substring(3));
+        return "NV-" + (number + 1);
     }
 
     public EmployeeDto getEmployeeById(String employeeID) {
