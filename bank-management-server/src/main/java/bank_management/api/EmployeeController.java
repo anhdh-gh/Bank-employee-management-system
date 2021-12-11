@@ -78,9 +78,9 @@ public class EmployeeController {
         );
     }
 
-    @PutMapping
-    public ResponseEntity<?> editEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
-        EmployeeDto employeeIsEdited = employeeService.editEmployee(employeeDto);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> editEmployee(@RequestBody EmployeeDto employeeDto, @PathVariable(value = "id") String employeeID) {
+        EmployeeDto employeeIsEdited = employeeService.editEmployee(employeeDto, employeeID);
         if (employeeIsEdited == null) {
             return ResponseEntity
                     .badRequest()

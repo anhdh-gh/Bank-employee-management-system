@@ -37,11 +37,14 @@ public class EmployeeService extends PersonService {
         return employeeDtoList;
     }
 
-    public EmployeeDto editEmployee(EmployeeDto employeeDto) {
-        Employee employee = new Employee(employeeDto);
-        int row = employeeRepository.updateEmployee(employee.getID(), employee.getBaseSalary(), employee.getPosition());
-        if (row > 0) {
-            return new EmployeeDto(employeeRepository.findById(employee.getID()).get());
+    public EmployeeDto editEmployee(EmployeeDto employeeDto, String employeeID) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeID);
+        if (optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+            employee.setSeniority(employeeDto.getSeniority());
+            employee.setBaseSalary(employeeDto.getBaseSalary());
+            employee.setPosition(employeeDto.getPosition());
+            return new EmployeeDto(employeeRepository.save(employee));
         }
         return null;
     }

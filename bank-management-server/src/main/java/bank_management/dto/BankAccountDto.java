@@ -6,6 +6,7 @@ import bank_management.entity.Employee;
 import bank_management.enumeration.BankAccountType;
 import bank_management.enumeration.MemberLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 public class BankAccountDto {
     private String ID;
 
@@ -42,6 +44,7 @@ public class BankAccountDto {
     private Employee employee;
 
     private MemberLevel memberLevel;
+
 
     public BankAccountDto(String ID, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, MemberLevel memberLevel) {
         this.ID = ID;
