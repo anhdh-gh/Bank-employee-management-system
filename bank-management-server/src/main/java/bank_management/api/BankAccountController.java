@@ -2,19 +2,23 @@ package bank_management.api;
 
 import bank_management.dto.BankAccountDto;
 
-import bank_management.entity.BankAccount;
-import bank_management.entity.Customer;
+import bank_management.entity.*;
 import bank_management.enumeration.BankAccountType;
 import bank_management.enumeration.ResponseStatus;
+import bank_management.payload.AddBankAccountRequest;
 import bank_management.payload.ResponseResult;
 import bank_management.payload.SearchBankAccountRequest;
 import bank_management.service.BankAccountService;
+import bank_management.service.EmployeeService;
+import bank_management.service.PersonService;
+import bank_management.utils.DateUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -25,15 +29,18 @@ public class BankAccountController {
     BankAccountService bankAccountService;
 
     @Autowired
+    PersonService personService;
+
+    @Autowired
     ObjectMapper json;
 
     @GetMapping
     public ResponseEntity<?> getAllBankAccount() {
-        List<BankAccountDto> bankAccountDtoListList = bankAccountService.getAllBankAccount();
+        List<BankAccount> bankAccounts = bankAccountService.getAllBankAccount();
 
         return ResponseEntity.ok(
             new ResponseResult (
-                bankAccountDtoListList,
+                bankAccounts,
                 "Lấy thành công tất cả bank account",
                 ResponseStatus.Success
             )
@@ -42,75 +49,148 @@ public class BankAccountController {
 
     @GetMapping("/search")
     public ResponseEntity<?> searchBankAccounts(@Valid SearchBankAccountRequest search) {
-        List<BankAccountDto> bankAccountDtos = bankAccountService.processSearch(search.getAccountCode(), search.getCustomerCode(), search.getType());
-        return ResponseEntity.ok(new ResponseResult(bankAccountDtos, "Tìm kiếm thành công", ResponseStatus.Success));
+        List<BankAccount> bankAccounts = bankAccountService.processSearch(search.getAccountCode(), search.getCustomerCode(), search.getType());
+        return ResponseEntity.ok(new ResponseResult(bankAccounts, "Tìm kiếm thành công", ResponseStatus.Success));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getByID(@PathVariable(value = "id") String id) {
-        BankAccountDto bankAccountDto = bankAccountService.getById(id);
+        BankAccount bankAccount = bankAccountService.getById(id);
 
-        if(bankAccountDto == null)
+        if(bankAccount == null)
             return ResponseEntity
-                    .badRequest()
-                    .body(
-                        new ResponseResult(
-                        "Không tìm thấy bank account với id là " + id,
-                        ResponseStatus.Invalid
-                    ));
+                .badRequest()
+                .body(new ResponseResult(
+                    "Không tìm thấy bank account với id là " + id,
+                    ResponseStatus.Invalid
+                ));
 
         return ResponseEntity.ok(
-                new ResponseResult (
-                    bankAccountDto,
-                    "Lấy bank account thành công",
-                    ResponseStatus.Success
+            new ResponseResult (
+                bankAccount,
+                "Lấy bank account thành công",
+                ResponseStatus.Success
             )
         );
     }
 
     @PostMapping
-    public ResponseEntity<?> insert(@Valid @RequestBody BankAccount bankAccount) {
-        BankAccount res = bankAccountService.insert(bankAccount);
-
-        if(res == null) {
+    public ResponseEntity<?> insert(@Valid @RequestBody AddBankAccountRequest req) {
+        if(DateUtils.isLessThanCurrentDate(req.getExpireDate()))
             return ResponseEntity
+                .badRequest()
+                .body(new ResponseResult(
+                    "ExpireDate phải lớn hơn ngày hiện tại",
+                    ResponseStatus.Invalid
+                ));
+
+        Customer customer = bankAccountService.getCustomerByCustomerCode(req.getCustomerCode());
+        if(customer == null)
+            return ResponseEntity
+                .badRequest()
+                .body(new ResponseResult(
+                    "Customer không tồn tại",
+                    ResponseStatus.Invalid
+                ));
+
+        Employee employee = bankAccountService.getEmployeeByID(personService.getAuthPerson().getID());
+        if(employee == null)
+            return ResponseEntity
+                .badRequest()
+                .body(new ResponseResult(
+                    "Không tìm thấy employee đăng ký tài khoản",
+                    ResponseStatus.Error
+                ));
+
+        BankAccount bankAccount = new BankAccount(
+            req.getMemberLevel(),
+            bankAccountService.autogenousAccountCode(),
+            bankAccountService.autogenousAccountNumber(),
+            req.getExpireDate(),
+            req.getBranch(),
+            req.getType(),
+            false,
+            (Employee) personService.getAuthPerson(),
+            req.getCVV()
+        );
+
+        switch (bankAccount.getType()) {
+            case Payment: {
+                PaymentAccount paymentAccount = new PaymentAccount(bankAccount);
+                paymentAccount.setCustomer(customer);
+                paymentAccount = bankAccountService.insertPaymentAccount(paymentAccount);
+                if(paymentAccount == null)
+                    return ResponseEntity
+                        .badRequest()
+                        .body(new ResponseResult(
+                            "Customer đã tạo payment account trước đó",
+                            ResponseStatus.Invalid
+                        ));
+                return ResponseEntity
+                    .ok()
+                    .body(new ResponseResult(
+                        paymentAccount,
+                        "Tạo thành công payment account",
+                        ResponseStatus.Success
+                    ));
+            }
+            case Credit: {
+                CreditAccount creditAccount = new CreditAccount(bankAccount);
+                creditAccount.setCustomer(customer);
+                creditAccount = bankAccountService.insertCreditAccount(creditAccount);
+                if(creditAccount == null)
+                    return ResponseEntity
+                        .badRequest()
+                        .body(new ResponseResult(
+                            "Customer đã tạo credit account trước đó",
+                            ResponseStatus.Invalid
+                        ));
+                return ResponseEntity
+                    .ok()
+                    .body(new ResponseResult(
+                        creditAccount,
+                        "Tạo thành công credit account",
+                        ResponseStatus.Success
+                    ));
+            }
+            default: {
+                return ResponseEntity
                     .badRequest()
                     .body(new ResponseResult(
-                        bankAccount,
-                        "AccountCode hoặc AccountNumber đã tồn tại",
-                        ResponseStatus.Invalid)
-                    );
+                        "Có lỗi sảy ra",
+                        ResponseStatus.Error
+                    ));
+            }
         }
-
-        return ResponseEntity.ok()
-                .body(new ResponseResult(
-                    bankAccount,
-                    "",
-                    ResponseStatus.Success)
-                );
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteByID(@PathVariable(value = "id") String id) {
-        BankAccountDto bankAccountDto = bankAccountService.getById(id);
+        BankAccount bankAccount = bankAccountService.getById(id);
 
-        if(bankAccountDto == null)
+        if(bankAccount == null)
             return ResponseEntity
-                    .badRequest()
-                    .body(
-                        new ResponseResult(
-                            "Không tìm thấy bank account với id là " + id,
-                            ResponseStatus.Invalid
-                    ));
+                .badRequest()
+                .body(
+                    new ResponseResult(
+                        "Không tìm thấy bank account với id là " + id,
+                        ResponseStatus.Invalid
+                ));
 
-        bankAccountService.delete(bankAccountDto.getID());
+        boolean res = bankAccountService.delete(bankAccount.getID());
+        if(res == false)
+            return ResponseEntity.badRequest().body(
+                new ResponseResult (
+                    "Xóa bank account không thành công",
+                    ResponseStatus.Error
+                )
+            );
 
         return ResponseEntity.ok(
-                new ResponseResult (
-                    bankAccountDto,
-                    "Xóa bank account thành công",
-                    ResponseStatus.Success
-                )
+            new ResponseResult (
+                "Xóa bank account thành công",
+                ResponseStatus.Success
+            )
         );
     }
 }
