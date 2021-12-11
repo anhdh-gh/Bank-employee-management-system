@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService extends PersonService{
+public class EmployeeService extends PersonService {
     @Autowired
     EmployeeRepository employeeRepository;
 
@@ -39,9 +39,9 @@ public class EmployeeService extends PersonService{
 
     public EmployeeDto editEmployee(EmployeeDto employeeDto) {
         Employee employee = new Employee(employeeDto);
-        Optional<Employee> optionalEmployee = employeeRepository.findById(employee.getID());
-        if (optionalEmployee.isPresent()) {
-            return new EmployeeDto(employeeRepository.save(employee));
+        int row = employeeRepository.updateEmployee(employee.getID(), employee.getBaseSalary(), employee.getPosition());
+        if (row > 0) {
+            return new EmployeeDto(employeeRepository.findById(employee.getID()).get());
         }
         return null;
     }
@@ -71,14 +71,13 @@ public class EmployeeService extends PersonService{
             int number = Integer.parseInt(employeeCode.substring(3));
             latest = (number > latest) ? number : latest;
         }
-        return "NV-"+(latest+1);
+        return "NV-" + (latest + 1);
     }
 
     public EmployeeDto getEmployeeById(String employeeID) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeID);
         if (optionalEmployee.isPresent()) {
             return new EmployeeDto(optionalEmployee.get());
-        }
-        else return null;
+        } else return null;
     }
 }

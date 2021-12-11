@@ -1,4 +1,4 @@
-ApiClient.get("/manager/profile", {})
+ApiClient.get("/person/info", {})
   .then((resp) => {
     const profile = resp.data.data.account.username;
     $("#profile").text(profile);
@@ -6,6 +6,9 @@ ApiClient.get("/manager/profile", {})
   .catch((err) => {});
 
 //set vao nav bar
+function convertDate(dateInput) {
+  return dateInput.split("-").reverse().join("-");
+}
 
 const idFormAddEmployee = "#addEmployee";
 $(idFormAddEmployee).validate({
@@ -164,7 +167,7 @@ $(idFormAddEmployee).validate({
         id: null,
       },
       identityNumber: data.identityNumber,
-      dateOfBirth: "2000-12-12", // note
+      dateOfBirth: convertDate(data.dateOfBirth), // note
       email: data.email,
       phoneNumber: data.phoneNumber,
       gender: data.gender,

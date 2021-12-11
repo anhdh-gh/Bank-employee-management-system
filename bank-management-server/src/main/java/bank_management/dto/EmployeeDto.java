@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Enumerated;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class EmployeeDto {
     private double baseSalary;
     private FullnameDto fullname;
     private AddressDto address;
-    private List<BankAccount> bankAccountList;
-    private List<Salary> salaryList;
+    private List<BankAccountDto> bankAccountList;
+    private List<SalaryDto> salaryList;
     private Manager manager;
     private Date createDate;
 
@@ -54,8 +55,16 @@ public class EmployeeDto {
         this.baseSalary = employee.getBaseSalary();
         this.fullname = new FullnameDto(employee.getFullName());
         this.address = new AddressDto(employee.getAddress());
-        this.bankAccountList = employee.getBankAccountList();
-        this.salaryList = employee.getSalaryList();
+        List<BankAccountDto> bankAccountDtoList = new ArrayList<>();
+        for (BankAccount bankAccount : employee.getBankAccountList()) {
+            bankAccountDtoList.add(new BankAccountDto(bankAccount));
+        }
+        this.bankAccountList = bankAccountDtoList;
+        List<SalaryDto> salaryDtoList = new ArrayList<>();
+        for(Salary salary : employee.getSalaryList()) {
+            salaryDtoList.add(new SalaryDto(salary));
+        }
+        this.salaryList = salaryDtoList;
         this.createDate = employee.getCreateDate();
     }
 }

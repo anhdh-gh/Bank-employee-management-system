@@ -1,6 +1,7 @@
 package bank_management.dto;
 
 import bank_management.entity.BankAccount;
+import bank_management.entity.Customer;
 import bank_management.entity.Employee;
 import bank_management.enumeration.BankAccountType;
 import bank_management.enumeration.MemberLevel;
@@ -62,5 +63,8 @@ public class BankAccountDto {
         this.type = bankAccount.getType();
         this.status = bankAccount.isStatus();
         this.memberLevel = bankAccount.getMemberLevel();
+    }
+
+    public BankAccountDto(BankAccount b, Customer customer) {
     }
 }

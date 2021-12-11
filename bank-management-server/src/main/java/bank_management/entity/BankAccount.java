@@ -1,5 +1,6 @@
 package bank_management.entity;
 
+import bank_management.dto.BankAccountDto;
 import bank_management.enumeration.BankAccountType;
 import bank_management.enumeration.MemberLevel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -71,5 +72,17 @@ public class BankAccount extends BaseEntity {
         this.status = status;
         this.employee = employee;
         this.CVV = CVV;
+    }
+
+    public BankAccount(BankAccountDto bankAccountDto) {
+        this.memberLevel = bankAccountDto.getMemberLevel();
+        this.accountCode = bankAccountDto.getAccountCode();
+        this.accountNumber = bankAccountDto.getAccountNumber();
+        this.expireDate = bankAccountDto.getExpireDate();
+        this.branch = bankAccountDto.getBranch();
+        this.type = bankAccountDto.getType();
+        this.status = bankAccountDto.isStatus();
+        this.employee = bankAccountDto.getEmployee();
+        this.ID = bankAccountDto.getID();
     }
 }
