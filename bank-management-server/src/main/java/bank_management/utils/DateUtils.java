@@ -17,7 +17,7 @@ public class DateUtils {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int year = cal.get(Calendar.YEAR);
-        return year + 1900;
+        return year;
     }
 
     public static boolean isGreaterThanCurrentDate(Date date) {

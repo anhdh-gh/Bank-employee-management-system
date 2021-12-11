@@ -101,25 +101,27 @@ public class SalaryService {
                 for (BankAccount bankAccount : bankAccountList) {
                     // tìm các tài khoản credit được tạo theo trong month - year
                     if (bankAccount.getType().equals(BankAccountType.Credit)) {
+
                         Date createDate = bankAccount.getCreateDate();
                         // tìm tài khoản chưa được cộng hoa hồng, status = false
                         if (month == DateUtils.getMonth(createDate) && year == DateUtils.getYear(createDate) && !bankAccount.isStatus()) {
                             salary_ += 500000.0; // credit thì commission = 500000
                             bankAccount.setStatus(true); // set lại trạng thái đã + hoa hồng
+                            System.out.println("checked");
                         }
                     }
 
                     // tìm các tài khoản payment có giao dịch lần đầu tiên theo trong month - year
-                    if (bankAccount.getType().equals(BankAccountType.Payment)) {
-                        Transaction transaction = transactionRepository.findTransactionByBankAccountReceiveOrderByCreateDate(bankAccount);
-                        Date createDate = transaction.getCreateDate();
-                        // tìm tài khoản chưa được cộng hoa hồng, status = false
-                        if (month == DateUtils.getMonth(createDate) && year == DateUtils.getYear(createDate) && !bankAccount.isStatus()) {
-                            //nếu là payment thì commission = 0.02 * tiền gửi lần đầu tiên
-                            salary_ += 0.02 * transaction.getAmount();
-                            bankAccount.setStatus(true); // set lại trạng thái đã + hoa hồng
-                        }
-                    }
+//                    if (bankAccount.getType().equals(BankAccountType.Payment)) {
+//                        Transaction transaction = transactionRepository.findTransactionByBankAccountReceiveOrderByCreateDate(bankAccount);
+//                        Date createDate = transaction.getCreateDate();
+//                        // tìm tài khoản chưa được cộng hoa hồng, status = false
+//                        if (month == DateUtils.getMonth(createDate) && year == DateUtils.getYear(createDate) && !bankAccount.isStatus()) {
+//                            //nếu là payment thì commission = 0.02 * tiền gửi lần đầu tiên
+//                            salary_ += 0.02 * transaction.getAmount();
+//                            bankAccount.setStatus(true); // set lại trạng thái đã + hoa hồng
+//                        }
+//                    }
                 }
                 employee.setBankAccountList(bankAccountList); // set lại danh sách bankAccount
                 employee = employeeRepository.save(employee); // lưu lại employee vào db (đã gồm lưu cả list bankAccount)

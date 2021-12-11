@@ -38,12 +38,13 @@ public class Employee extends User {
 	@JoinColumn(name = "ManagerID")
 	private Manager manager;
 
-	@OneToMany(targetEntity = BankAccount.class, mappedBy = "employee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JsonIgnore
+	@OneToMany(targetEntity = BankAccount.class, mappedBy = "employee", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@Fetch(FetchMode.SUBSELECT)
 	private List<BankAccount> bankAccountList;
 
-
-	@OneToMany(targetEntity = Salary.class, mappedBy = "employee", fetch = FetchType.LAZY)
+	@JsonIgnore
+	@OneToMany(targetEntity = Salary.class, mappedBy = "employee", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Salary> salaryList;
 
