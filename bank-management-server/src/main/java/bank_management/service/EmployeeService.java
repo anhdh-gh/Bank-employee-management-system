@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService extends PersonService{
+public class EmployeeService extends PersonService {
     @Autowired
     EmployeeRepository employeeRepository;
 
@@ -37,10 +37,13 @@ public class EmployeeService extends PersonService{
         return employeeDtoList;
     }
 
-    public EmployeeDto editEmployee(EmployeeDto employeeDto) {
-        Employee employee = new Employee(employeeDto);
-        Optional<Employee> optionalEmployee = employeeRepository.findById(employee.getID());
+    public EmployeeDto editEmployee(EmployeeDto employeeDto, String employeeID) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeID);
         if (optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+            employee.setSeniority(employeeDto.getSeniority());
+            employee.setBaseSalary(employeeDto.getBaseSalary());
+            employee.setPosition(employeeDto.getPosition());
             return new EmployeeDto(employeeRepository.save(employee));
         }
         return null;
@@ -71,14 +74,13 @@ public class EmployeeService extends PersonService{
             int number = Integer.parseInt(employeeCode.substring(3));
             latest = (number > latest) ? number : latest;
         }
-        return "NV-"+(latest+1);
+        return "NV-" + (latest + 1);
     }
 
     public EmployeeDto getEmployeeById(String employeeID) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeID);
         if (optionalEmployee.isPresent()) {
             return new EmployeeDto(optionalEmployee.get());
-        }
-        else return null;
+        } else return null;
     }
 }

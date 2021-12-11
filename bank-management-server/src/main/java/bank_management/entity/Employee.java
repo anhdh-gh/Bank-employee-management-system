@@ -3,7 +3,9 @@ package bank_management.entity;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import bank_management.dto.BankAccountDto;
 import bank_management.dto.EmployeeDto;
+import bank_management.dto.SalaryDto;
 import bank_management.enumeration.Gender;
 import bank_management.enumeration.Position;
 import bank_management.enumeration.Role;
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,12 +38,13 @@ public class Employee extends User {
 	@JoinColumn(name = "ManagerID")
 	private Manager manager;
 
-	@OneToMany(targetEntity = BankAccount.class, mappedBy = "employee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JsonIgnore
+	@OneToMany(targetEntity = BankAccount.class, mappedBy = "employee", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@Fetch(FetchMode.SUBSELECT)
 	private List<BankAccount> bankAccountList;
 
-
-	@OneToMany(targetEntity = Salary.class, mappedBy = "employee", fetch = FetchType.LAZY)
+	@JsonIgnore
+	@OneToMany(targetEntity = Salary.class, mappedBy = "employee", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Salary> salaryList;
 
@@ -75,8 +79,16 @@ public class Employee extends User {
 				employeeDto.getAddress().getHouseNumber(), employeeDto.getAddress().getZipCode(), employeeDto.getFullname().getFirstName(),
 				employeeDto.getFullname().getLastName(), employeeDto.getEmployeeCode(), employeeDto.getRole(), employeeDto.getSeniority(), employeeDto.getPosition());
 		this.baseSalary = employeeDto.getBaseSalary();
-		this.bankAccountList = employeeDto.getBankAccountList();
-		this.salaryList = employeeDto.getSalaryList();
+		List<BankAccount> bankAccounts = new ArrayList<>();
+		for(BankAccountDto bankAccountDto : employeeDto.getBankAccountList()) {
+			bankAccounts.add(new BankAccount(bankAccountDto));
+		}
+		this.bankAccountList = bankAccounts;
+		List<Salary> salaries = new ArrayList<>();
+		for(SalaryDto salaryDto : employeeDto.getSalaryList()) {
+			salaries.add(new Salary(salaryDto));
+		}
+		this.salaryList = salaries;
 		this.manager = employeeDto.getManager();
 	}
 }

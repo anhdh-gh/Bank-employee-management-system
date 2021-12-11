@@ -1,5 +1,6 @@
 package bank_management.entity;
 
+import bank_management.dto.SalaryDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,5 +50,13 @@ public class Salary extends BaseEntity{
         this.month = month;
         this.year = year;
         this.employee = employee;
+    }
+
+
+    public Salary(SalaryDto salaryDto) {
+        this.salary = salaryDto.getSalary();
+        this.month = salaryDto.getMonth();
+        this.year = salaryDto.getYear();
+        this.employee = salaryDto.getEmployee();
     }
 }

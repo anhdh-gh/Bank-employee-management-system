@@ -155,7 +155,7 @@
 							<span class="user-img"><img class="rounded-circle" src="assets/img/user-06.jpg" width="30"
 									alt="Admin">
 								<span class="status online"></span></span>
-							<span>Admin</span>
+							<span id="profile">Admin</span>
 						</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="profile.html">My Profile</a>
@@ -244,106 +244,105 @@
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 							<div class="card">
 								<div class="card-body">
-									<form>
+									<form id="editEmployee" method="post">
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-
 												<div class="form-group">
-													<label>Firstname</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Password</label>
-													<input type="password" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Email</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Username</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Gender</label>
-													<select class="form-control select">
-														<option>Male</option>
-														<option>Female</option>
-														<option>Other</option>
-													</select>
-												</div>
-												<div class="form-group">
-													<label>Birth Date</label>
-													<input class="form-control datetimepicker-input datetimepicker"
-														type="text" data-toggle="datetimepicker">
-												</div>
-												<div class="form-group">
-													<label>City</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Number House</label>
-													<input type="text" class="form-control">
+													<label>Employee Code</label>
+													<input id="employeeCode" name="employeeCode" type="text"
+														class="form-control" disabled>
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-												<!-- <form> -->
 												<div class="form-group">
-													<label>Lastname</label>
-													<input type="text" class="form-control">
+													<label>Full name</label>
+													<input name=fullName" id="fullName" type="text"
+														class="form-control" disabled>
 												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
-													<label>Confirm Password</label>
-													<input type="password" class="form-control">
+													<label>Username</label>
+													<input name="username" id="username" type="text"
+														class="form-control" disabled>
 												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
-													<label>Identity Number</label>
-													<input type="password" class="form-control">
+													<label>Email</label>
+													<input name="email" id="email" type="email" class="form-control" disabled>
 												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
 													<label>Mobile number</label>
-													<input type="text" class="form-control">
+													<input name="phoneNumber" id="phoneNumber" type="text"
+														class="form-control" disabled>
 												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
-													<label>Position </label>
-													<select class="form-control select">
-														<option>Sales Executive</option>
-														<option>Teller</option>
-														<option>Accountant</option>
-														<option>Technician</option>
-														<option>Security</option>
+													<label>Identity Number</label>
+													<input name="identityNumber" id="identityNumber" type="text"
+														class="form-control" disabled>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Gender</label>
+													<select name="gender" id="gender" class="form-control select" disabled>
+														<option value="Male">Male</option>
+														<option value="Female">Female</option>
+														<option value="Other">Other</option>
 													</select>
 												</div>
-												<div class="form-group">
-													<label>Country</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>District</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Zip Code</label>
-													<input type="text" class="form-control">
-												</div>
-												<!-- </form> -->
 											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Position </label>
+													<select class="form-control select" name="position" id="position">
+														<option value="SalesExecutive">SalesExecutive</option>
+														<option value="Teller">Teller</option>
+														<option value="Cashier">Cashier</option>
+														<option value="Accountant">Accountant</option>
+														<option value="Technician">Technician</option>
+														<option value="Security">Security</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Base Salary</label>
+													<input name="baseSalary" id="baseSalary" type="number" class="form-control">
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Seniority</label>
+													<input name="seniority" id="seniority" type="number" class="form-control" min = "0">
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Birth Date</label>
+													<input name="dateOfBirth" id="dateOfBirth"
+														class="form-control datetimepicker-input datetimepicker"
+														type="text" data-toggle="datetimepicker" disabled>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Address</label>
+													<input name="address" id="address" type="text" class="form-control" disabled>
+												</div>
+											</div>
+
 									</form>
-									<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-											<form>
-												<div class="form-group">
-													<label>Upload Image</label>
-													<input type="file" name="pic" accept="image/*" class="form-control">
-												</div>
-											</form>
-										</div> -->
 									<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-										<form>
 											<div class="form-group text-center">
-												<button class="btn btn-primary mr-2" type="submit">Submit</button>
-												<button class="btn btn-secondary" type="reset">Cancel</button>
+												<button class="btn btn-primary mr-2" type="submit" id="submit">Submit</button>
+												<button class="btn btn-secondary" id="cancel">Cancel</button>
 											</div>
-										</form>
 									</div>
 								</div>
 							</div>

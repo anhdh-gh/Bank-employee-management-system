@@ -5,6 +5,7 @@ import bank_management.entity.Address;
 import bank_management.entity.FullName;
 import bank_management.entity.Person;
 import bank_management.enumeration.Gender;
+import bank_management.enumeration.Position;
 import bank_management.repository.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,7 @@ public class Test {
 
     @org.junit.jupiter.api.Test
     void randomString() {
-        System.out.println(RandomStringUtils.randomAlphanumeric(20));
+        System.out.println(employeeRepo.updateEmployee("0120f65e-37de-476e-adf3-4936311fa94f", 2000000, Position.Cashier));
+
     }
 }

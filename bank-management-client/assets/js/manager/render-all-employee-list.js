@@ -1,4 +1,4 @@
-ApiClient.get("/manager/profile", {})
+ApiClient.get("/person/info", {})
   .then((resp) => {
     const profile = resp.data.data.account.username;
     $("#profile").text(profile);
@@ -39,7 +39,7 @@ ApiClient.get("/employee", {})
                         </td>
                         <td class="text-right">
                           <a
-                            href="edit-employee.html"
+                            href="edit-employee.html?id=${employee.id}"
                             class="btn btn-primary btn-sm mb-1"
                           >
                             <i class="far fa-edit"></i>

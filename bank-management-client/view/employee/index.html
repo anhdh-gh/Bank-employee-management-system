@@ -1422,7 +1422,7 @@
     <script src="../../assets/js/common/ApiClient.js"></script>
     <script src="../../assets/js/common/authentication.js"></script>
     <script>
-      ApiClient.get("/manager/profile", {})
+      ApiClient.get("/person/info", {})
         .then((resp) => {
           const profile = resp.data.data.account.username;
           $("#profile").text(profile);

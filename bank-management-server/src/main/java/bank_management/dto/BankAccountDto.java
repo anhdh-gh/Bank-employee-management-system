@@ -3,9 +3,10 @@ package bank_management.dto;
 import bank_management.entity.BankAccount;
 import bank_management.entity.Customer;
 import bank_management.entity.Employee;
-import bank_management.entity.MemberLevel;
 import bank_management.enumeration.BankAccountType;
+import bank_management.enumeration.MemberLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 public class BankAccountDto {
     private String ID;
 
@@ -41,9 +43,8 @@ public class BankAccountDto {
 
     private Employee employee;
 
-    private Customer customer;
-
     private MemberLevel memberLevel;
+
 
     public BankAccountDto(String ID, String accountCode, String accountNumber, Date expireDate, String branch, BankAccountType type, boolean status, MemberLevel memberLevel) {
         this.ID = ID;
@@ -67,15 +68,6 @@ public class BankAccountDto {
         this.memberLevel = bankAccount.getMemberLevel();
     }
 
-    public BankAccountDto(BankAccount bankAccount, Customer customer) {
-        this.ID = bankAccount.getID();
-        this.accountCode = bankAccount.getAccountCode();
-        this.accountNumber = bankAccount.getAccountNumber();
-        this.expireDate = bankAccount.getExpireDate();
-        this.branch = bankAccount.getBranch();
-        this.type = bankAccount.getType();
-        this.status = bankAccount.isStatus();
-        this.memberLevel = bankAccount.getMemberLevel();
-        this.customer = customer;
+    public BankAccountDto(BankAccount b, Customer customer) {
     }
 }
