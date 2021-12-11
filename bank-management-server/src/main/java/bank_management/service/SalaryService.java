@@ -74,7 +74,7 @@ public class SalaryService {
 
                 // tìm các tài khoản payment có giao dịch lần đầu tiên theo trong timeline lương
                 if (bankAccount.getType().equals(BankAccountType.Payment)) {
-                    Transaction transaction = transactionRepository.findTransactionByBankAccountReceiveOrderByCreateDate(bankAccount);
+                    Transaction transaction = transactionRepository.getAmountOfFirstTransactionByPaymentAccount(bankAccount.getID());
                     if (transaction != null) {
                         Date createDate = transaction.getCreateDate();
                         if (month == DateUtils.getMonth(createDate) && year == DateUtils.getYear(createDate) && bankAccount.isStatus()) {
