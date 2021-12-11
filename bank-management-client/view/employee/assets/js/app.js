@@ -112,12 +112,14 @@ Version      : 1.0
 		$('[data-toggle="tooltip"]').tooltip();
 	}
 	
-	// Datatable
-	if ($('.datatable').length > 0) {
-		$('.datatable').DataTable({
-			"bFilter": false,
-		});
-	}
+	// // Datatable
+	// $(document).ready( function () {
+	// 	if ($('.datatable').length > 0) {
+	// 		$('.datatable').DataTable({
+	// 			"bFilter": false,
+	// 		});
+	// 	}
+	// } );
 	
 	// Sidebar Slimscroll
 	if ($slimScrolls.length > 0) {

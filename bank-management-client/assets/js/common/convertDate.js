@@ -8,8 +8,10 @@ function convertDate(dateInput, option){
 }
 
 // let dateTest = "2000-08-05";
-// console.log(convertDate(dateTest, 2));
+// console.log(convertDate(dateTest, 2)); 
+// => 05/08/2000
 
 // let dateTimeTest = "2011-07-14 11:23:00";
 // console.log(convertDate(dateTimeTest, 1));
+// => 14-07-2014
 
