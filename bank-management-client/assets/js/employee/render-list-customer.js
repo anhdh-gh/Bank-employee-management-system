@@ -26,7 +26,7 @@ ApiClient.get("/customer", {})
                           ${customer.email}
                         </td>
                         <td>${customer.phoneNumber}</td>
-                        <td>${customer.dateOfBirth}</td>
+                        <td>${DateUtils.convertDate(customer.dateOfBirth, 1)}</td>
                         <td>
                           ${
                             customer.address.houseNumber +
