@@ -19,4 +19,12 @@ public class DateUtils {
         int year = cal.get(Calendar.YEAR);
         return year + 1900;
     }
+
+    public static boolean isGreaterThanCurrentDate(Date date) {
+        return date.after(new Date());
+    }
+
+    public static boolean isLessThanCurrentDate(Date date) {
+        return date.before(new Date());
+    }
 }

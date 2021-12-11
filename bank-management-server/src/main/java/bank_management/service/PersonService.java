@@ -97,7 +97,7 @@ public class PersonService {
         return jwtToken;
     }
 
-    // Get Account bu username
+    // Get Account by username
     public Account getAccountByUsername(String username) {
         Account account = accountRepo.findByUsername(username);
         return account;
