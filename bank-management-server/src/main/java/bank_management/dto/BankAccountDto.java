@@ -5,6 +5,7 @@ import bank_management.entity.Customer;
 import bank_management.entity.Employee;
 import bank_management.enumeration.BankAccountType;
 import bank_management.enumeration.MemberLevel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -41,6 +42,7 @@ public class BankAccountDto {
     @NotBlank(message = "Status không được trống!")
     private boolean status;
 
+    @JsonIgnore
     private Employee employee;
 
     private MemberLevel memberLevel;

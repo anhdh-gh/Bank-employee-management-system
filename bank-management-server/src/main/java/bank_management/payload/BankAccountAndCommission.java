@@ -8,8 +8,6 @@ import lombok.Data;
 public class BankAccountAndCommission {
     private BankAccountDto bankAccountDto;
     private double commission;
-    public final double COMMISSION_CREDIT = 500000.0;
-    public final double COMMISSION_PAYMENT = 0.2;
 
     public BankAccountAndCommission(BankAccountDto bankAccountDto, double commission) {
         this.bankAccountDto = bankAccountDto;

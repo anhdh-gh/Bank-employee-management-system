@@ -1,5 +1,6 @@
 package bank_management.service;
 
+import bank_management.dto.EmployeeDto;
 import bank_management.payload.BankAccountAndCommission;
 import bank_management.dto.BankAccountDto;
 import bank_management.payload.DetailSalary;
@@ -72,18 +73,24 @@ public class SalaryService {
                 }
 
                 // tìm các tài khoản payment có giao dịch lần đầu tiên theo trong timeline lương
-                if (bankAccount.getType().equals(BankAccountType.Payment)) {
-                    Transaction transaction = transactionRepository.findTransactionByBankAccountReceiveOrderByCreateDate(bankAccount);
-                    Date createDate = transaction.getCreateDate();
-                    if (month == DateUtils.getMonth(createDate) && year == DateUtils.getYear(createDate) && bankAccount.isStatus()) {
-                        BankAccountDto bankAccountDto = new BankAccountDto(bankAccount);
-                        bankAccountDto.setEmployee(employee);
-                        //nếu là payment thì commission = 0.02 * tiền gửi lần đầu tiên
-                        list.add(new BankAccountAndCommission(bankAccountDto, 0.02 * transaction.getAmount()));
-                    }
-                }
+//                if (bankAccount.getType().equals(BankAccountType.Payment)) {
+//                    Transaction transaction = transactionRepository.findTransactionByBankAccountReceiveOrderByCreateDate(bankAccount);
+//                    Date createDate = transaction.getCreateDate();
+//                    if (month == DateUtils.getMonth(createDate) && year == DateUtils.getYear(createDate) && bankAccount.isStatus()) {
+//                        BankAccountDto bankAccountDto = new BankAccountDto(bankAccount);
+//                        bankAccountDto.setEmployee(employee);
+//                        //nếu là payment thì commission = 0.02 * tiền gửi lần đầu tiên
+//                        list.add(new BankAccountAndCommission(bankAccountDto, 0.02 * transaction.getAmount()));
+//                    }
+//                }
             }
-            DetailSalary detailSalary = new DetailSalary(employee.getEmployeeCode(), salary.getMonth(), salary.getYear(), employee.getBaseSalary(), list);
+            EmployeeDto employeeDto = new EmployeeDto(employee);
+            employeeDto.setBankAccountList(null);
+            employeeDto.setSalaryList(null);
+
+            SalaryDto salaryDto = new SalaryDto(salary);
+            salary.setEmployee(null);
+            DetailSalary detailSalary = new DetailSalary(employeeDto, salaryDto, list);
             return detailSalary;
         }
         return null;
@@ -104,7 +111,7 @@ public class SalaryService {
 
                         Date createDate = bankAccount.getCreateDate();
                         // tìm tài khoản chưa được cộng hoa hồng, status = false
-                        if (month == DateUtils.getMonth(createDate) && year == DateUtils.getYear(createDate) && !bankAccount.isStatus()) {
+                        if (month == DateUtils.getMonth(createDate) && year == DateUtils.getYear(createDate)) {
                             salary_ += 500000.0; // credit thì commission = 500000
                             bankAccount.setStatus(true); // set lại trạng thái đã + hoa hồng
                             System.out.println("checked");
