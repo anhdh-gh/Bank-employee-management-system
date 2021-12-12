@@ -1,9 +1,10 @@
 const employeeGrid = "#employee-grid";
 //render data
 function renderData(data) {
+  $(employeeGrid).empty();
   let html = "";
   data.forEach((employee) => {
-    let firstLetter = employee.fullname.firstName.substring(0, 1);
+    let firstLetter = employee.fullName.firstName.substring(0, 1);
     let employeeRow = `<tr>
                         <td>
                           <h2>
@@ -13,9 +14,9 @@ function renderData(data) {
                               >${firstLetter}</a
                             ><a href="profile.html?id=${employee.id}"
                               >${
-                                employee.fullname.firstName +
+                                employee.fullName.firstName +
                                 " " +
-                                employee.fullname.lastName
+                                employee.fullName.lastName
                               } <span>${employee.position}</span></a
                             >
                           </h2>
@@ -25,7 +26,10 @@ function renderData(data) {
                           ${employee.email}
                         </td>
                         <td>${employee.phoneNumber}</td>
-                        <td>${employee.createDate}</td>
+                        <td>${DateUtils.convertDate(
+                          employee.createDate,
+                          1
+                        )}</td>
                         <td>
                           ${employee.position}
                         </td>
@@ -53,55 +57,44 @@ function renderData(data) {
   $(employeeGrid).html(html);
 }
 
+const paging = () => {
+  (function ($) {
+    "use strict";
+    if ($(".datatable").length > 0) {
+      $(".datatable").DataTable({
+        bFilter: false,
+      });
+    }
+  })(jQuery);
+};
+
+let urlApi = "/employee";
+let data = {};
+const paramsSearch = getUrlVars();
+if (paramsSearch) {
+  urlApi += "/search?" + encodeQueryData(paramsSearch);
+  Object.keys(paramsSearch).forEach((att) => {
+    $(`#${att}`).val(paramsSearch[att]).change();
+  });
+
+  data = {
+    employeeCode: $("#employeeCodeSearch").val(),
+    employeeName: $("#employeeNameSearch").val(),
+    position: $("#positionSearch").val(),
+  };
+}
+
 //call api
-ApiClient.get("/employee", {})
+ApiClient.get(urlApi, data)
   .then((resp) => {
     let data = resp.data.data;
     renderData(data);
 
-    (function ($) {
-      "use strict";
-      if ($(".datatable").length > 0) {
-        $(".datatable").DataTable({
-          bFilter: false,
-        });
-      }
-    })(jQuery);
+    paging();
   })
   .catch((err) => {
     Notify.showError(err.response.data.data.message);
   });
-
-//search
-const idFormSearchEmployee = "#search-form";
-function handleSearch() {
-  const data = Form.getData(idFormSearchEmployee);
-  var employeeSearch = {
-    employeeCode: data.employeeCodeSearch,
-    employeeName: data.employeeNameSearch,
-    position: data.positionSearch,
-  };
-  ApiClient.get("/employee/search", employeeSearch)
-    .then((resp) => {
-      const data = resp.data.data;
-      if (data.length === 0) Notify.showError("Không tìm thấy employee");
-      else {
-        renderData(data);
-      }
-      (function ($) {
-        "use strict";
-        if ($(".datatable").length > 0) {
-          $(".datatable").DataTable({
-            retrieve: true,
-            paging: true,
-          });
-        }
-      })(jQuery);
-    })
-    .catch((err) => {
-      Notify.showError(err.message);
-    });
-}
 
 //fill id vao modal de xoa
 function fillModalDelete(employeeID) {

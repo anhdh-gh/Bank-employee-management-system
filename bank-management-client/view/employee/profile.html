@@ -207,10 +207,12 @@
                     alt="Admin" />
                   <span class="status online"></span
                 ></span>
-                <span id="profile">Admin</span>
+                <span id="profile"></span>
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item" href="profile.html" id="view-profile"
+                  >My Profile</a
+                >
                 <a class="dropdown-item" href="edit-profile.html"
                   >Edit Profile</a
                 >
@@ -228,7 +230,9 @@
               ><i class="fas fa-ellipsis-v"></i
             ></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="profile.html">My Profile</a>
+              <a class="dropdown-item" href="profile.html" id="view-profile"
+                >My Profile</a
+              >
               <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
               <a class="dropdown-item" href="settings.html">Settings</a>
               <a class="dropdown-item" href="login.html">Logout</a>
@@ -302,7 +306,10 @@
           <div class="page-header">
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                <h5 class="text-uppercase mb-0 mt-0 page-title">
+                <h5
+                  class="text-uppercase mb-0 mt-0 page-title"
+                  id="title-by-role"
+                >
                   Employee Profile
                 </h5>
               </div>
@@ -638,7 +645,7 @@
     <script src="../../assets/js/common/Notify.js"></script>
     <script src="../../assets/js/common/ApiClient.js"></script>
     <script src="../../assets/js/common/authentication.js"></script>
-
+    <script src="../../assets/js/common/convertDate.js"></script>
     <script
       data-cfasync="false"
       src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
