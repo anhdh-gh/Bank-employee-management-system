@@ -1,18 +1,10 @@
-ApiClient.get("/person/info", {})
-  .then((resp) => {
-    const profile = resp.data.data.account.username;
-    $("#profile").text(profile);
-  })
-  .catch((err) => {});
-
 const employeeGrid = "#employee-grid";
-ApiClient.get("/employee", {})
-  .then((resp) => {
-    let data = resp.data.data;
-    let html = "";
-    data.forEach((employee) => {
-      let firstLetter = employee.fullname.firstName.substring(0, 1);
-      let employeeRow = `<tr>
+//render data
+function renderData(data) {
+  let html = "";
+  data.forEach((employee) => {
+    let firstLetter = employee.fullname.firstName.substring(0, 1);
+    let employeeRow = `<tr>
                         <td>
                           <h2>
                             <a href="profile.html?id=${
@@ -48,23 +40,87 @@ ApiClient.get("/employee", {})
                             type="submit"
                             data-toggle="modal"
                             data-target="#delete_employee"
-                            class="btn btn-danger btn-sm mb-1" class="delete" value="${
+                            class="btn btn-danger btn-sm mb-1" class="delete" onclick="fillModalDelete('${
                               employee.id
-                            }"
+                            }')"
                           >
                             <i class="far fa-trash-alt"></i>
                           </button>
                         </td>
                       </tr>`;
-      html += employeeRow;
-    });
-    $(employeeGrid).html(html);
+    html += employeeRow;
+  });
+  $(employeeGrid).html(html);
+}
+
+//call api
+ApiClient.get("/employee", {})
+  .then((resp) => {
+    let data = resp.data.data;
+    renderData(data);
+
+    (function ($) {
+      "use strict";
+      if ($(".datatable").length > 0) {
+        $(".datatable").DataTable({
+          bFilter: false,
+        });
+      }
+    })(jQuery);
   })
   .catch((err) => {
     Notify.showError(err.response.data.data.message);
   });
 
-$(".delete").on("click", () => {
-  console.log(12345);
-  console.log($("#delete").attr("value"));
-});
+//search
+const idFormSearchEmployee = "#search-form";
+function handleSearch() {
+  const data = Form.getData(idFormSearchEmployee);
+  var employeeSearch = {
+    employeeCode: data.employeeCodeSearch,
+    employeeName: data.employeeNameSearch,
+    position: data.positionSearch,
+  };
+  ApiClient.get("/employee/search", employeeSearch)
+    .then((resp) => {
+      const data = resp.data.data;
+      if (data.length === 0) Notify.showError("Không tìm thấy employee");
+      else {
+        renderData(data);
+      }
+      (function ($) {
+        "use strict";
+        if ($(".datatable").length > 0) {
+          $(".datatable").DataTable({
+            retrieve: true,
+            paging: true,
+          });
+        }
+      })(jQuery);
+    })
+    .catch((err) => {
+      Notify.showError(err.message);
+    });
+}
+
+//fill id vao modal de xoa
+function fillModalDelete(employeeID) {
+  $("#delete-confirm").attr("value", employeeID);
+}
+
+//xoa
+function deleteEmployee() {
+  let employeeID = $("#delete-confirm").attr("value");
+  console.log(employeeID);
+  ApiClient.delete("/employee/" + employeeID)
+    .then((resp) => {
+      let data = resp.data;
+      console.log(data.message);
+      if (data.responseStatus == "Success") {
+        Notify.showSuccess(resp.data.message);
+      } else {
+        Notify.showError(resp.data.message);
+      }
+    })
+    .catch((err) => {});
+}

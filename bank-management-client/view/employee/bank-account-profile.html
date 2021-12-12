@@ -22,6 +22,9 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+
+	<!-- DevExtreme theme -->
+	<link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/21.2.3/css/dx.light.css">
 </head>
 
 <body>
@@ -149,7 +152,7 @@
 							<span class="user-img"><img class="rounded-circle" src="assets/img/user-06.jpg" width="30"
 									alt="Admin">
 								<span class="status online"></span></span>
-							<span>Admin</span>
+							<span id="profile">Admin</span>
 						</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="profile.html">My Profile</a>
@@ -246,33 +249,33 @@
 									<div class="row">
 										<div class="col-md-5">
 											<div class="profile-info-left">
-												<h3 class="user-name m-t-0">Michael S. Porch</h3>
-												<h5 class="company-role m-t-0 m-b-0">Gold Member</h5>
-												<small class="text-muted">Female</small>
-												<div class="staff-id"> ID : PT-0001</div>
+												<h3 class="user-name m-t-0" id="username">Michael S. Porch</h3>
+												<h5 class="company-role m-t-0 m-b-0" id="memberLevel">Gold Member</h5>
+												<small class="text-muted" id="gender">Female</small>
+												<div class="staff-id" id="customerCode"> ID : PT-0001</div>
 											</div>
 										</div>
 										<div class="col-md-7">
 											<ul class="personal-info">
 												<li>
 													<span class="title">Account Number:</span>
-													<span class="text"><a href="#">XXXXXXXXXXXX-8700</a></span>
+													<span class="text"><span id="accountNumber">XXXXXXXXXXXX-8700</span></span>
 												</li>
 												<li>
 													<span class="title">Account Type:</span>
-													<span class="text">Credit Account</span>
+													<span class="text" id="type">Credit Account</span>
 												</li>
 												<li>
 													<span class="title">Create Date:</span>
-													<span class="text">12/05/2021</span>
+													<span class="text" id="createDate">12/05/2021</span>
 												</li>
 												<li>
 													<span class="title">Expire Date:</span>
-													<span class="text">05/2025</span>
+													<span class="text" id="expireDate">05/2025</span>
 												</li>
 												<li>
 													<span class="title">Branch</span>
-													<span class="text">5754 Airport Rd, Coosada, AL, 36020</span>
+													<span class="text" id="branch">5754 Airport Rd, Coosada, AL, 36020</span>
 												</li>
 											</ul>
 										</div>
@@ -888,6 +891,18 @@
 	<script src="assets/js/jquery.dataTables.min.js"></script>
 	<script src="assets/js/dataTables.bootstrap4.min.js"></script>
 	<script src="assets/js/app.js"></script>
+
+	<!-- Thư viện dùng chung -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+	<script src="https://cdn3.devexpress.com/jslib/21.2.3/js/dx.all.js"></script>
+	<script src="../../assets/js/common/Notify.js"></script>
+	<script src="../../assets/js/common/ApiClient.js"></script>
+	<script src="../../assets/js/common/authentication.js"></script>
+
+	<!-- Bank account profile -->
+	<script src="../../assets/js/common/convertDate.js"></script>
+	<script src="../../assets/js/employee/bank-account-profile.js"></script>
 </body>
 
 <!-- Mirrored from dreamguystech.com/preadmin/html/school/light/bank-account-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:54 GMT -->

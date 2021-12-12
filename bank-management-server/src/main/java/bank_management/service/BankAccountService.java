@@ -6,6 +6,7 @@ import bank_management.repository.BankAccountRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,11 @@ public class BankAccountService {
 
     @Autowired
     EmployeeRepository employeeRepo;
+
+    public PaymentAccount getPaymentAccountByCustomerID(String customerID) {
+        PaymentAccount paymentAccount = paymentAccountRepo.getPaymentAccountByCustomerID(customerID);
+        return paymentAccount;
+    }
 
     public List<BankAccount> getAllBankAccount() {
         List<BankAccount> bankAccountList = bankAccountRepo.findAll();
@@ -136,33 +142,30 @@ public class BankAccountService {
         return creditAccountRepo.save(creditAccount);
     }
 
-    public boolean delete(String ID) {
-        Optional<BankAccount> optionalBankAccount = bankAccountRepo.findById(ID);
-        if (optionalBankAccount.isPresent()) {
-            bankAccountRepo.delete(optionalBankAccount.get());
-            return true;
+    @Transactional(rollbackFor = {Exception.class, Throwable.class})
+    public void delete(String ID) throws Exception {
+        Optional<BankAccount> oba = bankAccountRepo.findById(ID);
+        if (oba.isPresent()) {
+            BankAccount ba = oba.get();
+
+            Optional<PaymentAccount> opa = paymentAccountRepo.findById(ba.getID());
+            if(opa.isPresent()) {
+                PaymentAccount pa = opa.get();
+                int row = paymentAccountRepo.deletePaymentAccountByID(pa.getID());
+                if(row < 1) throw new Exception("Xóa payemnt account không thành công");
+            }
+
+            Optional<CreditAccount> oca = creditAccountRepo.findById(ba.getID());
+            if(oca.isPresent()) {
+                CreditAccount ca = oca.get();
+                int row = creditAccountRepo.deleteCreditAccountByID(ca.getID());
+                if(row < 1) throw new Exception("Xóa creadit account không thành công");
+            }
+
+            int rowBa = bankAccountRepo.deleteBankAccountByID(ba.getID());
+            if(rowBa < 1) throw new Exception("Xóa bank account không thành công");
         }
-        return false;
     }
-
-
-//    public Customer getCustomerByBankAccountID(String id) {
-//        Customer customer = customerRepo.findFirstCustomerByPaymentAccountID(id);
-//        if(customer == null)
-//            customer = customerRepo.findFirstCustomerByCreditAccountID(id);
-//        return customer;
-//        return null;
-//    }
-
-//    public List<BankAccountDto> getAllBankAccount() {
-
-
-//    public Customer getCustomerByBankAccountID(String id) {
-//        Customer customer = customerRepo.findFirstCustomerByPaymentAccountID(id);
-//        if(customer == null)
-//            customer = customerRepo.findFirstCustomerByCreditAccountID(id);
-//        return customer;
-//    }
 
     public List<BankAccount> processSearch(String accountCode, String customerCode, String type) {
         List<BankAccount> res = bankAccountRepo.findAll();

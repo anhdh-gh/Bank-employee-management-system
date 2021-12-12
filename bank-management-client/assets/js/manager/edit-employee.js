@@ -1,13 +1,7 @@
-ApiClient.get("/person/info", {})
-  .then((resp) => {
-    const profile = resp.data.data.account.username;
-    $("#profile").text(profile);
-  })
-  .catch((err) => {});
 // get id
 const currentURL = window.location.href;
 
-function getUrlVars(url) {
+function getUrlVar(url) {
   var vars = {};
   var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
     vars[key] = value;
@@ -15,7 +9,7 @@ function getUrlVars(url) {
   return vars;
 }
 
-var employeeID = getUrlVars(currentURL)["id"]; // / get employee theo id
+var employeeID = getUrlVar(currentURL)["id"]; // / get employee theo id
 if (employeeID != null) {
   ApiClient.get("/employee/" + employeeID, {}) //
     .then((resp) => {
@@ -54,9 +48,6 @@ $(idFormEditEmployee).validate({
   messages: {},
 
   submitHandler: (form) => {
-    window.location.replace(
-      `${window.location.origin}/view/employee/all-employees.html`
-    );
     // Lấy dữ liệu
     const data = Form.getData(idFormEditEmployee);
     const employee = {
@@ -79,21 +70,22 @@ $(idFormEditEmployee).validate({
       id: null,
     };
 
-    // ApiClient.put("/employee/" + employeeID, employee)
-    //   .then((resp) => {
-    //     console.log(resp.data.message);
-    //     if (resp.data.responseStatus == "Success") {
-    //       Notify.showSuccess(resp.data.message);
-    //       window.location.replace(
-    //         `${window.location.origin}/view/employee/all-employees.html`
-    //       );
-    //     } else {
-    //       Notify.showError(resp.data.message);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     Notify.showError(err.response.data.message);
-    //   });
+    //call api edit
+    ApiClient.put("/employee/" + employeeID, employee)
+      .then((resp) => {
+        console.log(resp.data.message);
+        if (resp.data.responseStatus == "Success") {
+          Notify.showSuccess(resp.data.message);
+          window.location.replace(
+            `${window.location.origin}/view/employee/all-employees.html`
+          );
+        } else {
+          Notify.showError(resp.data.message);
+        }
+      })
+      .catch((err) => {
+        Notify.showError(err.response.data.message);
+      });
 
     // Không cho tự submit form
     return false;

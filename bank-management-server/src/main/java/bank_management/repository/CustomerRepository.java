@@ -1,5 +1,6 @@
 package bank_management.repository;
 
+import bank_management.entity.FullName;
 import bank_management.entity.PaymentAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

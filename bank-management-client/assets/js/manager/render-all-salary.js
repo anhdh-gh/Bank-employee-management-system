@@ -1,10 +1,3 @@
-ApiClient.get("/person/info", {})
-  .then((resp) => {
-    const profile = resp.data.data.account.username;
-    $("#profile").text(profile);
-  })
-  .catch((err) => {});
-
 const idSalaryComponent = "#salary-component";
 ApiClient.get("/salary", {})
   .then((resp) => {
@@ -71,5 +64,14 @@ ApiClient.get("/salary", {})
       html += salaryRow;
     });
     $(idSalaryComponent).html(html);
+
+    (function ($) {
+      "use strict";
+      if ($(".datatable").length > 0) {
+        $(".datatable").DataTable({
+          bFilter: false,
+        });
+      }
+    })(jQuery);
   })
   .catch((err) => {});

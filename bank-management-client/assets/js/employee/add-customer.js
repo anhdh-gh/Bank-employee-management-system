@@ -172,7 +172,7 @@ $(idFormAddCustomer).validate({
         id: null,
       },
       identityNumber: data.identityNumber,
-      dateOfBirth: convertDate(data.dateOfBirth), // note
+      dateOfBirth: DateUtils.convertDate(data.dateOfBirth,2), // note
       email: data.email,
       phoneNumber: data.phoneNumber,
       gender: data.gender,

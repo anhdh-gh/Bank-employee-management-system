@@ -1,22 +1,22 @@
 package bank_management.payload;
 
+import bank_management.dto.EmployeeDto;
+import bank_management.dto.SalaryDto;
+import bank_management.entity.Employee;
+import bank_management.entity.Salary;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 public class DetailSalary {
-    private String employeeCode;
-    private int month;
-    private int year;
-    private double baseSalary;
+    private EmployeeDto employeeDto;
+    private SalaryDto salaryDto;
     private List<BankAccountAndCommission> list;
 
-    public DetailSalary(String employeeCode, int month, int year, double baseSalary, List<BankAccountAndCommission> list) {
-        this.baseSalary = baseSalary;
+    public DetailSalary(EmployeeDto employeeDto, SalaryDto salaryDto, List<BankAccountAndCommission> list) {
         this.list = list;
-        this.employeeCode = employeeCode;
-        this.month = month;
-        this.year = year;
+        this.employeeDto = employeeDto;
+        this.salaryDto = salaryDto;
     }
 }

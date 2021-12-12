@@ -51,8 +51,7 @@ public class BankAccount extends BaseEntity {
     @NotNull(message = "Status không được trống!") // true: đã được cộng hoa hồng cho nhân viên, false: ngược lại
     protected boolean status;
 
-    @JsonIgnore
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn (name = "EmployeeID")
     protected Employee employee;
 

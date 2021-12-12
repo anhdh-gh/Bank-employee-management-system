@@ -135,8 +135,19 @@ public class BankAccountController {
                     ));
             }
             case Credit: {
+                // Kiểm tra người dùng đã tạo payment account ?
+                PaymentAccount paymentAccount = bankAccountService.getPaymentAccountByCustomerID(customer.getID());
+                if(paymentAccount == null)
+                    return ResponseEntity
+                        .badRequest()
+                        .body(new ResponseResult(
+                            "Customer chưa tạo payment account",
+                            ResponseStatus.Invalid
+                        ));
+
                 CreditAccount creditAccount = new CreditAccount(bankAccount);
                 creditAccount.setCustomer(customer);
+
                 creditAccount = bankAccountService.insertCreditAccount(creditAccount);
                 if(creditAccount == null)
                     return ResponseEntity
@@ -165,7 +176,7 @@ public class BankAccountController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteByID(@PathVariable(value = "id") String id) {
+    public ResponseEntity<?> deleteByID(@PathVariable(value = "id") String id) throws Exception {
         BankAccount bankAccount = bankAccountService.getById(id);
 
         if(bankAccount == null)
@@ -177,15 +188,8 @@ public class BankAccountController {
                         ResponseStatus.Invalid
                 ));
 
-        boolean res = bankAccountService.delete(bankAccount.getID());
-        if(res == false)
-            return ResponseEntity.badRequest().body(
-                new ResponseResult (
-                    "Xóa bank account không thành công",
-                    ResponseStatus.Error
-                )
-            );
-
+        bankAccountService.delete(bankAccount.getID());
+        
         return ResponseEntity.ok(
             new ResponseResult (
                 "Xóa bank account thành công",

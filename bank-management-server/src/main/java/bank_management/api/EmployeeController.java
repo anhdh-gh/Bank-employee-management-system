@@ -7,6 +7,7 @@ import bank_management.entity.Manager;
 import bank_management.entity.Person;
 import bank_management.payload.ResponseResult;
 import bank_management.enumeration.ResponseStatus;
+import bank_management.payload.SearchEmployeeRequest;
 import bank_management.service.EmployeeService;
 import bank_management.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +127,14 @@ public class EmployeeController {
                     .ok()
                     .body(new ResponseResult(employeeDto ,"Lấy thông tin thành công.", ResponseStatus.Success ));
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchEmployee(SearchEmployeeRequest searchEmployeeRequest) {
+        List<EmployeeDto> employeeDtoList = employeeService.searchEmployee(searchEmployeeRequest);
+        return ResponseEntity
+                .ok()
+                .body(new ResponseResult(employeeDtoList ,"Lấy thông tin thành công.", ResponseStatus.Success ));
     }
 
 }
