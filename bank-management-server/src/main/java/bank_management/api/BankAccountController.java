@@ -189,7 +189,7 @@ public class BankAccountController {
                 ));
 
         bankAccountService.delete(bankAccount.getID());
-        
+
         return ResponseEntity.ok(
             new ResponseResult (
                 "Xóa bank account thành công",

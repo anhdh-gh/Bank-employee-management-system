@@ -152,19 +152,21 @@ public class BankAccountService {
             if(opa.isPresent()) {
                 PaymentAccount pa = opa.get();
                 int row = paymentAccountRepo.deletePaymentAccountByID(pa.getID());
-                if(row < 1) throw new Exception("Xóa payemnt account không thành công");
+                if(row < 1) throw new Exception("Xóa payment account không thành công");
             }
 
             Optional<CreditAccount> oca = creditAccountRepo.findById(ba.getID());
             if(oca.isPresent()) {
                 CreditAccount ca = oca.get();
                 int row = creditAccountRepo.deleteCreditAccountByID(ca.getID());
-                if(row < 1) throw new Exception("Xóa creadit account không thành công");
+                if(row < 1) throw new Exception("Xóa credit account không thành công");
             }
 
             int rowBa = bankAccountRepo.deleteBankAccountByID(ba.getID());
             if(rowBa < 1) throw new Exception("Xóa bank account không thành công");
         }
+
+        throw new Exception("Xóa bank account không thành công");
     }
 
     public List<BankAccount> processSearch(String accountCode, String customerCode, String type) {
