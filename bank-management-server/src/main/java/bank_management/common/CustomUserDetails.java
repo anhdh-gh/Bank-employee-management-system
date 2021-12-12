@@ -21,6 +21,8 @@ import bank_management.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+// Mặc định Spring Security sử dụng một đối tượng UserDetails để chứa toàn bộ thông tin về người dùng.
+// Vì vậy, cần tạo ra một class mới giúp chuyển các thông tin của Person thành UserDetail
 @Data
 @AllArgsConstructor
 public class CustomUserDetails implements UserDetails {

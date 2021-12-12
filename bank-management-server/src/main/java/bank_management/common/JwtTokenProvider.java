@@ -12,6 +12,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 
+// Sau khi có các thông tin về người dùng
+// Cần mã hóa thông tin người dùng thành chuỗi JWT
+// Tạo ra class JwtTokenProvider để làm nhiệm vụ này.
 @Component
 @Slf4j
 public class JwtTokenProvider {

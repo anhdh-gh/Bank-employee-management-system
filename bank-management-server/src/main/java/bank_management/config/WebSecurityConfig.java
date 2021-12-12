@@ -16,7 +16,7 @@ import bank_management.enumeration.Role;
 import bank_management.filter.JwtAuthenticationFilter;
 import bank_management.service.CustomUserDetailsService;
 
-@EnableWebSecurity
+@EnableWebSecurity // Kích hoạt tính năng Spring Security trên ứng dụng Web
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -41,12 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     
     @Override
-    protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth.userDetailsService(customUserDetailsService) // Cung cáp UserDetailsService cho spring security
-            .passwordEncoder(passwordEncoder()); // cung cấp password encoder
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .userDetailsService(customUserDetailsService) // Cung cáp customUserDetailsService cho spring security
+            .passwordEncoder(passwordEncoder()); // Cung cấp password encoder
     }
-    
+
+    // Override lại method configure để thực hiện việc phân quyền.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

@@ -17,6 +17,8 @@ import bank_management.repository.EmployeeRepository;
 import bank_management.repository.ManagerRepository;
 import bank_management.repository.PersonRepository;
 
+// Khi người dùng đăng nhập thì Spring Security sẽ cần lấy các thông tin UserDetails hiện có để kiểm tra.
+// Vì vậy, cần tạo ra một class kế thừa lớp UserDetailsService mà Spring Security cung cấp để làm nhiệm vụ này.
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
