@@ -47,6 +47,15 @@ public class BankAccountController {
         );
     }
 
+    @GetMapping("/payment")
+    public ResponseEntity<?> getPayment() {
+        Person person = personService.getAuthPerson();
+        PaymentAccount paymentAccount = bankAccountService.getPaymentAccountByCustomerID(person.getID());
+        if(paymentAccount == null)
+            ResponseEntity.badRequest().body(new ResponseResult("Customer chưa tạo payment account", ResponseStatus.Invalid));
+        return ResponseEntity.ok(new ResponseResult(paymentAccount, "Lấy payment account thành công", ResponseStatus.Success));
+    }
+
     @GetMapping("/account_number/{accountNumber}")
     public ResponseEntity<?> getBankAccountByAccountNumber(@PathVariable(value = "accountNumber") String accountNumber) {
         BankAccount bankAccount = bankAccountService.getBankAccountByAccountNumber(accountNumber);
