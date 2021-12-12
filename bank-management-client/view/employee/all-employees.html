@@ -332,38 +332,56 @@
               </div>
             </div>
           </div>
-          <div class="row filter-row">
+          <form class="row filter-row" id="search-form" method="post">
             <div class="col-sm-6 col-md-3">
               <div class="form-group form-focus">
-                <input type="text" class="form-control floating" />
-                <label class="focus-label">Employee ID</label>
+                <input
+                  type="text"
+                  class="form-control floating"
+                  id="employeeCodeSearch"
+                  name="employeeCodeSearch"
+                />
+                <label class="focus-label">Employee Code</label>
               </div>
             </div>
             <div class="col-sm-6 col-md-3">
               <div class="form-group form-focus">
-                <input type="text" class="form-control floating" />
+                <input
+                  type="text"
+                  class="form-control floating"
+                  id="employeeNameSearch"
+                  name="employeeNameSearch"
+                />
                 <label class="focus-label">Employee Name</label>
               </div>
             </div>
             <div class="col-sm-6 col-md-3">
               <div class="form-group form-focus select-focus">
-                <select class="select form-control">
-                  <option>Select Positions</option>
-                  <option>Sales Executive</option>
-                  <option>Teller</option>
-                  <option>Accountant</option>
-                  <option>Technician</option>
-                  <option>Security</option>
+                <select
+                  class="select form-control"
+                  id="positionSearch"
+                  name="positionSearch"
+                >
+                  <option value="All">All</option>
+                  <option value="SalesExecutive">SalesExecutive</option>
+                  <option value="Teller">Teller</option>
+                  <option value="Accountant">Accountant</option>
+                  <option value="Technician">Technician</option>
+                  <option value="Security">Security</option>
                 </select>
-                <label class="focus-label">Designation</label>
+                <label class="focus-label">Positions</label>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3 d-flex align-items-center">
-              <a href="#" class="btn btn-search rounded btn-block mb-3">
+            <div class="col-sm-6 col-md-3">
+              <button
+                type="submit"
+                id="bt-search"
+                class="btn btn-search rounded btn-block mb-3"
+              >
                 search
-              </a>
+              </button>
             </div>
-          </div>
+          </form>
           <div class="row staff-grid-row" id="employee-grid"></div>
           <div class="notification-box">
             <div class="msg-sidebar notifications msg-noti">
@@ -654,6 +672,7 @@
     <script src="../../assets/js/common/Notify.js"></script>
     <script src="../../assets/js/common/ApiClient.js"></script>
     <script src="../../assets/js/common/authentication.js"></script>
+    <script src="../../assets/js/common/Form.js"></script>
 
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
@@ -667,6 +686,7 @@
     <script src="assets/js/app.js"></script>
 
     <script src="../../assets/js/manager/render-all-employee.js"></script>
+    <script src="../../assets/js/manager/search-employee.js"></script>
   </body>
 
   <!-- Mirrored from dreamguystech.com/preadmin/html/school/light/all-employees.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:56:35 GMT -->

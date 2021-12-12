@@ -1,9 +1,3 @@
-ApiClient.get("/person/info", {})
-  .then((resp) => {
-    const profile = resp.data.data.account.username;
-    $("#profile").text(profile);
-  })
-  .catch((err) => {});
 // get id
 const currentURL = window.location.href;
 

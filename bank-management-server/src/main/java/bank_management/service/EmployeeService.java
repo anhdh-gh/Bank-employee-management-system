@@ -1,8 +1,9 @@
 package bank_management.service;
 
 import bank_management.dto.EmployeeDto;
-import bank_management.entity.Employee;
-import bank_management.entity.User;
+import bank_management.entity.*;
+import bank_management.enumeration.Position;
+import bank_management.payload.SearchEmployeeRequest;
 import bank_management.repository.EmployeeRepository;
 import bank_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,6 @@ public class EmployeeService extends PersonService {
 
     public EmployeeDto addEmployee(EmployeeDto employeeDto) {
         employeeDto.setEmployeeCode(generateEmployeeCode());
-        employeeDto.setBaseSalary(3000000);
-        employeeDto.setSeniority(0);
         Employee employee = new Employee(employeeDto);
         return new EmployeeDto(employeeRepository.save(employee));
     }
@@ -67,14 +66,9 @@ public class EmployeeService extends PersonService {
     }
 
     private String generateEmployeeCode() {
-        List<User> list = userRepository.findAll();
-        int latest = 0;
-        for (User user : list) {
-            String employeeCode = user.getEmployeeCode();
-            int number = Integer.parseInt(employeeCode.substring(3));
-            latest = (number > latest) ? number : latest;
-        }
-        return "NV-" + (latest + 1);
+        String latestEmployeeCode = userRepository.getLatestEmployeeCode();
+        int number = Integer.parseInt(latestEmployeeCode.substring(3));
+        return "NV-" + (number + 1);
     }
 
     public EmployeeDto getEmployeeById(String employeeID) {
@@ -82,5 +76,31 @@ public class EmployeeService extends PersonService {
         if (optionalEmployee.isPresent()) {
             return new EmployeeDto(optionalEmployee.get());
         } else return null;
+    }
+
+    public List<EmployeeDto> searchEmployee(SearchEmployeeRequest searchEmployeeRequest) {
+        List<Employee> res = employeeRepository.findAll();
+        String employeeCode = searchEmployeeRequest.getEmployeeCode();
+        String employeeName = searchEmployeeRequest.getEmployeeName();
+        String position = searchEmployeeRequest.getPosition();
+
+        if(!position.equals("All"))
+            res.removeIf(b -> !b.getPosition().name().contains(position));
+
+        if(employeeCode != null)
+            res.removeIf(b -> !b.getEmployeeCode().contains(employeeCode));
+
+        if(employeeName != null)
+            res.removeIf(b -> {
+                Optional<Employee> optionalEmployee = employeeRepository.findById(b.getID());
+                return
+                        (optionalEmployee.isPresent() && !optionalEmployee.get().getFullName().toString().contains(employeeName));
+
+            });
+        List<EmployeeDto> employeeDtoList = new ArrayList<>();
+        for (Employee employee : res) {
+            employeeDtoList.add(new EmployeeDto(employee));
+        }
+        return employeeDtoList;
     }
 }
