@@ -1,7 +1,7 @@
 // get id
 const currentURL = window.location.href;
 
-function getUrlVars(url) {
+function getUrlVar(url) {
   var vars = {};
   var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
     vars[key] = value;
@@ -9,7 +9,7 @@ function getUrlVars(url) {
   return vars;
 }
 
-const salaryID = getUrlVars(currentURL)["id"];
+const salaryID = getUrlVar(currentURL)["id"];
 ApiClient.get("/salary/detail/" + salaryID, {})
   .then((resp) => {
     data = resp.data.data;
@@ -20,13 +20,15 @@ ApiClient.get("/salary/detail/" + salaryID, {})
     $("#month-year").text(data.salaryDto.month + "/" + data.salaryDto.year);
 
     $("#fullname").text(
-      data.employeeDto.fullname.firstName +
+      data.employeeDto.fullName.firstName +
         " " +
-        data.employeeDto.fullname.lastName
+        data.employeeDto.fullName.lastName
     );
     $("#position").text(data.employeeDto.position);
     $("#employee-code").text(data.employeeDto.employeeCode);
-    $("#join-date").text("Joining Date: " + data.employeeDto.createDate);
+    $("#join-date").text(
+      "Joining Date: " + DateUtils.convertDate(data.employeeDto.createDate, 1)
+    );
 
     //render detail salary
     let html = `<div class="col-sm-6">
@@ -132,7 +134,10 @@ ApiClient.get("/salary/detail/" + salaryID, {})
     data.list.forEach((item) => {
       let bankAccountRow = `<tr>
                                     <td>${index++}</td>
-                                    <td>${item.bankAccountDto.expireDate}</td>
+                                    <td>${DateUtils.convertDate(
+                                      item.bankAccountDto.expireDate,
+                                      1
+                                    )}</td>
                                     <td>${item.bankAccountDto.accountCode}</td>
                                     <td>${item.bankAccountDto.type}</td>
                                     <td>+ ${item.commission}</td>

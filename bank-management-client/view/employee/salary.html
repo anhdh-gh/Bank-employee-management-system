@@ -222,10 +222,12 @@
                     alt="Admin" />
                   <span class="status online"></span
                 ></span>
-                <span id="profile">Admin</span>
+                <span id="profile"></span>
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item" href="profile.html" id="view-profile"
+                  >My Profile</a
+                >
                 <a class="dropdown-item" href="edit-profile.html"
                   >Edit Profile</a
                 >
@@ -243,7 +245,9 @@
               ><i class="fas fa-ellipsis-v"></i
             ></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="profile.html">My Profile</a>
+              <a class="dropdown-item" href="profile.html" id="view-profile"
+                >My Profile</a
+              >
               <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
               <a class="dropdown-item" href="settings.html">Settings</a>
               <a class="dropdown-item" href="login.html">Logout</a>
@@ -336,22 +340,20 @@
             <div class="col-sm-4 col-5"></div>
           </div>
           <div class="content-page">
-            <div class="row filter-row">
-              <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
-                <div class="form-group form-focus">
-                  <input class="form-control" type="text" />
-                  <label class="focus-label">Employee Name</label>
-                </div>
-              </div>
+            <form class="row filter-row">
               <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
                 <div class="form-group form-focus select-focus">
-                  <select class="select form-control">
-                    <option>-- Select --</option>
-                    <option>Sales Executive</option>
-                    <option>Teller</option>
-                    <option>Accountant</option>
-                    <option>Technician</option>
-                    <option>Security</option>
+                  <select
+                    class="select form-control"
+                    id="positionSearch"
+                    name="positionSearch"
+                  >
+                    <option value="All">All</option>
+                    <option value="SalesExecutive">SalesExecutive</option>
+                    <option value="Teller">Teller</option>
+                    <option value="Accountant">Accountant</option>
+                    <option value="Technician">Technician</option>
+                    <option value="Security">Security</option>
                   </select>
                   <label class="focus-label">Position</label>
                 </div>
@@ -362,6 +364,8 @@
                     class="form-control datetimepicker-input datetimepicker floating"
                     type="text"
                     data-toggle="datetimepicker"
+                    id="fromDate"
+                    name="fromDate"
                   />
                   <label class="focus-label">From</label>
                 </div>
@@ -372,22 +376,29 @@
                     class="form-control datetimepicker-input datetimepicker floating"
                     type="text"
                     data-toggle="datetimepicker"
+                    id="toDate"
+                    name="toDate"
                   />
                   <label class="focus-label">To</label>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
-                <a href="#" class="btn btn-search rounded btn-block mb-3">
+                <button
+                  type="submit"
+                  id="search"
+                  class="btn btn-search rounded btn-block mb-3"
+                >
                   search
-                </a>
+                </button>
               </div>
-            </div>
+            </form>
             <div class="row">
               <div class="col-md-12 mb-3">
                 <div class="table-responsive mt-2">
                   <table class="table custom-table datatable">
                     <thead class="thead-light">
                       <tr>
+                        <th>#</th>
                         <th>Time</th>
                         <th style="width: 25%">Employee</th>
                         <th>Employee Code</th>
@@ -888,25 +899,32 @@
       </div>
     </div>
 
+    <script
+      data-cfasync="false"
+      src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.js"></script>
+    <script src="assets/js/select2.min.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
     <!-- Thư viện dùng chung -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     <script src="https://cdn3.devexpress.com/jslib/21.2.3/js/dx.all.js"></script>
     <script src="../../assets/js/common/Notify.js"></script>
     <script src="../../assets/js/common/ApiClient.js"></script>
+    <script src="../../assets/js/common/Form.js"></script>
     <script src="../../assets/js/common/authentication.js"></script>
-    <script src="../../assets/js/manager/render-all-salary.js"></script>
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/common/convertDate.js"></script>
 
-    <script src="assets/js/jquery.slimscroll.js"></script>
-    <script src="assets/js/select2.min.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="../../assets/js/manager/render-all-salary.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assets/js/app.js"></script>
   </body>
 
   <!-- Mirrored from dreamguystech.com/preadmin/html/school/light/salary.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:56:20 GMT -->

@@ -5,6 +5,8 @@ import bank_management.enumeration.BankAccountType;
 import bank_management.enumeration.MemberLevel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -20,7 +22,7 @@ import java.util.Date;
 public class BankAccount extends BaseEntity {
 
     @Column (name = "MemberLevel")
-    @NotNull(message = "MemberLevel không được trống!")
+//    @NotNull(message = "MemberLevel không được trống!")
     @Enumerated(EnumType.STRING)
     protected MemberLevel memberLevel;
 
@@ -51,11 +53,11 @@ public class BankAccount extends BaseEntity {
     @NotNull(message = "Status không được trống!") // true: đã được cộng hoa hồng cho nhân viên, false: ngược lại
     protected boolean status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "EmployeeID")
     protected Employee employee;
 
-    @NotBlank(message = "CVV không được để trống")
+//    @NotBlank(message = "CVV không được để trống")
     @Size(max = 10, message = "CVV tối đa 10 ký tự")
     @Column(name = "CVV")
     protected String CVV;

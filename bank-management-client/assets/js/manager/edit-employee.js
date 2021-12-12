@@ -16,7 +16,7 @@ if (employeeID != null) {
       employee = resp.data.data;
       $("#employeeCode").val(employee.employeeCode);
       $("#fullName").val(
-        employee.fullname.firstName + " " + employee.fullname.lastName
+        employee.fullName.firstName + " " + employee.fullName.lastName
       );
       $("#email").val(employee.email);
       $("#phoneNumber").val(employee.phoneNumber);
@@ -26,7 +26,7 @@ if (employeeID != null) {
       $("#position").val(employee.position).change();
       $("#baseSalary").val(employee.baseSalary);
       $("#seniority").val(employee.seniority);
-      $("#dateOfBirth").val(employee.dateOfBirth);
+      $("#dateOfBirth").val(DateUtils.convertDate(employee.dateOfBirth, 1));
       $("#address").val(
         employee.address.houseNumber +
           " " +
@@ -62,7 +62,7 @@ $(idFormEditEmployee).validate({
       seniority: data.seniority,
       position: data.position,
       baseSalary: data.baseSalary,
-      fullname: {},
+      fullName: {},
       address: {},
       bankAccountList: [],
       salaryList: [],

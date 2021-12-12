@@ -3,7 +3,7 @@ const employeeGrid = "#employee-grid";
 function renderData(data) {
   let html = "";
   data.forEach((employee) => {
-    let firstLetter = employee.fullname.firstName.substring(0, 1);
+    let firstLetter = employee.fullName.firstName.substring(0, 1);
     let employeeRow = `<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
               <div class="profile-widget">
                 <div class="profile-img">
@@ -38,7 +38,7 @@ function renderData(data) {
                 </div>
                 <h4 class="user-name m-t-10 m-b-0 text-ellipsis">
                   <a href="profile.html?id=${employee.id}" >${
-      employee.fullname.firstName + " " + employee.fullname.lastName
+      employee.fullName.firstName + " " + employee.fullName.lastName
     }</a>
                 </h4>
                 <div class="small text-muted">${employee.position}</div>

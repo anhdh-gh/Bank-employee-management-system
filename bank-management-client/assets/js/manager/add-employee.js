@@ -185,7 +185,7 @@ $(idFormAddEmployee).validate({
       seniority: data.seniority,
       position: data.position,
       baseSalary: data.baseSalary,
-      fullname: {
+      fullName: {
         firstName: data.firstName,
         lastName: data.lastName,
       },

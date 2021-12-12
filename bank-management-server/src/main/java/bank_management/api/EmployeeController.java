@@ -113,22 +113,6 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/profile")
-    public ResponseEntity<?> getCurrentEmployee() {
-        Person person = personService.getAuthPerson();
-        EmployeeDto employeeDto = employeeService.getEmployeeById(person.getID());
-        if (employeeDto == null) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new ResponseResult("Không thể lấy thông tin nhân viên!", ResponseStatus.Error));
-        }
-        else {
-            return ResponseEntity
-                    .ok()
-                    .body(new ResponseResult(employeeDto ,"Lấy thông tin thành công.", ResponseStatus.Success ));
-        }
-    }
-
     @GetMapping("/search")
     public ResponseEntity<?> searchEmployee(SearchEmployeeRequest searchEmployeeRequest) {
         List<EmployeeDto> employeeDtoList = employeeService.searchEmployee(searchEmployeeRequest);
