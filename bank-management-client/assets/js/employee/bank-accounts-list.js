@@ -15,6 +15,7 @@ const deleteBankAccount = idBankAccount => {
         .catch(err => {
             console.log(err.response.data.message)
             Notify.showError('Xóa bank account không thành công')
+            $(`#delete_employee`).modal('hide');
         })
     })
 }

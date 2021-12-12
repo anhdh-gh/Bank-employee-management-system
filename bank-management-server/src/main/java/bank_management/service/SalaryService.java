@@ -33,6 +33,10 @@ public class SalaryService {
         int currentYear = DateUtils.getYear(currentDate);
         int currentMonth = DateUtils.getMonth(currentDate);
         List<Salary> salaries = salaryRepository.findAllByMonthAndYearOrderByMonth(currentMonth - 1, currentYear);
+        if(salaries == null) {
+            calcSalary(currentMonth-1, currentYear);
+            salaries = salaryRepository.findAllByMonthAndYearOrderByMonth(currentMonth-1, currentYear);
+        }
         List<SalaryDto> salaryDtoList = new ArrayList<>();
         for (Salary salary : salaries) {
             SalaryDto salaryDto = new SalaryDto(salary);
