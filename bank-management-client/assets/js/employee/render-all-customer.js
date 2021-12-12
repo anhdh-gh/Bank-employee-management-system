@@ -16,7 +16,7 @@ const renderData = (data) => {
     let customerRow = `<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
             <div class="profile-widget">
               <div class="profile-img">
-                <a href="profile.html?id=${
+                <a href="customer-profile.html?id=${
                   customer.id
                 }" class="avatar">${firstLetter}</a>
               </div>

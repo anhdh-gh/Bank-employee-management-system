@@ -21,10 +21,10 @@ const customerID = getUrlVars(currentURL)["id"];
 ApiClient.get("/customer/" + customerID, {})
   .then((resp) => {
     const data = resp.data.data;
+    console.log(data);
     $("#full-name").text(
       data.fullName.firstName + " " + data.fullName.lastName
     );
-    // $("#position").text(data.position);
     $("#gender").text(data.gender);
     $("#customer-code").text("Customer Code: " + data.customerCode);
     $("#phone-number").text(data.phoneNumber);
@@ -39,6 +39,6 @@ ApiClient.get("/customer/" + customerID, {})
         ", " +
         data.address.country
     );
-    $("#identityNumber").text(XXXXXXXX + data.createDate.substr(8));
+    $("#identityNumber").text("XXXXXXXX" + data.identityNumber.substr(8));
   })
   .catch((err) => {});
