@@ -26,7 +26,7 @@ public class Transaction extends BaseEntity{
     @Column (name = "TransactionCode" ,unique = true)
     @NotBlank(message = "TransactionCode không được trông!")
     @Size(max = 30, message = "TransactionCode tối đa 30 ký tự")
-    @Pattern(regexp="^\\d+$", message = "TransactionCode chỉ chứa chữ số")
+    @Pattern(regexp="^GD-\\d{10}+$", message = "TransactionCode chỉ chứa chữ số")
     private String transactionCode;
 
     @Column (name = "Amount")
@@ -43,7 +43,7 @@ public class Transaction extends BaseEntity{
     private String content;
 
     @Column (name = "Status")
-    @NotBlank(message = "Status không được trống")
+    @NotNull
     @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 
