@@ -10,6 +10,7 @@ import bank_management.enumeration.ResponseStatus;
 import bank_management.payload.ResponseResult;
 import bank_management.payload.SearchBankAccountRequest;
 import bank_management.payload.SearchCustomerRequest;
+import bank_management.service.BankAccountService;
 import bank_management.service.CustomerService;
 import bank_management.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class CustomerController {
 
     @Autowired
     PersonService personService;
+
+    @Autowired
+    BankAccountService bankAccountService;
 
     @PostMapping
     public ResponseEntity<?> addCustomer(@Valid @RequestBody CustomerDto customerDto) {

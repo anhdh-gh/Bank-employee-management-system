@@ -32,10 +32,12 @@ public class CustomerService extends PersonService {
         return customerDtoList;
     }
 
-    public CustomerDto editCustomer(CustomerDto customerDto) {
-        Customer customer = new Customer(customerDto);
+    public CustomerDto editCustomer(CustomerDto customerDto)
+    {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerDto.getID());
         if (optionalCustomer.isPresent()) {
+            Customer customer = optionalCustomer.get();
+//            customer.setFullName(customerDto.getFullName());
             return new CustomerDto(customerRepository.save(customer));
         }
         return null;

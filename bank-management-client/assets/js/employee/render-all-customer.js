@@ -34,15 +34,6 @@ const renderData = (data) => {
                   }"
                     ><i class="fas fa-pencil-alt m-r-5"></i> Edit</a
                   >
-                  <a
-                    class="dropdown-item"
-                    href="${customer.id}"
-                    data-toggle="modal"
-                    data-target="#delete_customer"
-                    class="delete" onclick="fillModalDelete(${
-                      customer.id
-                    })" ><i class="fas fa-trash-alt m-r-5" ></i> Delete</a
-                  >
                 </div>
               </div>
               <h4 class="user-name m-t-10 m-b-0 text-ellipsis">
@@ -87,7 +78,6 @@ $(idBtnSearch).click((e) => {
       Notify.showError(err.message);
     });
 });
-
 
 //xoa
 $("#delete-confirm").on("click", () => {
