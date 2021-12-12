@@ -62,7 +62,7 @@ public class CustomerController {
         if(customer == null){
             return ResponseEntity.badRequest().body(new ResponseResult("Không tìm thấy khách hàng có ID là " + customerId + "!", ResponseStatus.Error));
         }
-        return ResponseEntity.ok().body(new ResponseResult("Lấy thông tin khách hàng có ID là " + customerId + " thành công.", ResponseStatus.Success ));
+        return ResponseEntity.ok().body(new ResponseResult(customer, "Lấy thông tin khách hàng có ID là " + customerId + " thành công.", ResponseStatus.Success ));
     }
 
     @GetMapping
