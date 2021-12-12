@@ -7,6 +7,7 @@ import bank_management.payload.SearchEmployeeRequest;
 import bank_management.repository.EmployeeRepository;
 import bank_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ public class EmployeeService extends PersonService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public EmployeeDto findEmployeeById(String ID) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(ID);
@@ -53,14 +57,20 @@ public class EmployeeService extends PersonService {
     public EmployeeDto addEmployee(EmployeeDto employeeDto) {
         employeeDto.setEmployeeCode(generateEmployeeCode());
         Employee employee = new Employee(employeeDto);
+        employee.getAccount().setPassword(passwordEncoder.encode(employee.getAccount().getPassword()));
         return new EmployeeDto(employeeRepository.save(employee));
     }
 
     public boolean deleteEmployee(String employeeID) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeID);
         if (optionalEmployee.isPresent()) {
-            int row = employeeRepository.deleteEmployee(optionalEmployee.get().getID());
-            return row > 0;
+//            int row = employeeRepository.deleteEmployee(optionalEmployee.get().getID());
+//            return row > 0;
+            employeeRepository.delete(optionalEmployee.get());
+            Optional<Employee> optionalEmployee_check = employeeRepository.findById(employeeID);
+            if (!optionalEmployee_check.isPresent()) {
+                return true;
+            }
         }
         return false;
     }

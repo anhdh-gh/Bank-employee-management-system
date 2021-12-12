@@ -43,9 +43,23 @@ if (employeeID != null) {
 
 const idFormEditEmployee = "#editEmployee";
 $(idFormEditEmployee).validate({
-  rules: {},
+  rules: {
+    seniority: {
+      required: true,
+    },
+    baseSalary: {
+      required: true,
+    },
+  },
 
-  messages: {},
+  messages: {
+    seniority: {
+      required: "Seniority không được để trống",
+    },
+    baseSalary: {
+      required: "BaseSalary không được để trống",
+    },
+  },
 
   submitHandler: (form) => {
     // Lấy dữ liệu
@@ -84,7 +98,7 @@ $(idFormEditEmployee).validate({
         }
       })
       .catch((err) => {
-        Notify.showError(err.response.data.message);
+        Notify.showError("Edit không thành công");
       });
 
     // Không cho tự submit form

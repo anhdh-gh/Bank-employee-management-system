@@ -100,13 +100,12 @@ if (paramsSearch) {
     endYear: paramsSearch.fromDate ? paramsSearch.toDate.substring(6) : 0,
   };
 }
-console.log(urlApi);
 ApiClient.get(urlApi, data)
   .then((resp) => {
     let data = resp.data.data;
-    console.log(data);
     renderData(data);
-
     paging();
   })
-  .catch((err) => {});
+  .catch((err) => {
+    Notify.showError("Lỗi hệ thống!");
+  });

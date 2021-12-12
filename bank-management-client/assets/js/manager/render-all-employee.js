@@ -68,18 +68,20 @@ function fillModalDelete(employeeID) {
 }
 
 //xoa
-$("#delete-confirm").on("click", () => {
+$("#delete-confirm").on("click", (e) => {
+  e.preventDefault();
   let employeeID = $("#delete-confirm").attr("value");
-  console.log(employeeID);
   ApiClient.delete("/employee/" + employeeID)
     .then((resp) => {
       let data = resp.data;
-      console.log(data.message);
+      console.log(data);
       if (data.responseStatus == "Success") {
         Notify.showSuccess(resp.data.message);
       } else {
         Notify.showError(resp.data.message);
       }
     })
-    .catch((err) => {});
+    .catch((err) => {
+      Notify.showError("Không thể xóa!");
+    });
 });
