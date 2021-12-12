@@ -14,7 +14,7 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, String
     BankAccount getBankAccountByAccountNumber(String accountNumber);
     BankAccount getBankAccountByAccountCode(String accountCode);
 
-    @Modifying (clearAutomatically = true)
+    @Modifying (clearAutomatically = true) // Xóa trong bộ nhớ cache
     @Transactional
     @Query(value = "DELETE FROM bankaccount WHERE BankAccountID = ?1", nativeQuery = true)
     int deleteBankAccountByID(String bankAccountID);

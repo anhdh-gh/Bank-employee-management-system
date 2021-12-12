@@ -51,43 +51,42 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .cors()
-                .and()
-            .csrf()
-                .disable()
+            .cors() // Ngăn chặn request từ một domain khác
+             .and()
+            .csrf().disable() // Tăt bảo vệ CSRF
             .authorizeRequests()
             	
-            	// Cho phép mọi người truy cập vào các đường dẫn này
-                .antMatchers(
-                	"/person/login",
-                    "/person/forgot_password"
-                ).permitAll()
-                
-                // Cho phép những người đã authenticate và là Manager truy cập vào các đường dẫn này
-                .antMatchers(
-                	"/bank_account",
-                    "/bank_account/search",
-                    "/bank_account/*",
-                    "/bank_account/delete/*",
-                    "/bank_account/creditAccountByIdCustomer/*"
-                ).hasAuthority(Role.Manager.name())
+            // Cho phép mọi người truy cập vào các đường dẫn này
+            .antMatchers(
+                "/person/login",
+                "/person/forgot_password"
+            ).permitAll()
 
-                // Cho phép những người đã authenticated và là Employee truy cập vào các đường dẫn này
-                .antMatchers(
-                    "/bank_account",
-                    "/bank_account/search",
-                    "/bank_account/*",
-                    "/bank_account/delete/*",
-                    "/bank_account/creditAccountByIdCustomer/*"
-                ).hasAuthority(Role.Employee.name())
+            // Cho phép những người đã authenticate và là Manager truy cập vào các đường dẫn này
+            .antMatchers(
+                "/bank_account",
+                "/bank_account/search",
+                "/bank_account/*",
+                "/bank_account/delete/*",
+                "/bank_account/creditAccountByIdCustomer/*"
+            ).hasAuthority(Role.Manager.name())
 
-                // Cho phép những người đã authenticated và là Customer truy cập vào các đường dẫn này
-                .antMatchers(
-                	"/bank_account/payment"
-                 ).hasAuthority(Role.Customer.name())
-                
-                // Tất cả các request khác đều cần phải xác thực mới được truy cập
-                .anyRequest().authenticated(); 
+            // Cho phép những người đã authenticated và là Employee truy cập vào các đường dẫn này
+            .antMatchers(
+                "/bank_account",
+                "/bank_account/search",
+                "/bank_account/*",
+                "/bank_account/delete/*",
+                "/bank_account/creditAccountByIdCustomer/*"
+            ).hasAuthority(Role.Employee.name())
+
+            // Cho phép những người đã authenticated và là Customer truy cập vào các đường dẫn này
+            .antMatchers(
+                "/bank_account/payment"
+             ).hasAuthority(Role.Customer.name())
+
+            // Tất cả các request khác đều cần phải xác thực mới được truy cập
+            .anyRequest().authenticated();
 
         // Thêm một lớp Filter kiểm tra jwt
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -22,7 +22,7 @@ import java.util.Date;
 public class BankAccount extends BaseEntity {
 
     @Column (name = "MemberLevel")
-//    @NotNull(message = "MemberLevel không được trống!")
+    @NotNull(message = "MemberLevel không được trống!")
     @Enumerated(EnumType.STRING)
     protected MemberLevel memberLevel;
 
@@ -57,7 +57,7 @@ public class BankAccount extends BaseEntity {
     @JoinColumn (name = "EmployeeID")
     protected Employee employee;
 
-//    @NotBlank(message = "CVV không được để trống")
+    @NotBlank(message = "CVV không được để trống")
     @Size(max = 10, message = "CVV tối đa 10 ký tự")
     @Column(name = "CVV")
     protected String CVV;
