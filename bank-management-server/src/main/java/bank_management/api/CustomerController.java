@@ -58,41 +58,40 @@ public class CustomerController {
                 .status(HttpStatus.CREATED)
                 .body(new ResponseResult(customerDtoSaved, "Tạo tài khoản khách hàng thành công.", ResponseStatus.Success));
     }
-    
+
     @GetMapping("/{id}")
-    public  ResponseEntity<?> getCustomer(@PathVariable(value = "id") String customerId){
+    public ResponseEntity<?> getCustomer(@PathVariable(value = "id") String customerId) {
         CustomerDto customer = customerService.findCustomerById(customerId);
-        if(customer == null){
+        if (customer == null) {
             return ResponseEntity.badRequest().body(new ResponseResult("Không tìm thấy khách hàng có ID là " + customerId + "!", ResponseStatus.Error));
         }
-        return ResponseEntity.ok().body(new ResponseResult(customer, "Lấy thông tin khách hàng có ID là " + customerId + " thành công.", ResponseStatus.Success ));
+        return ResponseEntity.ok().body(new ResponseResult(customer, "Lấy thông tin khách hàng có ID là " + customerId + " thành công.", ResponseStatus.Success));
     }
 
     @GetMapping
-    public ResponseResult getAllCustomer(){
+    public ResponseResult getAllCustomer() {
         List<CustomerDto> customerDtoList = customerService.findAllCustomer();
         return new ResponseResult(customerDtoList, "Lấy thông tin tất cả khách hàng thành công!", ResponseStatus.Success);
     }
 
     @PutMapping("/editByEmployee")
-    public ResponseEntity<?> editCustomer(@Valid @RequestBody EditCustomerRequest editCustomerRequest){
+    public ResponseEntity<?> editCustomer(@Valid @RequestBody EditCustomerRequest editCustomerRequest) {
 //        Person person = personService.getAuthPerson();
         Customer customerEdit = customerService.getCustomerById(editCustomerRequest.getId());
-        if(customerEdit == null){
+        if (customerEdit == null) {
             return ResponseEntity.badRequest().body(new ResponseResult("Có lỗi xảy ra khi sửa đổi thông tin khách hàng!", ResponseStatus.Error));
-        }
-        else{
-            if(!editCustomerRequest.getEmail().equals(customerEdit.getEmail()) && personService.checkEmailExist(editCustomerRequest.getEmail())){
+        } else {
+            if (!editCustomerRequest.getEmail().equals(customerEdit.getEmail()) && personService.checkEmailExist(editCustomerRequest.getEmail())) {
                 return ResponseEntity.badRequest().body(new ResponseResult(
                         "Email đã tồn tại!",
                         ResponseStatus.Invalid));
             }
-            if(!editCustomerRequest.getPhoneNumber().equals(customerEdit.getPhoneNumber()) && personService.checkPhoneNumberExist(editCustomerRequest.getPhoneNumber())){
+            if (!editCustomerRequest.getPhoneNumber().equals(customerEdit.getPhoneNumber()) && personService.checkPhoneNumberExist(editCustomerRequest.getPhoneNumber())) {
                 return ResponseEntity.badRequest().body(new ResponseResult(
                         "Số điện thoại đã tồn tại!",
                         ResponseStatus.Invalid));
             }
-            if(!editCustomerRequest.getIdentityNumber().equals(customerEdit.getIdentityNumber())&& personService.checkIdentityNumberExist(editCustomerRequest.getIdentityNumber())){
+            if (!editCustomerRequest.getIdentityNumber().equals(customerEdit.getIdentityNumber()) && personService.checkIdentityNumberExist(editCustomerRequest.getIdentityNumber())) {
                 return ResponseEntity.badRequest().body(new ResponseResult(
                         "IdentityNumber đã tồn tại!",
                         ResponseStatus.Invalid));
@@ -103,7 +102,7 @@ public class CustomerController {
             customerEdit.setIdentityNumber(editCustomerRequest.getIdentityNumber());
             customerEdit.setAddress(editCustomerRequest.getAddress());
             Customer customerRes = customerService.editCustomer(customerEdit);
-            if(customerRes == null){
+            if (customerRes == null) {
                 return ResponseEntity.badRequest().body(new ResponseResult(
                         "Chỉnh sửa thông tin không thành công!",
                         ResponseStatus.Error));
@@ -117,16 +116,15 @@ public class CustomerController {
     }
 
     @PutMapping("/editAddress")
-    public ResponseEntity<?> editAddressCustomer(@Valid @RequestBody Address address){
+    public ResponseEntity<?> editAddressCustomer(@Valid @RequestBody Address address) {
         Person person = personService.getAuthPerson();
         Customer customerEdit = customerService.getCustomerById(person.getID());
-        if(customerEdit == null){
+        if (customerEdit == null) {
             return ResponseEntity.badRequest().body(new ResponseResult("Có lỗi xảy ra khi sửa đổi thông tin khách hàng!", ResponseStatus.Error));
-        }
-        else{
+        } else {
             customerEdit.setAddress(address);
             Customer customerRes = customerService.editCustomer(customerEdit);
-            if(customerRes == null){
+            if (customerRes == null) {
                 return ResponseEntity.badRequest().body(new ResponseResult(
                         "Chỉnh sửa thông tin không thành công!",
                         ResponseStatus.Error));
@@ -140,30 +138,27 @@ public class CustomerController {
     }
 
     @PutMapping("/editEmail")
-    public ResponseEntity<?> editEmailCustomer(@Valid @RequestBody EditEmailRequest editEmailRequest){
+    public ResponseEntity<?> editEmailCustomer(@Valid @RequestBody EditEmailRequest editEmailRequest) {
         Person person = personService.getAuthPerson();
         Customer customerEdit = customerService.getCustomerById(person.getID());
-        if(customerEdit == null){
+        if (customerEdit == null) {
             return ResponseEntity.badRequest().body(new ResponseResult("Có lỗi xảy ra khi sửa đổi thông tin khách hàng!", ResponseStatus.Error));
-        }
-        else{
-            if(editEmailRequest.getEmail()!= null){
-                if(!editEmailRequest.getEmail().trim().isEmpty()){
+        } else {
+            if (editEmailRequest.getEmail() != null) {
+                if (!editEmailRequest.getEmail().trim().isEmpty()) {
                     customerEdit.setEmail(editEmailRequest.getEmail());
-                }
-                else{
+                } else {
                     return ResponseEntity.badRequest().body(new ResponseResult(
                             "Chỉnh sửa thông tin không thành công!",
                             ResponseStatus.Error));
                 }
-            }
-            else{
+            } else {
                 return ResponseEntity.badRequest().body(new ResponseResult(
                         "Chỉnh sửa thông tin không thành công!",
                         ResponseStatus.Error));
             }
             Customer customerRes = customerService.editCustomer(customerEdit);
-            if(customerRes == null){
+            if (customerRes == null) {
                 return ResponseEntity.badRequest().body(new ResponseResult(
                         "Chỉnh sửa thông tin không thành công!",
                         ResponseStatus.Error));
@@ -184,14 +179,12 @@ public class CustomerController {
             return ResponseEntity
                     .badRequest()
                     .body(new ResponseResult("Không thể lấy thông tin khách hàng!", ResponseStatus.Error));
-        }
-        else {
+        } else {
             return ResponseEntity
                     .ok()
-                    .body(new ResponseResult(customerDto ,"Lấy thông tin thành công.", ResponseStatus.Success ));
+                    .body(new ResponseResult(customerDto, "Lấy thông tin thành công.", ResponseStatus.Success));
         }
     }
-
 
 
     @GetMapping("/search")
@@ -201,9 +194,9 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteByID(@PathVariable(value = "id") String id) throws Exception {
-        Customer customer = customerService.getById(id);
-        if(customer == null)
+    public ResponseEntity<?> deleteByID(@PathVariable(value = "id") String id) {
+        boolean isDeleted = customerService.deleteCustomer(id);
+        if (!isDeleted) {
             return ResponseEntity
                     .badRequest()
                     .body(
@@ -211,11 +204,9 @@ public class CustomerController {
                                     "Không tìm thấy customer với id là " + id,
                                     ResponseStatus.Invalid
                             ));
-
-        customerService.delete(customer.getID());
-
+        }
         return ResponseEntity.ok(
-                new ResponseResult (
+                new ResponseResult(
                         "Xóa customer thành công",
                         ResponseStatus.Success
                 )

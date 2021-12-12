@@ -57,7 +57,10 @@ public class CustomerService extends PersonService {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerID);
         if (optionalCustomer.isPresent()) {
             customerRepository.delete(optionalCustomer.get());
-            return true;
+            Optional<Customer> optionalCustomer_check = customerRepository.findById(customerID);
+            if(!optionalCustomer_check.isPresent()){
+                return true;
+            }
         }
         return false;
     }
