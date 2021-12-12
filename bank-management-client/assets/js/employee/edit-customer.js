@@ -1,105 +1,104 @@
-const idFormAddCustomer = "#addCustomer";
-// function convertDate(dateInput){
-//   return dateInput.split("-").reverse().join("-");
-// }
-$(idFormAddCustomer).validate({
+// get id
+const currentURL = window.location.href;
+
+function getUrlVar(url) {
+  var vars = {};
+  var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+    vars[key] = value;
+  });
+  return vars;
+}
+
+var customerID = getUrlVar(currentURL)["id"]; // / get customer theo id
+if (customerID != null) {
+  ApiClient.get("/customer/" + customerID, {}) //
+    .then((resp) => {
+      customer = resp.data.data;
+      $("#firstName").val(customer.fullName.firstName);
+      $("#lastName").val(customer.fullName.lastName);
+      $("#email").val(customer.email);
+      $("#phoneNumber").val(customer.phoneNumber);
+      $("#username").val(customer.account.username);
+      $("#identityNumber").val(customer.identityNumber);
+      $("#gender").val(customer.gender).change();
+      $("#dateOfBirth").val(DateUtils.convertDate(customer.dateOfBirth, 1));
+      $("#zipCode").val(
+        customer.address.zipCode
+      );
+      $("#district").val(
+        customer.address.district
+      );
+      $("#city").val(
+        customer.address.city
+      );
+      $("#country").val(
+        customer.address.country
+      );
+      $("#houseNumber").val(
+        customer.address.houseNumber
+      );
+      return customer;
+    })
+    .catch((err) => {});
+}
+
+const idFormEditCustomer = "#editCustomer";
+$(idFormEditCustomer).validate({
   rules: {
-    username: {
-      required: true,
-      notBlank: true,
-      maxlength: 30,
-    },
-    password: {
-      required: true,
-      notBlank: true,
-      minlength: 8,
-    },
-    confirmPassword: {
-      required: true,
-      notBlank: true,
-      minlength: 8,
-      equalTo: "#password",
-    },
     firstName: {
-      required: true,
-      notBlank: true,
-      maxlength: 30,
-    },
-    lastName: {
-      required: true,
-      notBlank: true,
-      maxlength: 30,
-    },
-    email: {
-      required: true,
-      notBlank: true,
-      email: true,
-    },
-    identityNumber: {
-      required: true,
-      notBlank: true,
-      digits: true,
-      maxlength: 15,
-    },
-    phoneNumber: {
-      required: true,
-      notBlank: true,
-      digits: true,
-      maxlength: 11,
-      minlength: 10,
-    },
-    dateOfBirth: {
-      required: true,
-    },
-    country: {
-      required: true,
-      notBlank: true,
-      maxlength: 50,
-    },
-    city: {
-      required: true,
-      notBlank: true,
-      maxlength: 50,
-    },
-    district: {
-      required: true,
-      notBlank: true,
-      maxlength: 50,
-    },
-    houseNumber: {
-      required: true,
-      notBlank: true,
-      maxlength: 50,
-    },
-    zipCode: {
-      required: true,
-      notBlank: true,
-      maxlength: 20,
-    },
-    cvv: {
-      minlength: 3,
-      maxlength: 3,
-    },
+        required: true,
+        notBlank: true,
+        maxlength: 30,
+      },
+      lastName: {
+        required: true,
+        notBlank: true,
+        maxlength: 30,
+      },
+      email: {
+        required: true,
+        notBlank: true,
+        email: true,
+      },
+      identityNumber: {
+        required: true,
+        notBlank: true,
+        digits: true,
+        maxlength: 15,
+      },
+      phoneNumber: {
+        required: true,
+        notBlank: true,
+        digits: true,
+        maxlength: 11,
+        minlength: 10,
+      },
+      dateOfBirth: {
+        required: true,
+      },
+      country: {
+        required: true,
+        notBlank: true,
+        maxlength: 50,
+      },
+      city: {
+        required: true,
+        notBlank: true,
+        maxlength: 50,
+      },
+      district: {
+        required: true,
+        notBlank: true,
+        maxlength: 50,
+      },
+      houseNumber: {
+        required: true,
+        notBlank: true,
+        maxlength: 50,
+      },
   },
 
   messages: {
-    username: {
-      required: "Username không được để trống",
-      notBlank: "Username không được để trống",
-      maxlength: "Username tối đa 30 ký tự",
-    },
-
-    password: {
-      required: "Password không được để trống",
-      notBlank: "Password không được để trống",
-      minlength: "Password tối thiểu 8 ký tự",
-    },
-    confirmPassword: {
-      required: "Confirm Password không được để trống",
-      notBlank: "Confirm Password không được để trống",
-      minlength: "Confirm Password tối thiểu 8 ký tự",
-      equalTo: "Xác nhận mật khẩu không chính xác",
-    },
     firstName: {
       required: "First name không được để trống",
       notBlank: "First name không được để trống",
@@ -155,31 +154,24 @@ $(idFormAddCustomer).validate({
       notBlank: "Zip code không được để trống",
       maxlength: "Zip code tối đa 20 kí tự",
     },
-    cvv: {
-      minlength: "Mã CVV gồm 3 ký tự",
-      maxlength: "Mã CVV gồm 3 ký tự",
-    },
   },
 
   submitHandler: (form) => {
+    console.log("hehe");
     // Lấy dữ liệu
-    const data = Form.getData(idFormAddCustomer);
+    const data = Form.getData(idFormEditCustomer);
     console.log(data);
     const customer = {
-      account: {
-        username: data.username,
-        password: data.password,
-        id: null,
-      },
+      account: {},
       identityNumber: data.identityNumber,
-      dateOfBirth: DateUtils.convertDate(data.dateOfBirth, 2), // note
+      dateOfBirth: null, // note
       email: data.email,
       phoneNumber: data.phoneNumber,
       gender: data.gender,
       customerCode: null,
       fullName: {
-        firstName: data.firstName,
-        lastName: data.lastName,
+          firstName: data.firstName,
+          lastName: data.lastName
       },
       address: {
         country: data.country,
@@ -188,17 +180,17 @@ $(idFormAddCustomer).validate({
         houseNumber: data.houseNumber,
         zipCode: data.zipCode,
       },
-      id: null,
+      id: customerID,
     };
 
-    // console.log("Customer: ", customer);
-    ApiClient.post("/customer", customer)
+    //call api edit
+    ApiClient.put("/customer/editByEmployee", customer)
       .then((resp) => {
-        console.log(resp.data.data);
+        console.log(resp.data.message);
         if (resp.data.responseStatus == "Success") {
           Notify.showSuccess(resp.data.message);
           window.location.replace(
-            `${window.location.origin}/view/employee/all-customers.html`
+            `${window.location.origin}/view/employee/customers-list.html`
           );
         } else {
           Notify.showError(resp.data.message);
@@ -211,4 +203,10 @@ $(idFormAddCustomer).validate({
     // Không cho tự submit form
     return false;
   },
+});
+
+$("#cancel").on("click", () => {
+  window.location.replace(
+    `${window.location.origin}/view/employee/all-customers.html`
+  );
 });

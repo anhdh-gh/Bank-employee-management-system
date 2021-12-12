@@ -5,6 +5,7 @@ import bank_management.entity.Customer;
 import bank_management.repository.CustomerRepository;
 import bank_management.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,9 @@ public class CustomerService extends PersonService {
 
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public CustomerDto findCustomerById(String ID) {
         Optional<Customer> optionalCustomer = customerRepository.findById(ID);
@@ -45,6 +49,7 @@ public class CustomerService extends PersonService {
     public CustomerDto addCustomer(CustomerDto customerDto) {
         customerDto.setCustomerCode(generateCustomerCode());
         Customer customer = new Customer(customerDto);
+        customer.getAccount().setPassword(passwordEncoder.encode(customer.getAccount().getPassword()));
         return new CustomerDto(customerRepository.save(customer));
     }
 

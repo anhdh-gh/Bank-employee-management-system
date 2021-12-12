@@ -1,16 +1,12 @@
 package bank_management.api;
 
-
 import bank_management.dto.CustomerDto;
-import bank_management.dto.EmployeeDto;
 import bank_management.entity.Address;
-import bank_management.entity.BankAccount;
 import bank_management.entity.Customer;
 import bank_management.entity.Person;
 import bank_management.enumeration.ResponseStatus;
 import bank_management.payload.EditCustomerRequest;
 import bank_management.payload.ResponseResult;
-import bank_management.payload.SearchBankAccountRequest;
 import bank_management.payload.SearchCustomerRequest;
 import bank_management.service.BankAccountService;
 import bank_management.service.CustomerService;

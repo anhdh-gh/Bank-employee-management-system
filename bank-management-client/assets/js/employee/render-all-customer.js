@@ -9,6 +9,30 @@ const customerGrid = "#customer-grid";
 const idFormSearchCustomer = "#searchCustomer";
 const idBtnSearch = "#btn-search-customer";
 
+function deleteCustomer(customerID) {
+  $("#delete-confirm").on("click", (e) => {
+    e.preventDefault();
+    console.log(customerID);
+    ApiClient.delete("/customer/" + customerID)
+      .then((resp) => {
+        let data = resp.data;
+        // console.log(data.message);
+        if (data.responseStatus == "Success") {
+          Notify.showSuccess(resp.data.message);
+          window.location.replace(
+            `${window.location.origin}/view/employee/customers-list.html`
+          );
+        } else {
+          Notify.showError(resp.data.message);
+        }
+      })
+      .catch((err) => {
+        $("#delete_customer").modal("hide");
+        Notify.showError("Không thể xóa customer!");
+      });
+  });
+}
+
 const renderData = (data) => {
   let html = "";
   data.forEach((customer) => {
@@ -34,6 +58,10 @@ const renderData = (data) => {
                   }"
                     ><i class="fas fa-pencil-alt m-r-5"></i> Edit</a
                   >
+                  <a class="dropdown-item" onclick="deleteCustomer('${
+                    customer.id
+                  }')" data-toggle="modal"
+										data-target="#delete_customer"><i class="fas fa-trash-alt m-r-5"></i> Delete</a>
                 </div>
               </div>
               <h4 class="user-name m-t-10 m-b-0 text-ellipsis">
@@ -79,18 +107,18 @@ $(idBtnSearch).click((e) => {
     });
 });
 
-//xoa
-$("#delete-confirm").on("click", () => {
-  let customerID = $("#delete-confirm").attr("value");
-  ApiClient.delete("/customer/" + customerID)
-    .then((resp) => {
-      let data = resp.data;
-      console.log(data.message);
-      if (data.responseStatus == "Success") {
-        Notify.showSuccess(resp.data.message);
-      } else {
-        Notify.showError(resp.data.message);
-      }
-    })
-    .catch((err) => {});
-});
+// //xoa
+// $("#delete-confirm").on("click", () => {
+//   let customerID = $("#delete-confirm").attr("value");
+//   ApiClient.delete("/customer/" + customerID)
+//     .then((resp) => {
+//       let data = resp.data;
+//       console.log(data.message);
+//       if (data.responseStatus == "Success") {
+//         Notify.showSuccess(resp.data.message);
+//       } else {
+//         Notify.showError(resp.data.message);
+//       }
+//     })
+//     .catch((err) => {});
+// });

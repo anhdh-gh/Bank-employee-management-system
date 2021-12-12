@@ -26,6 +26,13 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+	<style>
+		#editCustomer label.error {
+			color: red;
+			margin: 0;
+			text-transform: inherit;
+		}
+	</style>
 </head>
 
 <body>
@@ -242,131 +249,107 @@
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 							<div class="card">
 								<div class="card-body">
-									<div class="row">
-										<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-											<form>
+									<form id="editCustomer" method="post">
+										<div class="row">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
 													<label>Firstname</label>
-													<input type="text" class="form-control">
+													<input disabled id="firstName" name="firstName" type="text"
+														class="form-control">
 												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
-													<label>Email</label>
-													<input type="email" class="form-control">
+													<label>Lastname</label>
+													<input disabled name="lastName" id="lastName" type="text"
+														class="form-control">
 												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
 													<label>Username</label>
-													<input disabled type="text" class="form-control">
+													<input disabled name="username" id="username" type="text"
+														class="form-control">
 												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Birth Date</label>
+													<input disabled name="dateOfBirth" id="dateOfBirth"
+														class="form-control datetimepicker-input datetimepicker"
+														type="text" data-toggle="datetimepicker">
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Identity Number</label>
+													<input name="identityNumber" id="identityNumber" type="text"
+														class="form-control">
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Email</label>
+													<input name="email" id="email" type="email" class="form-control">
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Mobile number</label>
+													<input name="phoneNumber" id="phoneNumber" type="text"
+														class="form-control">
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
 													<label>Gender</label>
-													<select class="form-control select">
+													<select name="gender" id="gender" class="form-control select">
 														<option>Male</option>
 														<option>Female</option>
 														<option>Other</option>
 													</select>
 												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
 													<label>Country</label>
-													<input type="text" class="form-control">
+													<input name="country" id="country" type="text" class="form-control">
 												</div>
-												<div class="form-group">
-													<label>District</label>
-													<input type="text" class="form-control">
-												</div>
-											</form>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-											<form>
-												<div class="form-group">
-													<label>Lastname</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Mobile number</label>
-													<input type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Identity Number</label>
-													<input disabled type="text" class="form-control">
-												</div>
-												<div class="form-group">
-													<label>Birth Date</label>
-													<input class="form-control datetimepicker-input datetimepicker"
-														type="text" data-toggle="datetimepicker">
-												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
 													<label>City</label>
-													<input type="text" class="form-control">
+													<input name="city" id="city" type="text" class="form-control">
 												</div>
-
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
 												<div class="form-group">
-													<label>Number House</label>
-													<input type="text" class="form-control">
-												</div>
-											</form>
-										</div>
-										<div class="mt-4">
-											<div class="row">
-												<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-													<div class="page-title ml-3">Bank Account</div>
+													<label>District</label>
+													<input name="district" id="district" type="text"
+														class="form-control">
 												</div>
 											</div>
-										</div>
-										<div class="card-body w-100 p-3">
-											<div class="row">
-												<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-													<form class="custom-mt-form">
-														<div class="form-group">
-															<label>Branch</label>
-															<select disabled class="form-control select">
-																<option>Ha Noi</option>
-																<option>Hai Phong</option>
-																<option>Da Nang</option>
-																<option>Ho Chi Minh</option>
-															</select>
-														</div>
-														<div class="form-group">
-															<label >Expire Date</label>
-															<input disabled
-																class="form-control datetimepicker-input datetimepicker"
-																type="text" data-toggle="datetimepicker">
-														</div>
-														<div class="form-group">
-															<label>CVV</label>
-															<input type="password" class="form-control">
-														</div>
-													</form>
-												</div>
-												<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-													<form class="custom-mt-form">
-														<div class="form-group">
-															<label>Card Type</label>
-															<select disabled class="form-control select">
-																<option>Credit</option>
-																<option>Payment</option>
-															</select>
-														</div>
-														<div class="form-group">
-															<label>Member level</label>
-															<select class="form-control select">
-																<option>Standard</option>
-																<option>Gold</option>
-																<option>Platinum</option>
-															</select>
-														</div>
-													</form>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-12">
+												<div class="form-group">
+													<label>Zip Code</label>
+													<input name="zipCode" id="zipCode" type="text" class="form-control">
 												</div>
 											</div>
-										</div>
-										<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-											<form class="custom-mt-form">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+												<div class="form-group">
+													<label>Premanent Address</label>
+													<input type="text" name="houseNumber" id="houseNumber"
+														class="form-control" rows="4"></input>
+												</div>
+											</div>
+											<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 												<div class="form-group text-center custom-mt-form-group">
 													<button class="btn btn-primary mr-2" type="submit">Submit</button>
 													<button class="btn btn-secondary" type="reset">Cancel</button>
 												</div>
-											</form>
+											</div>
 										</div>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -598,29 +581,31 @@
 		</div>
 
 	</div>
- <!-- Thư viện dùng chung -->
- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
- <script src="https://cdn3.devexpress.com/jslib/21.2.3/js/dx.all.js"></script>
- <script src="../../assets/js/common/Notify.js"></script>
- <script src="../../assets/js/common/ApiClient.js"></script>
-<script src="../../assets/js/common/authentication.js"></script>
+	<!-- Thư viện dùng chung -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+	<script src="https://cdn3.devexpress.com/jslib/21.2.3/js/dx.all.js"></script>
+	<script src="../../assets/js/common/Notify.js"></script>
+	<script src="../../assets/js/common/ApiClient.js"></script>
+	<script src="../../assets/js/common/authentication.js"></script>
 
- <script src="assets/js/jquery-3.6.0.min.js"></script>
+	<script src="assets/js/jquery-3.6.0.min.js"></script>
 
- <script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
 
- <script src="assets/js/jquery.slimscroll.js"></script>
+	<script src="assets/js/jquery.slimscroll.js"></script>
 
- <script src="assets/js/select2.min.js"></script>
- <script src="assets/js/moment.min.js"></script>                                          
+	<script src="assets/js/select2.min.js"></script>
+	<script src="assets/js/moment.min.js"></script>
 
- <script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
- <script src="assets/js/app.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
- <script src="../../assets/js/common/Validation.js"></script>
- <!-- <script src="../../assets/js/employee/add-customer.js"></script> -->
- <script src="../../assets/js/common/Form.js"></script>
+	<script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
+
+	<script src="assets/js/app.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+	<script src="../../assets/js/common/Validation.js"></script>
+	<script src="../../assets/js/common/convertDate.js"></script>
+	<script src="../../assets/js/employee/edit-customer.js"></script>
+	<script src="../../assets/js/common/Form.js"></script>
 </body>
 
 <!-- Mirrored from dreamguystech.com/preadmin/html/school/light/edit-student.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:55:57 GMT -->
