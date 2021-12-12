@@ -10,7 +10,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransactionsFilterRequest {
-    private String customerID;
     private Date startDate;
     private Date endDate;
     private int pageNum;

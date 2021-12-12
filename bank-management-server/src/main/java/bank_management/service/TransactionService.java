@@ -56,7 +56,7 @@ public class TransactionService {
      * @return
      */
     public List<Transaction> getAllTransactionFilter(TransactionsFilterRequest transactionsFilterRequest) {
-        return transactionRepository.getTransactionsFilter(transactionsFilterRequest.getCustomerID(),
+        return transactionRepository.getTransactionsFilter(personService.getAuthPerson().getID(),
                 transactionsFilterRequest.getStartDate(),
                 transactionsFilterRequest.getEndDate(),
                 transactionsFilterRequest.getPageNum(),
