@@ -1,7 +1,7 @@
 const idFormAddCustomer = "#addCustomer";
-function convertDate(dateInput){
-  return dateInput.split("-").reverse().join("-");
-}
+// function convertDate(dateInput){
+//   return dateInput.split("-").reverse().join("-");
+// }
 $(idFormAddCustomer).validate({
   rules: {
     username: {
@@ -172,7 +172,7 @@ $(idFormAddCustomer).validate({
         id: null,
       },
       identityNumber: data.identityNumber,
-      dateOfBirth: DateUtils.convertDate(data.dateOfBirth,2), // note
+      dateOfBirth: DateUtils.convertDate(data.dateOfBirth, 2), // note
       email: data.email,
       phoneNumber: data.phoneNumber,
       gender: data.gender,
@@ -191,6 +191,7 @@ $(idFormAddCustomer).validate({
       id: null,
     };
 
+    // console.log("Customer: ", customer);
     ApiClient.post("/customer", customer)
       .then((resp) => {
         console.log(resp.data.data);

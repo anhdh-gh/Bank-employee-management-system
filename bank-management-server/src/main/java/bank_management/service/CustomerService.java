@@ -3,6 +3,7 @@ package bank_management.service;
 import bank_management.dto.CustomerDto;
 import bank_management.entity.Customer;
 import bank_management.repository.CustomerRepository;
+import bank_management.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,9 @@ import java.util.Optional;
 public class CustomerService extends PersonService {
     @Autowired
     CustomerRepository customerRepository;
+
+    @Autowired
+    PersonRepository personRepository;
 
     public CustomerDto findCustomerById(String ID) {
         Optional<Customer> optionalCustomer = customerRepository.findById(ID);
@@ -33,15 +37,9 @@ public class CustomerService extends PersonService {
         return customerDtoList;
     }
 
-    public CustomerDto editCustomer(CustomerDto customerDto)
+    public Customer editCustomer(Customer customer)
     {
-        Optional<Customer> optionalCustomer = customerRepository.findById(customerDto.getID());
-        if (optionalCustomer.isPresent()) {
-            Customer customer = optionalCustomer.get();
-//            customer.setFullName(customerDto.getFullName());
-            return new CustomerDto(customerRepository.save(customer));
-        }
-        return null;
+        return customerRepository.save(customer);
     }
 
     public CustomerDto addCustomer(CustomerDto customerDto) {
@@ -88,7 +86,7 @@ public class CustomerService extends PersonService {
         return "KH-" + (lastest+1);
     }
 
-    public CustomerDto getCustomerById(String customerId) {
+    public CustomerDto getCustomerDtoById(String customerId) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
         if(optionalCustomer.isPresent()){
             return new CustomerDto((optionalCustomer.get()));
@@ -96,7 +94,13 @@ public class CustomerService extends PersonService {
         return null;
     }
 
-
+    public Customer getCustomerById(String customerId) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+        if(optionalCustomer.isPresent()){
+            return optionalCustomer.get();
+        }
+        return null;
+    }
 
     public Customer getById(String id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
@@ -114,6 +118,10 @@ public class CustomerService extends PersonService {
             Customer customer = optionalCustomer.get();
             int rowCustomer = customerRepository.deleteCustomerById(customer.getID());
             if(rowCustomer < 1){
+                throw new Exception("Xóa customer không thành công!");
+            }
+            int rowPerson = personRepository.deletePersonByID(customer.getID());
+            if(rowPerson < 1){
                 throw new Exception("Xóa customer không thành công!");
             }
         }

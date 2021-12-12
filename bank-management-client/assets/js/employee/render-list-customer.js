@@ -18,6 +18,7 @@ function deleteCustomer(customerID){
         }
       })
       .catch((err) => {
+        $('#delete_customer').modal('hide');
         Notify.showError("Không thể xóa customer!");
       });
   });
