@@ -47,6 +47,26 @@ public class BankAccountController {
         );
     }
 
+    @GetMapping("/creditAccountByIdCustomer/{idCustomer}")
+    public ResponseEntity<?> getCreditAccountByIdCustomer(@PathVariable(value = "idCustomer") String idCustomer) {
+        CreditAccount creditAccount = bankAccountService.getCreditAccountByCustomerID(idCustomer);
+        if(creditAccount == null)
+            return ResponseEntity
+                .badRequest()
+                .body(new ResponseResult(
+                    "Không tìm thấy credit account với idCustomer là " + idCustomer,
+                    ResponseStatus.Invalid
+                ));
+
+        return ResponseEntity.ok(
+            new ResponseResult (
+                creditAccount,
+                "Lấy credit account thành công",
+                ResponseStatus.Success
+            )
+        );
+    }
+
     @GetMapping("/payment")
     public ResponseEntity<?> getPayment() {
         Person person = personService.getAuthPerson();
