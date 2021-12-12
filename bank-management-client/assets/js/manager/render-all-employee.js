@@ -30,9 +30,9 @@ function renderData(data) {
                       href="${employee.id}"
                       data-toggle="modal"
                       data-target="#delete_employee"
-                      class="delete" onclick="fillModalDelete(${
+                      class="delete" onclick="fillModalDelete('${
                         employee.id
-                      })" ><i class="fas fa-trash-alt m-r-5" ></i> Delete</a
+                      }')" ><i class="fas fa-trash-alt m-r-5" ></i> Delete</a
                     >
                   </div>
                 </div>
@@ -70,6 +70,7 @@ function fillModalDelete(employeeID) {
 //xoa
 $("#delete-confirm").on("click", () => {
   let employeeID = $("#delete-confirm").attr("value");
+  console.log(employeeID);
   ApiClient.delete("/employee/" + employeeID)
     .then((resp) => {
       let data = resp.data;

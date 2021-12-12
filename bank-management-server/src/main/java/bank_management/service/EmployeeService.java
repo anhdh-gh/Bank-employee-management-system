@@ -59,8 +59,8 @@ public class EmployeeService extends PersonService {
     public boolean deleteEmployee(String employeeID) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(employeeID);
         if (optionalEmployee.isPresent()) {
-            employeeRepository.delete(optionalEmployee.get());
-            return true;
+            int row = employeeRepository.deleteEmployee(optionalEmployee.get().getID());
+            return row > 0;
         }
         return false;
     }
