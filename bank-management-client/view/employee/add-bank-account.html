@@ -26,6 +26,17 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+
+	<!-- DevExtreme theme -->
+	<link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/21.2.3/css/dx.light.css">
+
+	<style>
+		#create-bank-account-form label.error {
+			color: red;
+			margin: 0;
+			text-transform: none;
+		}
+	</style>
 </head>
 
 <body>
@@ -242,32 +253,33 @@
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 							<div class="card">
 								<div class="card-body">
-									<div class="row">
+
+									<form class="row" id="create-bank-account-form">
 										<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-											<form>
+											<div>
 												<div class="form-group">
 													<label>Customer Code</label>
-													<input type="text" class="form-control">
+													<input type="text" class="form-control" id="customerCode" name="customerCode">
 												</div>
 												<div class="form-group">
 													<label>Account Type</label>
-													<select class="form-control select">
-														<option>Credit Card</option>
-														<option>Payment Card</option>
+													<select class="form-control select" id="type" name="type">
+														<option>Credit</option>
+														<option>Payment</option>
 													</select>
 												</div>								
 												<div class="form-group">
 													<label>Expire Date</label>
 													<input class="form-control datetimepicker-input datetimepicker"
-														type="text" data-toggle="datetimepicker">
+														type="text" data-toggle="datetimepicker" id="expireDate" name="expireDate">
 												</div>
-											</form>
+											</div>
 										</div>
 										<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-											<form>
+											<div>
 												<div class="form-group">
 													<label>Branch</label>
-													<select class="form-control select">
+													<select class="form-control select" id="branch" name="branch">
 														<option>Ha Noi</option>
 														<option>Hai Phong</option>
 														<option>Da Nang</option>
@@ -276,17 +288,17 @@
 												</div>
 												<div class="form-group">
 													<label>CVV</label>
-													<input type="password" class="form-control">
+													<input type="password" class="form-control" id="cvv" name="cvv">
 												</div>
 												<div class="form-group">
 													<label>Member level</label>
-													<select class="form-control select">
+													<select class="form-control select" id="memberLevel" name="memberLevel">
 														<option>Standard</option>
 														<option>Gold</option>
 														<option>Platinum</option>
 													</select>
 												</div>	
-											</form>
+											</div>
 										</div>
 										<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 											<form>
@@ -296,7 +308,8 @@
 												</div>
 											</form>
 										</div>
-									</div>
+									</form>
+									
 								</div>
 							</div>
 						</div>
@@ -541,6 +554,21 @@
 	<script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
 
 	<script src="assets/js/app.js"></script>
+
+	<!-- Thư viện dùng chung -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+	<script src="https://cdn3.devexpress.com/jslib/21.2.3/js/dx.all.js"></script>
+	<script src="../../assets/js/common/Notify.js"></script>
+	<script src="../../assets/js/common/ApiClient.js"></script>
+	<script src="../../assets/js/common/authentication.js"></script>
+
+	<!-- add-bank-account -->
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+	<script src="../../assets/js/common/convertDate.js"></script>
+	<script src="../../assets/js/common/Validation.js"></script>
+	<script src="../../assets/js/common/Form.js"></script>
+	<script src="../../assets/js/employee/add-bank-account.js"></script>
 </body>
 
 <!-- Mirrored from dreamguystech.com/preadmin/html/school/light/add-bank-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:55:58 GMT -->

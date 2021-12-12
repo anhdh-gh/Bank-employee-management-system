@@ -40,9 +40,9 @@ function renderData(data) {
                             type="submit"
                             data-toggle="modal"
                             data-target="#delete_employee"
-                            class="btn btn-danger btn-sm mb-1" class="delete" value="${
+                            class="btn btn-danger btn-sm mb-1" class="delete" onclick="fillModalDelete('${
                               employee.id
-                            }"
+                            }')"
                           >
                             <i class="far fa-trash-alt"></i>
                           </button>
@@ -101,4 +101,26 @@ function handleSearch() {
     .catch((err) => {
       Notify.showError(err.message);
     });
+}
+
+//fill id vao modal de xoa
+function fillModalDelete(employeeID) {
+  $("#delete-confirm").attr("value", employeeID);
+}
+
+//xoa
+function deleteEmployee() {
+  let employeeID = $("#delete-confirm").attr("value");
+  console.log(employeeID);
+  ApiClient.delete("/employee/" + employeeID)
+    .then((resp) => {
+      let data = resp.data;
+      console.log(data.message);
+      if (data.responseStatus == "Success") {
+        Notify.showSuccess(resp.data.message);
+      } else {
+        Notify.showError(resp.data.message);
+      }
+    })
+    .catch((err) => {});
 }

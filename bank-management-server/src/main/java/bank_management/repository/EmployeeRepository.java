@@ -22,4 +22,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, String>{
 
 //	@Query(value = "SELECT u.employeeCode FROM User e ORDER BY e.employeeCode DESC LIMIT 1", nativeQuery = true)
 //	String generateEmployeeCode();
+
+    @Modifying (clearAutomatically = true)
+    @Transactional
+    @Query("DELETE FROM Employee e WHERE e.ID = :ID")
+    int deleteEmployee(@Param(value = "ID") String employeeID);
 }

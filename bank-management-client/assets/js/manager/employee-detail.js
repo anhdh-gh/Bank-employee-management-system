@@ -1,7 +1,7 @@
 // get id
 const currentURL = window.location.href;
 
-function getUrlVars(url) {
+function getUrlVar(url) {
   var vars = {};
   var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
     vars[key] = value;
@@ -9,7 +9,7 @@ function getUrlVars(url) {
   return vars;
 }
 
-const employeeID = getUrlVars(currentURL)["id"];
+const employeeID = getUrlVar(currentURL)["id"];
 
 ApiClient.get("/employee/" + employeeID, {})
   .then((resp) => {
