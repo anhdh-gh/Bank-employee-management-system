@@ -45,21 +45,15 @@ class TransactionGrid {
         let me = this;
 
         me.grid.on("click", "div.transaction-item", function() {
-            let transactionID = $(this).find("[FieldName='transactionID']").html(); 
+            let transactionID = $(this).find("[FieldName='transactionID']").html(),
+                recordSelected = me.cacheDataGrid.find(t => t.transactionID == transactionID);
 
-            me.formDetail.initDetail(me.cacheDataGrid.find(t => t.transactionID = transactionID));
+            me.formDetail.initDetail(recordSelected);
         })
     }
 
     /**
-     * Hàm lấy bản ghi được select
-     */
-    getCurrentSelectedRecord() {
-
-    }
-
-    /**
-     * Hàm lấy dữ liệu từ server
+     * Hàm lấy dữ liệu từ server 
      */
     getDataServer() {
         let me = this;
@@ -110,17 +104,27 @@ class TransactionGrid {
             executeDate = data.executeDate,
             dataRender = {}; // Đối tượng data để render
 
+        dataRender.transactionID = data.id;dataRender.transactionID = data.id;
+
         dataRender.date = CommonFn.getDate(executeDate);
         dataRender.monthNameSort = CommonFn.getMonthNameSort(executeDate);
         dataRender.fullDate = CommonFn.getFullDate(executeDate);
-        
-        dataRender.transactionID = data.id;
-        dataRender.userSendName = me.renderUserName(data);
+
+        dataRender.userNameDisplay = me.renderUserNameDisplay(data);
+        dataRender.userSendName = data.bankAccountSent.customer.fullName.firstName + ' ' +
+                            data.bankAccountSent.customer.fullName.lastName;
+        dataRender.userReceiveName = data.bankAccountReceive.customer.fullName.firstName + ' ' +
+                                    data.bankAccountReceive.customer.fullName.lastName;
+
         dataRender.description = data.content;
         dataRender.bankAccountType = data.bankAccountReceive.type;
-        dataRender.amount = me.formatMoneyTransaction(data, dataRender.bankAccountType);   
+        dataRender.amount = me.formatMoneyTransaction(data, dataRender.bankAccountType);  
+
         dataRender.status = data.status;
+        dataRender.statusString = data.status == Resource.TransactionStatus.InProgress ? 'In Progress' : data.status;
+
         dataRender.branch = me.renderBranch(data);
+        dataRender.transactionCode = data.transactionCode;
         
         if(dataRender.bankAccountType == Resource.BankAccountType.Credit) {
             dataRender.amount = '-' + dataRender.amount;
@@ -129,9 +133,9 @@ class TransactionGrid {
         return dataRender;
     }
 
-    renderUserName(data) {
+    renderUserNameDisplay(data) {
         let me = this;
-        if(currentUser.id == data.bankAccountSent.customer.id) {
+        if(currentUser.info.id == data.bankAccountSent.customer.id) {
             return data.bankAccountReceive.customer.fullName.firstName + ' ' +
                     data.bankAccountReceive.customer.fullName.lastName;
         }
@@ -143,7 +147,7 @@ class TransactionGrid {
 
     renderBranch(data) {
         let me = this;
-        if(currentUser.id == data.bankAccountSent.customer.id) {
+        if(currentUser.info.id == data.bankAccountSent.customer.id) {
             return data.bankAccountReceive.branch;
         }
         else {
@@ -163,7 +167,7 @@ class TransactionGrid {
 
         // Nếu là người gửi hoặc là tài khoản credit
         if(bankAccountType == Resource.BankAccountType.Credit ||
-            currentUser.id == data.bankAccountSent.customer.id) {
+            currentUser.info.id == data.bankAccountSent.customer.id) {
             money = '-' + money;
         }
         else {

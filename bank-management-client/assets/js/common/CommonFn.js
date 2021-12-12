@@ -95,7 +95,7 @@ CommonFn.getDate = dateSrc => {
  * @param {} dateSrc 
  * @returns 
  */
- CommonFn.getDate = dateSrc => {
+ CommonFn.getYear = dateSrc => {
     let date = new Date(dateSrc);
 
     return date.getFullYear().toString();
@@ -136,7 +136,7 @@ CommonFn.getMonthName= dateSrc => {
  * @returns 
  */
 CommonFn.getFullDate = dateSrc => {
-    return 
+    return CommonFn.getDate(dateSrc) + ' ' + CommonFn.getMonthName(dateSrc) + ' ' + CommonFn.getYear(dateSrc);
 }
 
 
