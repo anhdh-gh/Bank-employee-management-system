@@ -68,7 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     "/salary",
                     "/salary/*",
                     "/salary/detail/*",
-                        "/customer"
+                        "/customer",
+                        "/customer/*"
 
                 ).permitAll()
                 

@@ -255,34 +255,34 @@
 									<div class="row">
 										<div class="col-md-5">
 											<div class="profile-info-left">
-												<h3 class="user-name m-t-0">Jeffrey M. Wong</h3>
+												<h3 class="user-name m-t-0" id="full-name">Jeffrey M. Wong</h3>
 												<h5 class="company-role m-t-0 m-b-0">Standard Member</h5>
-												<small class="text-muted">Male</small>
-												<div class="staff-id">Customer ID : CLT-0001</div>
+												<small class="text-muted" id="gender">Male</small>
+												<div class="staff-id" id="customer-code">Customer Code: CLT-0001</div>
 											</div>
 										</div>
 										<div class="col-md-7">
 											<ul class="personal-info">
 												<li>
 													<span class="title">Phone:</span>
-													<span class="text"><a href="#">973-584-58700</a></span>
+													<span class="text"><a href="#" id="phone-number">973-584-58700</a></span>
 												</li>
 												<li>
 													<span class="title">Email:</span>
-													<span class="text"><a href="#"><span class="__cf_email__"
+													<span class="text"><a id="email" href="#"><span class="__cf_email__"
 																data-cfemail="b3d1d2c1c1cad0c6d7d2f3d6cbd2dec3dfd69dd0dcde">[email&#160;protected]</span></a></span>
 												</li>
 												<li>
 													<span class="title">Birthday:</span>
-													<span class="text">2nd August</span>
+													<span class="text" id="date-of-birth">2nd August</span>
 												</li>
 												<li>
 													<span class="title">Address:</span>
-													<span class="text">5754 Airport Rd, Coosada, AL, 36020</span>
+													<span class="text" id="address">5754 Airport Rd, Coosada, AL, 36020</span>
 												</li>
 												<li>
 													<span class="title">Identity Number:</span>
-													<span class="text">XXXXXXX-28950</span>
+													<span class="text" id="identityNumber">XXXXXXX-28950</span>
 												</li>
 											</ul>
 										</div>
@@ -519,6 +519,13 @@
 
 	</div>
 
+	<!-- Thư viện dùng chung -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <script src="https://cdn3.devexpress.com/jslib/21.2.3/js/dx.all.js"></script>
+    <script src="../../assets/js/common/Notify.js"></script>
+    <script src="../../assets/js/common/ApiClient.js"></script>
+    <!-- <script src="../../assets/js/common/authentication.js"></script> -->
 	<script data-cfasync="false"
 		src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 	<script src="assets/js/jquery-3.6.0.min.js"></script>
@@ -526,7 +533,7 @@
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
 
 	<script src="assets/js/jquery.slimscroll.js"></script>
-
+	<script src="../../assets/js/employee/render-customer-profile.js"></script>
 	<script src="assets/js/app.js"></script>
 </body>
 

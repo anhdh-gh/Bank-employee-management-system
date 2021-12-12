@@ -18,7 +18,8 @@
 	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
 
 	<link rel="stylesheet" href="assets/css/select2.min.css">
-
+	<!-- DevExtreme theme -->
+	<link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/21.2.3/css/dx.light.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
@@ -247,23 +248,23 @@
 						</div>
 					</div>
 				</div>
-				<div class="row filter-row">
+				<form class="row filter-row" id="searchCustomer">
 					<div class="col-sm-6 col-md-3">
 						<div class="form-group form-focus">
-							<input type="text" class="form-control floating">
-							<label class="focus-label">Customer ID</label>
+							<input type="text" class="form-control floating"v id="customerCode" name="customerCode">
+							<label class="focus-label">Customer Code</label>
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-3">
 						<div class="form-group form-focus">
-							<input type="text" class="form-control floating">
+							<input type="text" class="form-control floating" id="customerName" name="customerName">
 							<label class="focus-label">Customer Name</label>
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-3">
 						<div class="form-group form-focus select-focus">
-							<select class="select form-control">
-								<option>Select gender</option>
+							<select class="select form-control" id="gender" name="gender">
+								<option value="">Select gender</option>
 								<option>Male</option>
 								<option>Female</option>
 								<option>Other</option>
@@ -272,9 +273,9 @@
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-3">
-						<a href="#" class="btn btn-search rounded btn-block mb-3"> search </a>
+						<button type="submit" id="btn-search-customer" class="btn btn-search rounded btn-block mb-3"> search </button>
 					</div>
-				</div>
+				</form>
 				<div class="row staff-grid-row" id="customer-grid">
 					<!-- Call API to Render -->
 				</div>
@@ -534,7 +535,7 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
     <script src="assets/js/jquery.slimscroll.js"></script>
-
+	<script src="../../assets/js/common/Form.js"></script>
     <script src="assets/js/select2.min.js"></script>
     <script src="assets/js/moment.min.js"></script>
 	<script src="../../assets/js/employee/render-all-customer.js"></script>

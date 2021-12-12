@@ -56,6 +56,24 @@ public class CustomerService extends PersonService {
         return false;
     }
 
+    public List<Customer> processSearch(String customerCode, String customerName, String gender){
+        System.out.println(customerCode + " " + customerName + " " + gender);
+        List<Customer> resultSearch = customerRepository.findAll();
+
+        if(!gender.equals("Select gender")){
+            resultSearch.removeIf(customer -> !customer.getGender().name().equals(gender));
+        }
+
+        if(customerCode != null){
+            resultSearch.removeIf(customer -> !customer.getCustomerCode().contains(customerCode));
+        }
+
+        if(customerName!= null){
+            resultSearch.removeIf(customer -> !(customer.getFullName().getFirstName() + " " + customer.getFullName().getLastName()).contains(customerName));
+        }
+        return resultSearch;
+    }
+
     private String generateCustomerCode(){
         List<Customer> customerList = customerRepository.findAll();
         int lastest = 0;

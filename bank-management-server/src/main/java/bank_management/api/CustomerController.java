@@ -3,10 +3,13 @@ package bank_management.api;
 
 import bank_management.dto.CustomerDto;
 import bank_management.dto.EmployeeDto;
+import bank_management.entity.BankAccount;
 import bank_management.entity.Customer;
 import bank_management.entity.Person;
 import bank_management.enumeration.ResponseStatus;
 import bank_management.payload.ResponseResult;
+import bank_management.payload.SearchBankAccountRequest;
+import bank_management.payload.SearchCustomerRequest;
 import bank_management.service.CustomerService;
 import bank_management.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,5 +100,11 @@ public class CustomerController {
                     .ok()
                     .body(new ResponseResult(customerDto ,"Lấy thông tin thành công.", ResponseStatus.Success ));
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchCustomers(@Valid SearchCustomerRequest search) {
+        List<Customer> customerList = customerService.processSearch(search.getCustomerCode(), search.getCustomerName(), search.getGender());
+        return ResponseEntity.ok(new ResponseResult(customerList, "Tìm kiếm thành công", ResponseStatus.Success));
     }
 }
