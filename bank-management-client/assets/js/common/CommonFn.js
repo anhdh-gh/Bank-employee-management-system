@@ -9,7 +9,7 @@ var CommonFn = CommonFn || {};
  */
 CommonFn.formatMoney = money => {
     if(money && !isNaN(money)){
-        return money.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1.");
+        return '$' + money.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1.");
     }else{
         return money;
     }
@@ -78,32 +78,65 @@ CommonFn.getValueEnum = (data, enumName) => {
 }
 
 /**
- * Hàm call api lên lấy hoặc truyền dữ liệu lên server 
+ * Lấy ra giá trị ngày
  * NVTOAN
- * @param {*} url 
- * @param {*} method 
- * @param {*} data 
- * @param {*} fnCallBack 
- * @param {*} async 
+ * @param {} dateSrc 
+ * @returns 
  */
-CommonFn.Ajax = (url, method, data, fnCallBack, async = true) => {
-    $.ajax({
-        url: url,
-        method: method,
-        async: async,
-        data: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json"
-        },
-        crossDomain: true,
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            fnCallBack(response);
-        },
-        error: function (errorMsg) {
-            console.log(errorMsg.responseText);
-        }
-    })
+CommonFn.getDate = dateSrc => {
+    let date = new Date(dateSrc);
+
+    return date.getDate().toString().padStart(2, '0');
 }
+
+/**
+ * Lấy ra giá trị năm
+ * NVTOAN
+ * @param {} dateSrc 
+ * @returns 
+ */
+ CommonFn.getDate = dateSrc => {
+    let date = new Date(dateSrc);
+
+    return date.getFullYear().toString();
+}
+
+/**
+ * Lấy ra giá trị tháng viết tắt
+ * NVTOAN
+ * @param {*} dateSrc 
+ * @returns 
+ */
+CommonFn.getMonthNameSort = dateSrc => {
+    let date = new Date(dateSrc),
+        month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    return month_names_short[date.getMonth()];
+}
+
+
+/**
+ * Lấy ra giá trị tháng chữ
+ * NVTOAN
+ * @param {*} dateSrc 
+ * @returns 
+ */
+CommonFn.getMonthName= dateSrc => {
+    let date = new Date(dateSrc),
+    month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    return month_names[date.getMonth()];
+}
+
+
+/**
+ * Lấy ra giá trị ngày tháng năm đầy đủ
+ * NVTOAN
+ * @param {*} dateSrc 
+ * @returns 
+ */
+CommonFn.getFullDate = dateSrc => {
+    return 
+}
+
 

@@ -41,7 +41,7 @@ const createAxios = () => {
     // axiosInstant.defaults.withCredentials = true;
     axiosInstant.defaults.timeout = 20000;
     axiosInstant.defaults.headers = { "Content-Type": "application/json" };
-    // axiosInstant.defaults.headers = {"access-control-allow-origin": "*"};
+    axiosInstant.defaults.headers = {"access-control-allow-origin": "*"};
     axiosInstant.defaults.headers = token && { Authorization: `Bearer ${token}` };
     axiosInstant.interceptors.response.use(
         (response) => {

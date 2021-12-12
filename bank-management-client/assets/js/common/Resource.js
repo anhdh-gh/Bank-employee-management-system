@@ -33,3 +33,9 @@ Resource.BankAccountType = {
     Payment: "Payment",
     Credit: "Credit"
 }
+
+Resource.TransactionStatus = {
+    InProgress: "InProgress",
+    Canceled: "Canceled",
+    Completed: "Completed"
+}

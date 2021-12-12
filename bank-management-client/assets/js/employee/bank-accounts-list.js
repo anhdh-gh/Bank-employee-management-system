@@ -1,9 +1,24 @@
-$(document).ready(function() {
+const idTableBankAccount = '#table-bank-account'
+const idFomSearchBankAccount = '#form-search-bank-account'
+const idBtSearch = '#bt-search'
+const idBtDelete = '#bt-delete'
 
-    const idTableBankAccount = '#table-bank-account'
-    const idFomSearchBankAccount = '#form-search-bank-account'
-    const idBtSearch = '#bt-search'
-    const idBtDelete = '#bt-delete'
+const deleteBankAccount = idBankAccount => {
+    $(idBtDelete).on('click', e => {
+        e.preventDefault();
+        
+        ApiClient.delete(`/bank_account/${idBankAccount}`)
+        .then(resp => {
+            Notify.showSuccess(resp.data.message)
+            window.location.replace(`${window.location.origin}/view/employee/bank-accounts-list.html`) 
+        })
+        .catch(err => {
+            Notify.showError(err.response.data.message)
+        })
+    })
+}
+
+$(document).ready(function() {
 
     const renderData = data => {
         $(idTableBankAccount).empty();
@@ -27,7 +42,7 @@ $(document).ready(function() {
                     <a href="bank-account-profile.html?idBankAccount=${item.idBankAccount}" class="btn btn-info btn-sm mb-1">
                         <i class="far fa-eye"></i>
                     </a>
-                    <button data-toggle="modal" data-target="#delete_employee"
+                    <button data-toggle="modal" data-target="#delete_employee" onclick="deleteBankAccount('${item.idBankAccount}')"
                         class="btn btn-danger btn-sm mb-1 bt-delete-ba">
                         <i class="far fa-trash-alt"></i>
                     </button>
@@ -86,39 +101,9 @@ $(document).ready(function() {
         const data = convertResponseToData(resp.data.data)
         renderData(data);
         paging();
+        if(data.length < 1) Notify.showError("Không có dữ liệu để hiển thị")
     })
     .catch(err => {
         Notify.showError(err.response.data.message)
-    })
-
-    // $('button[name=bt-delete]').click(function (e) {
-    //     e.preventDefault();
-    //     console.log(this.attr('id-delete'));
-    // })
-
-    // function deleteBankAccount(idBankAccount) {
-    //     console.log(idBankAccount)
-    // }
-
-    $(`.bt-delete-ba`).ready(function () {
-
-
-
-        // const bts = $(`.bt-delete-ba`)
-        // bts.forEach(bt => {
-        //     bt.on('click', e => {
-        //         const btDelete = $(this)
-        //         console.log(btDelete.attr("idBankAccount"))
-
-        //         // // Lấy id
-        //         // ApiClient.delete(`bank_account/${}`)
-        //         // .then(reps => {
-
-        //         // })
-        //         // .catch(err => {
-        //         //     Notify.showError(err.response.data.message)
-        //         // })
-        //     })                     
-        // })   
     })
 })

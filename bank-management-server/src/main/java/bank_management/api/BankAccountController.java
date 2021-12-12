@@ -176,7 +176,7 @@ public class BankAccountController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteByID(@PathVariable(value = "id") String id) {
+    public ResponseEntity<?> deleteByID(@PathVariable(value = "id") String id) throws Exception {
         BankAccount bankAccount = bankAccountService.getById(id);
 
         if(bankAccount == null)
@@ -188,15 +188,8 @@ public class BankAccountController {
                         ResponseStatus.Invalid
                 ));
 
-        boolean res = bankAccountService.delete(bankAccount.getID());
-        if(res == false)
-            return ResponseEntity.badRequest().body(
-                new ResponseResult (
-                    "Xóa bank account không thành công",
-                    ResponseStatus.Error
-                )
-            );
-
+        bankAccountService.delete(bankAccount.getID());
+        
         return ResponseEntity.ok(
             new ResponseResult (
                 "Xóa bank account thành công",
