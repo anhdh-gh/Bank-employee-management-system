@@ -40,20 +40,20 @@ public class SalaryController {
         );
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity getSalaryListForEachEmployee(@PathVariable(value = "id") String employeeID) {
-        List<SalaryDto> salaryDtoList = salaryService.getSalaryLístForEachEmployee(employeeID);
-        if (salaryDtoList == null) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new ResponseResult("Không tồn tại nhân viên có ID là " + employeeID, ResponseStatus.Error));
-        } else return ResponseEntity
-                .ok()
-                .body(new ResponseResult(
-                        salaryDtoList,
-                        "Lấy thông tin bảng lương của nhân viên có ID "+ employeeID + " thành công!",
-                        ResponseStatus.Success));
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity getSalaryListForEachEmployee(@PathVariable(value = "id") String employeeID) {
+//        List<SalaryDto> salaryDtoList = salaryService.getSalaryLístForEachEmployee(employeeID);
+//        if (salaryDtoList == null) {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new ResponseResult("Không tồn tại nhân viên có ID là " + employeeID, ResponseStatus.Error));
+//        } else return ResponseEntity
+//                .ok()
+//                .body(new ResponseResult(
+//                        salaryDtoList,
+//                        "Lấy thông tin bảng lương của nhân viên có ID "+ employeeID + " thành công!",
+//                        ResponseStatus.Success));
+//    }
 
     @GetMapping("/detail/{id}")
     public ResponseEntity getDetailSalary(@PathVariable(value = "id") String salaryID) {
