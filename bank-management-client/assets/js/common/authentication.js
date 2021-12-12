@@ -45,6 +45,10 @@ if (urlsPageNotAuth.every((url) => url !== pathname)) {
                 sidebar.eq(6).remove();
               }
             }
+
+            $("#sidebar .sidebar-ul").ready(function() {
+              $("#sidebar .sidebar-ul").removeClass("d-none")
+            })
           }
         }
 
