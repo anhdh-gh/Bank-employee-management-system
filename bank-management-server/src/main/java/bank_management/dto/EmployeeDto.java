@@ -32,7 +32,7 @@ public class EmployeeDto {
     private double seniority;
     private Position position;
     private double baseSalary;
-    private FullnameDto fullname;
+    private FullnameDto fullName;
     private AddressDto address;
     private List<BankAccountDto> bankAccountList;
     private List<SalaryDto> salaryList;
@@ -53,7 +53,7 @@ public class EmployeeDto {
         this.seniority = employee.getSeniority();
         this.position = employee.getPosition();
         this.baseSalary = employee.getBaseSalary();
-        this.fullname = new FullnameDto(employee.getFullName());
+        this.fullName = new FullnameDto(employee.getFullName());
         this.address = new AddressDto(employee.getAddress());
         List<BankAccountDto> bankAccountDtoList = new ArrayList<>();
         for (BankAccount bankAccount : employee.getBankAccountList()) {

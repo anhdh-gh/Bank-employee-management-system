@@ -1,11 +1,13 @@
 const idSalaryComponent = "#salary-component";
-ApiClient.get("/salary", {})
-  .then((resp) => {
-    let data = resp.data.data;
-    let html = "";
-    data.forEach((salary) => {
-      let firstLetter = salary.employee.fullName.firstName.substring(0, 1);
-      let salaryRow = `<tr>
+//render data
+function renderData(data) {
+  $(idSalaryComponent).empty();
+  let html = "";
+  data.forEach((salary, index) => {
+    let firstLetter = salary.employee.fullName.firstName.substring(0, 1);
+
+    let salaryRow = `<tr>
+                        <td>${index + 1}</td>
                         <td>${salary.month + "/" + salary.year}</td>
                         <td>
                           <h2>
@@ -26,7 +28,10 @@ ApiClient.get("/salary", {})
                         <td>
                           <a>${salary.employee.email}</a>
                         </td>
-                        <td>${salary.employee.createDate}</td>
+                        <td>${DateUtils.convertDate(
+                          salary.employee.createDate,
+                          1
+                        )}</td>
                         <td>
                             ${salary.employee.position}
                         </td>
@@ -61,17 +66,47 @@ ApiClient.get("/salary", {})
                           </div>
                         </td>
                       </tr>`;
-      html += salaryRow;
-    });
-    $(idSalaryComponent).html(html);
+    html += salaryRow;
+  });
+  $(idSalaryComponent).html(html);
+}
 
-    (function ($) {
-      "use strict";
-      if ($(".datatable").length > 0) {
-        $(".datatable").DataTable({
-          bFilter: false,
-        });
-      }
-    })(jQuery);
+const paging = () => {
+  (function ($) {
+    "use strict";
+    if ($(".datatable").length > 0) {
+      $(".datatable").DataTable({
+        bFilter: false,
+      });
+    }
+  })(jQuery);
+};
+
+let urlApi = "/salary";
+let data = {};
+const paramsSearch = getUrlVars();
+if (paramsSearch) {
+  urlApi += "/search";
+  Object.keys(paramsSearch).forEach((att) => {
+    $(`#${att}`).val(paramsSearch[att]).change();
+  });
+  data = {
+    position: $("#positionSearch").val(),
+    startMonth: paramsSearch.fromDate
+      ? paramsSearch.fromDate.substring(3, 5)
+      : 0,
+    startYear: paramsSearch.fromDate ? paramsSearch.fromDate.substring(6) : 0,
+    endMonth: paramsSearch.fromDate ? paramsSearch.toDate.substring(3, 5) : 0,
+    endYear: paramsSearch.fromDate ? paramsSearch.toDate.substring(6) : 0,
+  };
+}
+console.log(urlApi);
+ApiClient.get(urlApi, data)
+  .then((resp) => {
+    let data = resp.data.data;
+    console.log(data);
+    renderData(data);
+
+    paging();
   })
   .catch((err) => {});

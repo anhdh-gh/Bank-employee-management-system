@@ -76,8 +76,8 @@ public class Employee extends User {
 		super(employeeDto.getIdentityNumber(), employeeDto.getDateOfBirth(), employeeDto.getEmail(), employeeDto.getPhoneNumber(),
 			employeeDto.getGender(), employeeDto.getAccount().getUsername(), employeeDto.getAccount().getPassword(),
 				employeeDto.getAddress().getCity(), employeeDto.getAddress().getDistrict(), employeeDto.getAddress().getCountry(),
-				employeeDto.getAddress().getHouseNumber(), employeeDto.getAddress().getZipCode(), employeeDto.getFullname().getFirstName(),
-				employeeDto.getFullname().getLastName(), employeeDto.getEmployeeCode(), employeeDto.getRole(), employeeDto.getSeniority(), employeeDto.getPosition());
+				employeeDto.getAddress().getHouseNumber(), employeeDto.getAddress().getZipCode(), employeeDto.getFullName().getFirstName(),
+				employeeDto.getFullName().getLastName(), employeeDto.getEmployeeCode(), employeeDto.getRole(), employeeDto.getSeniority(), employeeDto.getPosition());
 		this.baseSalary = employeeDto.getBaseSalary();
 		List<BankAccount> bankAccounts = new ArrayList<>();
 		for(BankAccountDto bankAccountDto : employeeDto.getBankAccountList()) {

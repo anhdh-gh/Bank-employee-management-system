@@ -212,10 +212,12 @@
                     alt="Admin" />
                   <span class="status online"></span
                 ></span>
-                <span id="profile">Admin</span>
+                <span id="profile"></span>
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item" href="profile.html" id="view-profile"
+                  >My Profile</a
+                >
                 <a class="dropdown-item" href="edit-profile.html"
                   >Edit Profile</a
                 >
@@ -233,8 +235,10 @@
               ><i class="fas fa-ellipsis-v"></i
             ></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="profile.html">My Profile</a>
-              <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+              <a class="dropdown-item" href="profile.html" id="view-profile"
+                >My Profile</a
+              >
+              <a class="dropdown-item" href="">Edit Profile</a>
               <a class="dropdown-item" href="settings.html">Settings</a>
               <a class="dropdown-item" href="login.html">Logout</a>
             </div>
@@ -340,78 +344,78 @@
               </div>
             </div>
           </div>
-          <!-- <div class="content-page"> -->
-          <form class="row filter-row" id="search-form" method="post">
-            <div class="col-sm-6 col-md-3">
-              <div class="form-group form-focus">
-                <input
-                  type="text"
-                  class="form-control floating"
-                  id="employeeCodeSearch"
-                  name="employeeCodeSearch"
-                />
-                <label class="focus-label">Employee Code</label>
+          <div class="content-page">
+            <form class="row filter-row" id="search-form">
+              <div class="col-sm-6 col-md-3">
+                <div class="form-group form-focus">
+                  <input
+                    type="text"
+                    class="form-control floating"
+                    id="employeeCodeSearch"
+                    name="employeeCodeSearch"
+                  />
+                  <label class="focus-label">Employee Code</label>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <div class="form-group form-focus">
-                <input
-                  type="text"
-                  class="form-control floating"
-                  id="employeeNameSearch"
-                  name="employeeNameSearch"
-                />
-                <label class="focus-label">Employee Name</label>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-group form-focus">
+                  <input
+                    type="text"
+                    class="form-control floating"
+                    id="employeeNameSearch"
+                    name="employeeNameSearch"
+                  />
+                  <label class="focus-label">Employee Name</label>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <div class="form-group form-focus select-focus">
-                <select
-                  class="select form-control"
-                  id="positionSearch"
-                  name="positionSearch"
+              <div class="col-sm-6 col-md-3">
+                <div class="form-group form-focus select-focus">
+                  <select
+                    class="select form-control"
+                    id="positionSearch"
+                    name="positionSearch"
+                  >
+                    <option value="All">All</option>
+                    <option value="SalesExecutive">SalesExecutive</option>
+                    <option value="Teller">Teller</option>
+                    <option value="Accountant">Accountant</option>
+                    <option value="Technician">Technician</option>
+                    <option value="Security">Security</option>
+                  </select>
+                  <label class="focus-label">Positions</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 d-flex align-items-center">
+                <button
+                  type="submit"
+                  id="search"
+                  class="btn btn-search rounded btn-block mb-3"
                 >
-                  <option value="All">All</option>
-                  <option value="SalesExecutive">SalesExecutive</option>
-                  <option value="Teller">Teller</option>
-                  <option value="Accountant">Accountant</option>
-                  <option value="Technician">Technician</option>
-                  <option value="Security">Security</option>
-                </select>
-                <label class="focus-label">Positions</label>
+                  search
+                </button>
               </div>
-            </div>
-            <div class="col-sm-6 col-md-3 d-flex align-items-center">
-              <a
-                class="btn btn-search rounded btn-block mb-3"
-                id="search"
-                onclick="handleSearch()"
-              >
-                search
-              </a>
-            </div>
-          </form>
-          <div class="row">
-            <div class="col-md-12 mb-3">
-              <div class="table-responsive">
-                <table class="table custom-table datatable">
-                  <thead class="thead-light">
-                    <tr>
-                      <th>Name</th>
-                      <th>Employee Code</th>
-                      <th>Email</th>
-                      <th>Mobile</th>
-                      <th>Join Date</th>
-                      <th>Position</th>
-                      <th class="text-right">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="employee-grid"></tbody>
-                </table>
+            </form>
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <div class="table-responsive">
+                  <table class="table custom-table datatable">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>Employee Code</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Join Date</th>
+                        <th>Position</th>
+                        <th class="text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="employee-grid"></tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
-          <!-- </div> -->
           <div class="notification-box">
             <div class="msg-sidebar notifications msg-noti">
               <div class="topnav-dropdown-header">
@@ -694,6 +698,17 @@
         </div>
       </div>
     </div>
+    <script
+      data-cfasync="false"
+      src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.js"></script>
+    <script src="assets/js/select2.min.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="assets/js/app.js"></script>
 
     <!-- Thư viện dùng chung -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -703,18 +718,12 @@
     <script src="../../assets/js/common/ApiClient.js"></script>
     <script src="../../assets/js/common/Form.js"></script>
     <script src="../../assets/js/common/authentication.js"></script>
-    <script src="../../assets/js/manager/render-all-employee-list.js"></script>
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/common/convertDate.js"></script>
 
-    <script src="assets/js/jquery.slimscroll.js"></script>
-    <script src="assets/js/select2.min.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/plugins/datetimepicker/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="../../assets/js/manager/render-all-employee-list.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assets/js/app.js"></script>
   </body>
 
   <!-- Mirrored from dreamguystech.com/preadmin/html/school/light/employees-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Dec 2021 08:57:59 GMT -->

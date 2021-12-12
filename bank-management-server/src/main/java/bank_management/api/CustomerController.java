@@ -8,6 +8,7 @@ import bank_management.enumeration.ResponseStatus;
 import bank_management.payload.EditCustomerRequest;
 import bank_management.payload.ResponseResult;
 import bank_management.payload.SearchCustomerRequest;
+import bank_management.payload.*;
 import bank_management.service.BankAccountService;
 import bank_management.service.CustomerService;
 import bank_management.service.PersonService;
@@ -139,16 +140,16 @@ public class CustomerController {
     }
 
     @PutMapping("/editEmail")
-    public ResponseEntity<?> editEmailCustomer(@Valid @RequestBody String email){
+    public ResponseEntity<?> editEmailCustomer(@Valid @RequestBody EditEmailRequest editEmailRequest){
         Person person = personService.getAuthPerson();
         Customer customerEdit = customerService.getCustomerById(person.getID());
         if(customerEdit == null){
             return ResponseEntity.badRequest().body(new ResponseResult("Có lỗi xảy ra khi sửa đổi thông tin khách hàng!", ResponseStatus.Error));
         }
         else{
-            if(email!= null){
-                if(!email.trim().isEmpty()){
-                    customerEdit.setEmail(email);
+            if(editEmailRequest.getEmail()!= null){
+                if(!editEmailRequest.getEmail().trim().isEmpty()){
+                    customerEdit.setEmail(editEmailRequest.getEmail());
                 }
                 else{
                     return ResponseEntity.badRequest().body(new ResponseResult(
