@@ -16,4 +16,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
 
     @Query("SELECT t FROM Transaction t WHERE t.bankAccountReceive.ID = ?1 OR t.bankAccountSent.ID = ?1")
     List<Transaction> getTransactionsByBankAccountID(String bankAccountID);
+
+    @Query(value = "CALL Proc_GetTransactionsByCustomerID(:CustomerID);", nativeQuery = true)
+    List<Transaction> getTransactionsByCustomerID(@Param("CustomerID") String CustomerID);
 }
