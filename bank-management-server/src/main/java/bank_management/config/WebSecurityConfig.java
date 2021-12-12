@@ -82,7 +82,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             // Cho phép những người đã authenticated và là Customer truy cập vào các đường dẫn này
             .antMatchers(
-                "/bank_account/payment"
+                "/bank_account/payment",
+                    "/transaction/*",
+                    "/transaction/filter",
+                    "/transaction/newCode",
+                    "/transaction/sendMoney",
+                    "/transaction/deposit/*",
+                    "/transaction/payCreditCard/*"
              ).hasAuthority(Role.Customer.name())
 
             // Tất cả các request khác đều cần phải xác thực mới được truy cập

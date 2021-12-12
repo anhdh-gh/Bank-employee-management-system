@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -29,6 +30,18 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
      */
     @Query(value = "CALL Proc_GetTransactionsByCustomerID(:CustomerID);", nativeQuery = true)
     List<Transaction> getTransactionsByCustomerID(@Param("CustomerID") String CustomerID);
+
+    /**
+     * Lấy tất cả transaction theo filter
+     * NVTOAN
+     * @return
+     */
+    @Query(value = "CALL Proc_GetTransactionsFilter(:CustomerID, :StartDate, :EndDate, :PageNum, :PageSize);", nativeQuery = true)
+    List<Transaction> getTransactionsFilter(@Param("CustomerID") String customerID,
+                                            @Param("StartDate") Date startDate,
+                                            @Param("EndDate") Date endDate,
+                                            @Param("PageNum") int pageNum,
+                                            @Param("PageSize") int pageSize);
 
     /**
      * Lấy transaction code lớn nhất
