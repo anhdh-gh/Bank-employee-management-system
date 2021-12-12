@@ -6,8 +6,6 @@ class TransactionDetail {
 
         // Lưu lại grid
         me.detail = $(detailId);
-
-       
     }
 
     
@@ -16,6 +14,14 @@ class TransactionDetail {
      * @param {*} param 
      */
     initDetail(record) {
-        console.log(record)
+        let me = this;
+
+        me.detail.find('[FieldName]').each(function() {
+            let domElement = $(this),
+                fieldName = domElement.attr("FieldName"),
+                value = record[fieldName];
+            
+                domElement.text(value);
+        });
     }
 }

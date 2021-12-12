@@ -17,12 +17,43 @@ public class TransactionService {
     @Autowired
     PersonService personService;
 
+    /**
+     * Lấy tất cả transaction của customer đang đăng nhập
+     * NVTOAN
+     * @return
+     */
     public List<Transaction> getAllTransactionByCustomer() {
         Person currentCustomer =  personService.getAuthPerson();
 
         return  transactionRepository.getTransactionsByCustomerID(currentCustomer.getID());
     }
+
+    /**
+     * Lấy tất cả transaction theo bankAccountID
+     * NVTOAN
+     * @return
+     */
     public List<Transaction> getAllTransactionByBankAccountID(String bankAccountID) {
         return transactionRepository.getTransactionsByBankAccountID(bankAccountID);
+    }
+
+    /**
+     * Tạo ra transaction code mới nhất
+     * NVTOAN
+     * @return
+     */
+    public String getNewTransactionCode() {
+        String maxCode = transactionRepository.getMaxTransactionCode();
+        String newCode = maxCode;
+
+        if(maxCode == null) {
+            return "GD-0000000001";
+        }
+        else {
+            String[] part = maxCode.split("(?<=\\D)(?=\\d)");
+            newCode = part[0] + (Integer.parseInt(part[1]) + 1);
+        }
+
+        return newCode;
     }
 }

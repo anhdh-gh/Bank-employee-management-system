@@ -33,6 +33,18 @@ public class BankAccountService {
     @Autowired
     EmployeeRepository employeeRepo;
 
+    public PaymentAccount getPaymentAccountByID(String id) {
+        Optional<PaymentAccount> optionalPaymentAccount = paymentAccountRepo.findById(id);
+        if(optionalPaymentAccount.isPresent())
+            return optionalPaymentAccount.get();
+        return null;
+    }
+
+    public CreditAccount getCreditAccountByCustomerID(String customerID) {
+        CreditAccount creditAccount = creditAccountRepo.getCreditAccountByCustomerID(customerID);
+        return creditAccount;
+    }
+
     public PaymentAccount getPaymentAccountByCustomerID(String customerID) {
         PaymentAccount paymentAccount = paymentAccountRepo.getPaymentAccountByCustomerID(customerID);
         return paymentAccount;
@@ -76,6 +88,11 @@ public class BankAccountService {
     public boolean checkCreditAccountExistByCustomer(Customer customer) {
         CreditAccount creditAccount = creditAccountRepo.getCreditAccountByCustomerID(customer.getID());
         return creditAccount != null;
+    }
+
+    public BankAccount getBankAccountByAccountNumber(String accountNumber) {
+        BankAccount accountWithNumber = bankAccountRepo.getBankAccountByAccountNumber(accountNumber);
+        return accountWithNumber;
     }
 
     public boolean checkAccounCodeExist(String accountCode) {
@@ -152,19 +169,21 @@ public class BankAccountService {
             if(opa.isPresent()) {
                 PaymentAccount pa = opa.get();
                 int row = paymentAccountRepo.deletePaymentAccountByID(pa.getID());
-                if(row < 1) throw new Exception("Xóa payemnt account không thành công");
+                if(row < 1) throw new Exception("Xóa payment account không thành công");
             }
 
             Optional<CreditAccount> oca = creditAccountRepo.findById(ba.getID());
             if(oca.isPresent()) {
                 CreditAccount ca = oca.get();
                 int row = creditAccountRepo.deleteCreditAccountByID(ca.getID());
-                if(row < 1) throw new Exception("Xóa creadit account không thành công");
+                if(row < 1) throw new Exception("Xóa credit account không thành công");
             }
 
             int rowBa = bankAccountRepo.deleteBankAccountByID(ba.getID());
             if(rowBa < 1) throw new Exception("Xóa bank account không thành công");
         }
+
+        throw new Exception("Xóa bank account không thành công");
     }
 
     public List<BankAccount> processSearch(String accountCode, String customerCode, String type) {

@@ -14,9 +14,27 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
     @Query( nativeQuery = true, value = "SELECT t.* FROM Transaction t WHERE bankAccountReceiveID = :BankAccountReceiveID ORDER BY t.createDate LIMIT 1")
     Transaction getAmountOfFirstTransactionByPaymentAccount(@Param(value = "BankAccountReceiveID") String paymentAccountID);
 
+    /**
+     * Lấy tất cả transaction theo bankAccountID
+     * NVTOAN
+     * @return
+     */
     @Query("SELECT t FROM Transaction t WHERE t.bankAccountReceive.ID = ?1 OR t.bankAccountSent.ID = ?1")
     List<Transaction> getTransactionsByBankAccountID(String bankAccountID);
 
+    /**
+     * Lấy tất cả transaction của customer đang đăng nhập
+     * NVTOAN
+     * @return
+     */
     @Query(value = "CALL Proc_GetTransactionsByCustomerID(:CustomerID);", nativeQuery = true)
     List<Transaction> getTransactionsByCustomerID(@Param("CustomerID") String CustomerID);
+
+    /**
+     * Lấy transaction code lớn nhất
+     * NVTOAN
+     * @return
+     */
+    @Query("SELECT MAX(t.transactionCode) FROM Transaction t")
+    String getMaxTransactionCode();
 }

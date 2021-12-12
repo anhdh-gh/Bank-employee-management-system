@@ -13,7 +13,8 @@ const deleteBankAccount = idBankAccount => {
             window.location.replace(`${window.location.origin}/view/employee/bank-accounts-list.html`) 
         })
         .catch(err => {
-            Notify.showError(err.response.data.message)
+            console.log(err.response.data.message)
+            Notify.showError('Xóa bank account không thành công')
         })
     })
 }
