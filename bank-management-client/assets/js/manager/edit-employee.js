@@ -105,6 +105,7 @@ $(idFormEditEmployee).validate({
     return false;
   },
 });
+
 $("#cancel").on("click", () => {
   window.location.replace(
     `${window.location.origin}/view/employee/all-employees.html`
