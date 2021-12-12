@@ -266,8 +266,9 @@
 						<div class="col-sm-6 col-md-3">
 							<div class="form-group form-focus select-focus">
 								<select class="select form-control" id="type" name="type">
-									<option>Credit</option>
-									<option>Payment</option>
+									<option value="Credit">Credit</option>
+									<option value="Payment">Payment</option>
+									<option value="All" selected>All</option>
 								</select>
 								<label class="focus-label">Type</label>
 							</div>
@@ -283,7 +284,7 @@
 							<div class="table-responsive">
 								<table class="table custom-table datatable">
 									<thead class="thead-light">
-										<tr class="text-center">
+										<tr>
 											<th>Customer code</th>
 											<th>Account code</th>
 											<th>Type</th>
