@@ -5,6 +5,7 @@ import bank_management.entity.Customer;
 import bank_management.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,5 +94,28 @@ public class CustomerService extends PersonService {
             return new CustomerDto((optionalCustomer.get()));
         }
         return null;
+    }
+
+
+
+    public Customer getById(String id) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+        if(optionalCustomer.isPresent()){
+            Customer customer = optionalCustomer.get();
+            return customer;
+        }
+        return null;
+    }
+
+    @Transactional(rollbackFor = {Exception.class, Throwable.class})
+    public void delete(String id) throws Exception {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+        if(optionalCustomer.isPresent()){
+            Customer customer = optionalCustomer.get();
+            int rowCustomer = customerRepository.deleteCustomerById(customer.getID());
+            if(rowCustomer < 1){
+                throw new Exception("Xóa customer không thành công!");
+            }
+        }
     }
 }

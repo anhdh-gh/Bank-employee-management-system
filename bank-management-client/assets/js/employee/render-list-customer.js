@@ -2,6 +2,28 @@ const customerList = "#customer-list";
 const idFormSearchCustomer = "#searchCustomer";
 const idBtnSearch = "#btn-search-customer";
 
+function deleteCustomer(customerID){
+  $("#delete-confirm").on("click", (e) => {
+    e.preventDefault();
+    console.log(customerID);
+    ApiClient.delete("/customer/" + customerID)
+      .then((resp) => {
+        let data = resp.data;
+        // console.log(data.message);
+        if (data.responseStatus == "Success") {
+          Notify.showSuccess(resp.data.message);
+          window.location.replace(`${window.location.origin}/view/employee/customer-list.html`) 
+        } else {
+          Notify.showError(resp.data.message);
+        }
+      })
+      .catch((err) => {
+        Notify.showError("Không thể xóa customer!");
+      });
+  });
+};
+
+
 const renderData = (data) => {
   let html = "";
   data.forEach((customer) => {
@@ -40,17 +62,27 @@ const renderData = (data) => {
                         }
                       </td>
                       <td class="text-right">
+                      <a href="customer-profile.html?id=${
+                        customer.id
+                      }" class="btn btn-info btn-sm mb-1">
+                      <i class="far fa-eye"></i>
+                      </a>
                         <a
                           href="edit-customer.html"
                           class="btn btn-primary btn-sm mb-1"
                         >
                           <i class="far fa-edit"></i>
                         </a>
-                        <a href="customer-profile.html?id=${
-                          customer.id
-                        }" class="btn btn-info btn-sm mb-1">
-                        <i class="far fa-eye"></i>
-                        </a>
+                        <button
+                            type="submit"
+                            data-toggle="modal"
+                            data-target="#delete_customer"
+                            class="btn btn-danger btn-sm mb-1" class="delete" onclick="deleteCustomer('${
+                              customer.id
+                            }')"
+                          >
+                            <i class="far fa-trash-alt"></i>
+                          </button>
                       </td>
                     </tr>`;
     html += customerRow;
@@ -111,20 +143,9 @@ ApiClient.get(urlApi)
     Notify.showError(err.response.data.message);
   });
 
-// $(idBtnSearch).click((e) => {
-//   e.preventDefault();
-//   const dataSearch = Form.getData(idFormSearchCustomer);
-//   // console.log(dataSearch);
-//   ApiClient.get("/customer/search", dataSearch)
-//     .then((resp) => {
-//       let dataResult = resp.data.data;
-//       if (dataResult.length === 0) Notify.showError("Không tìm thấy customer!");
-//       else {
-//         renderData(dataResult);
-//         // paging();
-//       }
-//     })
-//     .catch((err) => {
-//       Notify.showError(err.message);
-//     });
-// });
+//fill id vao modal de xoa
+function fillModalDelete(customerID) {
+  $("#delete-confirm").attr("value", customerID);
+}
+
+//xoa

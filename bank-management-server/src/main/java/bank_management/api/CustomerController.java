@@ -111,4 +111,26 @@ public class CustomerController {
         List<Customer> customerList = customerService.processSearch(search.getCustomerCode(), search.getCustomerName(), search.getGender());
         return ResponseEntity.ok(new ResponseResult(customerList, "Tìm kiếm thành công", ResponseStatus.Success));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteByID(@PathVariable(value = "id") String id) throws Exception {
+        Customer customer = customerService.getById(id);
+        if(customer == null)
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            new ResponseResult(
+                                    "Không tìm thấy customer với id là " + id,
+                                    ResponseStatus.Invalid
+                            ));
+
+        customerService.delete(customer.getID());
+
+        return ResponseEntity.ok(
+                new ResponseResult (
+                        "Xóa customer thành công",
+                        ResponseStatus.Success
+                )
+        );
+    }
 }

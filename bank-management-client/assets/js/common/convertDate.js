@@ -1,4 +1,4 @@
-const DateUtils = {
+DateUtils = {
   convertDate: (dateInput, option) => {
     // Nếu convert Datetime (lấy từ server) sang date
     if (option == 1) {
