@@ -182,8 +182,7 @@ public class BankAccountService {
             int rowBa = bankAccountRepo.deleteBankAccountByID(ba.getID());
             if(rowBa < 1) throw new Exception("Xóa bank account không thành công");
         }
-
-        throw new Exception("Xóa bank account không thành công");
+        else throw new Exception("Không tìm thấy bank account với id: " + ID);
     }
 
     public List<BankAccount> processSearch(String accountCode, String customerCode, String type) {
