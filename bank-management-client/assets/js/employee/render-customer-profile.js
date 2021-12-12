@@ -8,7 +8,7 @@
   // get id
 const currentURL = window.location.href;
 
-function getUrlVars(url) {
+function getUrlVar(url) {
   var vars = {};
   url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
     vars[key] = value;
@@ -16,7 +16,7 @@ function getUrlVars(url) {
   return vars;
 }
 
-const customerID = getUrlVars(currentURL)["id"];
+const customerID = getUrlVar(currentURL)["id"];
 
 ApiClient.get("/customer/" + customerID, {})
   .then((resp) => {
@@ -29,7 +29,8 @@ ApiClient.get("/customer/" + customerID, {})
     $("#customer-code").text("Customer Code: " + data.customerCode);
     $("#phone-number").text(data.phoneNumber);
     $("#email").text(data.email);
-    $("#date-of-birth").text(data.dateOfBirth);
+    $("#date-of-birth").text(DateUtils.convertDate(data.dateOfBirth,1));
+    console.log(DateUtils.convertDate(data.dateOfBirth,1));
     $("#address").text(
       data.address.houseNumber +
         ", " +

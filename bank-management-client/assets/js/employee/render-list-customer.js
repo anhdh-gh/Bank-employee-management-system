@@ -9,11 +9,11 @@ const renderData = (data) => {
     let customerRow = `<tr>
                       <td>
                         <h2>
-                          <a href="profile.html?id=${
+                          <a href="customer-profile.html?id=${
                             customer.id
                           }" class="avatar text-white"
                             >${firstLetter}</a
-                          ><a href="profile.html?id=${customer.id}"
+                          ><a href="customer-profile.html?id=${customer.id}"
                             >${
                               customer.fullName.firstName +
                               " " +
