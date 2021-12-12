@@ -33,6 +33,18 @@ public class BankAccountService {
     @Autowired
     EmployeeRepository employeeRepo;
 
+    public PaymentAccount getPaymentAccountByID(String id) {
+        Optional<PaymentAccount> optionalPaymentAccount = paymentAccountRepo.findById(id);
+        if(optionalPaymentAccount.isPresent())
+            return optionalPaymentAccount.get();
+        return null;
+    }
+
+    public CreditAccount getCreditAccountByCustomerID(String customerID) {
+        CreditAccount creditAccount = creditAccountRepo.getCreditAccountByCustomerID(customerID);
+        return creditAccount;
+    }
+
     public PaymentAccount getPaymentAccountByCustomerID(String customerID) {
         PaymentAccount paymentAccount = paymentAccountRepo.getPaymentAccountByCustomerID(customerID);
         return paymentAccount;

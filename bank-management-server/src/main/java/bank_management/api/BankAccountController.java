@@ -209,6 +209,28 @@ public class BankAccountController {
                         ResponseStatus.Invalid
                 ));
 
+        if(bankAccount.getType().equals(BankAccountType.Payment)) {
+            PaymentAccount paymentAccount = bankAccountService.getPaymentAccountByID(bankAccount.getID());
+            if(paymentAccount == null)
+                return ResponseEntity
+                    .badRequest()
+                    .body(
+                        new ResponseResult(
+                            "Không tìm thấy payment account với id là " + id,
+                            ResponseStatus.Invalid
+                    ));
+
+            CreditAccount creditAccount = bankAccountService.getCreditAccountByCustomerID(paymentAccount.getCustomer().getID());
+            if(creditAccount != null)
+                return ResponseEntity
+                    .badRequest()
+                    .body(
+                        new ResponseResult(
+                            "Không thể xóa payment account khi còn credit account",
+                            ResponseStatus.Invalid
+                    ));
+        }
+
         bankAccountService.delete(bankAccount.getID());
 
         return ResponseEntity.ok(

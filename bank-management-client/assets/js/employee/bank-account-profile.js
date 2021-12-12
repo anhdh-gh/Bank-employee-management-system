@@ -1,4 +1,20 @@
+const idTableTransaction = '#table-transaction'
+
 $(document).ready(() => {
+    
+    const renderDataTransaction = data => {
+        $(idTableTransaction).empty()
+
+        data.forEach(item => {
+            $(idTableTransaction).append(`<tr>
+                <td>${item.executeDate}</td>
+                <td>${item.content}</td>
+                <td>${item.status}</td>
+                <td>${item.amount}</td>
+            </tr>`)
+        })
+    }
+
     const params = getUrlVars();
 
     if(params.idBankAccount) {
@@ -24,6 +40,20 @@ $(document).ready(() => {
         })
 
         // Hiển thị tất cả các TRANSACTIONS
+        ApiClient.get(`/transaction/${params.idBankAccount}`)
+        .then(resp => {
+            const data = resp.data.data.map(item => ({
+                executeDate: item.executeDate,
+                amount: item.amount,
+                content: item.content,
+                status: item.status
+            }))
+
+            renderDataTransaction(data)
+        })
+        .catch(err => {
+            Notify.showError(err.response.data.message)
+        })
     }
     else Notify.showError("Không có id trong param của url")    
 })
