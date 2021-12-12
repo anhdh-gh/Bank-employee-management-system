@@ -78,6 +78,11 @@ public class BankAccountService {
         return creditAccount != null;
     }
 
+    public BankAccount getBankAccountByAccountNumber(String accountNumber) {
+        BankAccount accountWithNumber = bankAccountRepo.getBankAccountByAccountNumber(accountNumber);
+        return accountWithNumber;
+    }
+
     public boolean checkAccounCodeExist(String accountCode) {
         BankAccount accountWithCode = bankAccountRepo.getBankAccountByAccountCode(accountCode);
         return accountWithCode != null;

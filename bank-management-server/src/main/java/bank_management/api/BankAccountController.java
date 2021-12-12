@@ -47,6 +47,27 @@ public class BankAccountController {
         );
     }
 
+    @GetMapping("/account_number/{accountNumber}")
+    public ResponseEntity<?> getBankAccountByAccountNumber(@PathVariable(value = "accountNumber") String accountNumber) {
+        BankAccount bankAccount = bankAccountService.getBankAccountByAccountNumber(accountNumber);
+
+        if(bankAccount == null)
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseResult(
+                        "Không tìm thấy bank account với account number là " + accountNumber,
+                        ResponseStatus.Invalid
+                    ));
+
+        return ResponseEntity.ok(
+                new ResponseResult (
+                    bankAccount,
+                    "Lấy bank account thành công",
+                    ResponseStatus.Success
+                )
+        );
+    }
+
     @GetMapping("/search")
     public ResponseEntity<?> searchBankAccounts(@Valid SearchBankAccountRequest search) {
         List<BankAccount> bankAccounts = bankAccountService.processSearch(search.getAccountCode(), search.getCustomerCode(), search.getType());
