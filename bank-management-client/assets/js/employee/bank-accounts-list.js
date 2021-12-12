@@ -101,6 +101,7 @@ $(document).ready(function() {
         const data = convertResponseToData(resp.data.data)
         renderData(data);
         paging();
+        if(data.length < 1) Notify.showError("Không có dữ liệu để hiển thị")
     })
     .catch(err => {
         Notify.showError(err.response.data.message)
