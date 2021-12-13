@@ -24,7 +24,7 @@ class DepositMoneyForm extends TransactionForm {
 
         transactionAPI.depositMoney(data.amount).then(res => {
             console.log(res);
-            $(location).prop('href', 'http://stackoverflow.com');
+            window.location.replace(`${window.location.origin}/view/customer/deposit-money-success.hml`); 
         })
         .catch(e => {
 
