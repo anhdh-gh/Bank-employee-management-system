@@ -186,7 +186,6 @@ public class CustomerController {
         }
     }
 
-
     @GetMapping("/search")
     public ResponseEntity<?> searchCustomers(@Valid SearchCustomerRequest search) {
         List<Customer> customerList = customerService.processSearch(search.getCustomerCode(), search.getCustomerName(), search.getGender());
