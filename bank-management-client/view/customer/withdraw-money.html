@@ -83,7 +83,7 @@
     <div class="container d-flex justify-content-center">
       <ul class="nav secondary-nav">
         <li class="nav-item"> <a class="nav-link" href="send-money.html">Send</a></li>
-        <li class="nav-item"> <a class="nav-link active" href="withdraw-money.html">Withdraw</a></li>
+        <li class="nav-item"> <a class="nav-link active" href="withdraw-money.html">Pay Credit</a></li>
         <li class="nav-item"> <a class="nav-link" href="deposit-money.html">Deposit</a></li>
       </ul>
     </div>
@@ -94,7 +94,7 @@
   ============================================= -->
   <div id="content" class="py-4">
     <div class="container">
-      <h2 class="font-weight-400 text-center mt-3 mb-4">Withdraw Money</h2>
+      <h2 class="font-weight-400 text-center mt-3 mb-4">Pay Money</h2>
       <div class="row">
         <div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
           <!-- Withdraw Money Form
@@ -104,26 +104,23 @@
               <h3 class="text-10 text-white font-weight-400">$2956.00</h3>
               <p class="text-white">Available Balance</p>
               <a href="" class="btn btn-outline-light btn-sm shadow-none text-uppercase rounded-pill text-1">Withdraw Full Amount</a> </div>
-            <form id="form-send-money" method="post">
+            <form id="form-withdraw-money" method="post">
               <div class="form-group">
-                <label for="withdrawto">Withdraw to</label>
-                <select id="withdrawto" class="custom-select" required="">
-                  <option value="">HDFC Bank - XXXXXXXXXXXX-9025</option>
-                  <option>Bank A/c 2 - XXXXXX-1211</option>
-                  <option>Bank A/c 3 - XXXXXX-2011</option>
-                  <option>Bank A/c 4 - XXXXXX-2011</option>
+                <label for="withdrawto">Pay to</label>
+                <select id="withdrawto" class="custom-select">
+                  <option value="">Credit Account</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="youSend">Amount</label>
                 <div class="input-group">
                   <div class="input-group-prepend"> <span class="input-group-text">$</span> </div>
-                  <input type="text" class="form-control" data-bv-field="youSend" id="youSend" value="1,000" placeholder="">
+                  <input type="text" class="form-control" data-bv-field="youSend" id="youSend" FieldName="amount" value="" placeholder="">
                 </div>
               </div>
-              <p class="text-muted mt-4">Transactions fees <span class="float-right d-flex align-items-center">5.00 USD</span></p>
-              <p class="font-weight-500">Amount to Withdraw <span class="text-3 float-right">1,000.00 USD</span></p>
-              <button class="btn btn-primary btn-block">Continue</button>
+              <p class="text-muted mt-4">Transactions fees <span class="float-right d-flex align-items-center">0 USD</span></p>
+              <p class="font-weight-500">Total <span class="text-3 float-right">1,000.00 USD</span></p>
+              <button class="btn btn-primary btn-block btnForm" Command="Save">Continue</button>
             </form>
           </div>
           <!-- Withdraw Money Form end -->
@@ -182,10 +179,48 @@
 ============================================= -->
 <a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a>
 
+<script>
+  function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+        key = event.clipboardData.getData('text/plain');
+    } else {
+    // Handle key press
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+</script>
 <!-- Script -->
 <script src="../../assets/lib/jquery/jquery.min.js"></script>
 <script src="../../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../../assets/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script src="../../assets/js/customer/theme.js"></script>
+
+<!-- Scrip chung -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<script src="https://cdn3.devexpress.com/jslib/21.2.3/js/dx.all.js"></script> 
+<script src="../../assets/js/common/Notify.js"></script>
+<script src="../../assets/js/common/CommonFn.js"></script>
+<script src="../../assets/js/common/Resource.js"></script>
+
+<!-- API -->
+<script src="../../assets/js/common/ApiClient.js"></script>
+<script src="../../api/base/BaseAPI.js"></script>
+<script src="../../api/person/PersonAPI.js"></script>
+<script src="../../api/bank-account/BankAccountAPI.js"></script>
+<script src="../../api/transaction/TransactionAPI.js"></script>
+
+<!-- Script riêng -->
+<script src="../../assets/js/transaction/TransactionForm.js"></script>
+<script src="../../assets/js/transaction/WithDrawForm.js"></script>
 </body>
 </html>
