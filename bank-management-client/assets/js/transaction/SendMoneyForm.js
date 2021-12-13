@@ -93,7 +93,7 @@ class SendMoneyForm extends TransactionForm {
             console.log(param)
 
         transactionAPI.sendMoney(param).then(res => {
-            $(location).prop('href', 'http://stackoverflow.com');
+            window.location.replace(`${window.location.origin}/view/customer/send-money-success.html`); 
         })
         .catch(e => {
 

@@ -54,8 +54,7 @@
               <ul class="navbar-nav mr-auto">
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="transactions.html">Transactions</a></li>
-                <li><a href="send-money.html">Send/Request</a></li>
-                <li class="active"><a href="deposit-money.html">Withdraw/Deposit</a></li>
+                <li class="active"><a href="send-money.html">New Transaction</a></li>
                 <li><a href="contact-us.html">Contact Us</a></li>
               </ul>
             </div>
@@ -80,11 +79,12 @@
 
   <!-- Secondary menu
   ============================================= -->
-  <div class="bg-white">
+  <div class="bg-primary">
     <div class="container d-flex justify-content-center">
-      <ul class="nav secondary-nav alternate">
+      <ul class="nav secondary-nav">
+        <li class="nav-item"> <a class="nav-link" href="send-money.html">Send</a></li>
+        <li class="nav-item"> <a class="nav-link" href="withdraw-money.html">Pay Credit</a></li>
         <li class="nav-item"> <a class="nav-link active" href="deposit-money.html">Deposit</a></li>
-        <li class="nav-item"> <a class="nav-link" href="withdraw-money.html">Withdraw</a></li>
       </ul>
     </div>
   </div>
@@ -106,7 +106,7 @@
               <p class="text-center text-success text-8 line-height-07">Success!</p>
               <p class="text-center text-4">Transactions Complete</p>
             </div>
-            <p class="text-center text-3 mb-4">You've successfully <span class="text-4 font-weight-500">$1000</span> Deposit Money, See transaction details under <a href="#">Activity</a>.</p>
+            <p class="text-center text-3 mb-4">You've successfully <span class="text-4 font-weight-500"></span> Deposit Money, See transaction details under <a href="#">Activity</a>.</p>
             <button class="btn btn-primary btn-block">Deposit Money Again</button>
             <button class="btn btn-link btn-block"><i class="fas fa-print"></i> Print</button>
           </div>
@@ -171,5 +171,6 @@
 <script src="../../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../../assets/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script src="../../assets/js/customer/theme.js"></script>
+<script src="../../assets/js/common/authentication.js"></script>
 </body>
 </html>

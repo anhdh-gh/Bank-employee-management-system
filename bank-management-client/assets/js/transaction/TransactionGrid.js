@@ -186,7 +186,7 @@ class TransactionGrid {
         // Nếu là người gửi hoặc là tài khoản credit
         if(bankAccountType == Resource.BankAccountType.Credit ||
             currentUser.info.id == data.bankAccountSent.customer.id) {
-            money = '-' + money;
+            money =  money;
         }
         else {
             money = '+' + money;
