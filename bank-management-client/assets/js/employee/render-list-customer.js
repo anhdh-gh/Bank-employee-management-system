@@ -127,9 +127,11 @@ if (paramsSearch) {
 
   urlApi += "/search?" + encodeQueryData(paramsSearch);
   Object.keys(paramsSearch).forEach((att) => {
-    $(`#${att}`).val(paramsSearch[att]);
+    $(`#${att}`).val(paramsSearch[att].split("+").join(" "));
   });
 }
+
+console.log(urlApi);
 
 ApiClient.get(urlApi)
   .then((resp) => {
