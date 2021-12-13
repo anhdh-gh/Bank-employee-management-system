@@ -58,48 +58,48 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // Cho phép mọi người truy cập vào các đường dẫn này
                 .antMatchers(
-                        "/person/login",
-                        "/person/forgot_password"
+                    "/person/login",
+                    "/person/forgot_password"
                 ).permitAll()
 
-                // Cho phép những người đã authenticate và là Manager truy cập vào các đường dẫn này
-                .antMatchers(
-                        "/bank_account",
-                        "/bank_account/search",
-                        "/bank_account/*",
-                        "/bank_account/delete/*",
-                        "/bank_account/creditAccountByIdCustomer/*",
-                        "/customer",
-                        "/customer/*",
-                        "/customer/editByEmployee",
-                        "/customer/search"
-                ).hasAuthority(Role.Manager.name())
-
-                // Cho phép những người đã authenticated và là Employee truy cập vào các đường dẫn này
-                .antMatchers(
-                        "/bank_account",
-                        "/bank_account/search",
-                        "/bank_account/*",
-                        "/bank_account/delete/*",
-                        "/bank_account/creditAccountByIdCustomer/*",
-                        "/customer",
-                        "/customer/*",
-                        "/customer/editByEmployee",
-                        "/customer/search"
-                ).hasAuthority(Role.Employee.name())
-
-                // Cho phép những người đã authenticated và là Customer truy cập vào các đường dẫn này
-                .antMatchers(
-                        "/bank_account/payment",
-                        "/transaction/*",
-                        "/transaction/filter",
-                        "/transaction/newCode",
-                        "/transaction/sendMoney",
-                        "/transaction/deposit/*",
-                        "/transaction/payCreditCard/*",
-                        "/customer/editAddress",
-                        "/customer/editEmail"
-                ).hasAuthority(Role.Customer.name())
+//                // Cho phép những người đã authenticate và là Manager truy cập vào các đường dẫn này
+//                .antMatchers(
+//                        "/bank_account",
+//                        "/bank_account/search",
+//                        "/bank_account/*",
+//                        "/bank_account/delete/*",
+//                        "/bank_account/creditAccountByIdCustomer/*",
+//                        "/customer",
+//                        "/customer/*",
+//                        "/customer/editByEmployee",
+//                        "/customer/search"
+//                ).hasAuthority(Role.Manager.name())
+//
+//                // Cho phép những người đã authenticated và là Employee truy cập vào các đường dẫn này
+//                .antMatchers(
+//                        "/bank_account",
+//                        "/bank_account/search",
+//                        "/bank_account/*",
+//                        "/bank_account/delete/*",
+//                        "/bank_account/creditAccountByIdCustomer/*",
+//                        "/customer",
+//                        "/customer/*",
+//                        "/customer/editByEmployee",
+//                        "/customer/search"
+//                ).hasAuthority(Role.Employee.name())
+//
+//                // Cho phép những người đã authenticated và là Customer truy cập vào các đường dẫn này
+//                .antMatchers(
+//                        "/bank_account/payment",
+//                        "/transaction/*",
+//                        "/transaction/filter",
+//                        "/transaction/newCode",
+//                        "/transaction/sendMoney",
+//                        "/transaction/deposit/*",
+//                        "/transaction/payCreditCard/*",
+//                        "/customer/editAddress",
+//                        "/customer/editEmail"
+//                ).hasAuthority(Role.Customer.name())
 
                 // Tất cả các request khác đều cần phải xác thực mới được truy cập
                 .anyRequest().authenticated();
