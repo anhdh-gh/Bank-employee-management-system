@@ -2817,3 +2817,9 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
 .ui-menu .ui-menu-divider {
   display: none;
 }
+
+/* toast */
+.dx-toast-content {
+  max-width: 300px;
+  max-height: 50px;
+}

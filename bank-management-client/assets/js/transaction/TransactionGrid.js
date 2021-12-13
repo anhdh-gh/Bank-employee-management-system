@@ -1,3 +1,12 @@
+//JS transaction chung
+const transactionAPI = new TransactionAPI();
+const personAPI = new PersonAPI();
+var currentUser = personAPI.getCurrentUserInfo().then(res => {
+    currentUser = res.data.data;
+
+    let transactionGrid = new TransactionGrid('#transactionGrid');
+    transactionGrid.initFormDetail("#transaction-detail");
+});
 // Trang Transaction
 class TransactionGrid {
 
@@ -13,8 +22,11 @@ class TransactionGrid {
         // Biến lưu dữ liệu grid
         me.cacheDataGrid = [];
 
+        me.dateRange = $("#dateRange");
+
         // Lấy dữ liệu từ server
         me.getDataServer();
+        me.getDateRange();
 
         // Khởi tạo sự kiện
         me.initEvent();
@@ -50,6 +62,12 @@ class TransactionGrid {
 
             me.formDetail.initDetail(recordSelected);
         })
+    }
+
+    getDateRange() {
+        let me = this;
+
+        console.log(me.dateRange);
     }
 
     /**
