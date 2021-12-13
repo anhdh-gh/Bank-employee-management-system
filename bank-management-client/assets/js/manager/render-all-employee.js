@@ -80,8 +80,13 @@ $("#delete-confirm").on("click", (e) => {
       } else {
         Notify.showError(resp.data.message);
       }
+      $("#delete_employee").modal("hide");
+      window.location.replace(
+        `${window.location.origin}/view/employee/all-employees.html`
+      );
     })
     .catch((err) => {
+      $("#delete_employee").modal("hide");
       Notify.showError("Không thể xóa!");
     });
 });

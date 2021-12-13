@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface SalaryRepository extends JpaRepository<Salary, String>{
-    List<Salary> findAllByEmployee_ID(String employeeID);
+//    List<Salary> findAllByEmployee_ID(String employeeID);
     List<Salary> findByMonthAndYear(int month, int year);
     List<Salary> findAllByMonthAndYearOrderByMonth(int month, int year);
 
