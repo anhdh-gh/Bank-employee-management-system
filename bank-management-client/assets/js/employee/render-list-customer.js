@@ -69,7 +69,9 @@ const renderData = (data) => {
                       <i class="far fa-eye"></i>
                       </a>
                         <a
-                          href="edit-customer.html"
+                        href="edit-customer.html?id=${
+                          customer.id
+                        }"
                           class="btn btn-primary btn-sm mb-1"
                         >
                           <i class="far fa-edit"></i>
