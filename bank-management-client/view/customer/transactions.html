@@ -90,24 +90,28 @@
           <!-- Profile Details
           =============================== -->
           <div class="bg-light shadow-sm rounded text-center p-3 mb-4">
-            <div class="profile-thumb mt-3 mb-4"> <img class="rounded-circle" src="../../assets/images/profile-thumb.jpg" alt="">
-              <div class="profile-thumb-edit custom-file bg-primary text-white" data-toggle="tooltip" title="Change Profile Picture"> <i class="fas fa-camera position-absolute"></i>
+            <div class="profile-thumb mt-3 mb-4"> <img class="rounded-circle"
+                src="../../assets/images/profile-thumb.jpg" alt="">
+              <div class="profile-thumb-edit custom-file bg-primary text-white" data-toggle="tooltip"
+                title="Change Profile Picture"> <i class="fas fa-camera position-absolute"></i>
                 <input type="file" class="custom-file-input" id="customFile">
               </div>
             </div>
-            <p class="text-3 font-weight-500 mb-2">Hello, Smith Rhodes</p>
-            <p class="mb-2"><a href="profile.html" class="text-5 text-light" data-toggle="tooltip" title="Edit Profile"><i class="fas fa-edit"></i></a></p>
+            <p class="text-3 font-weight-500 mb-2" id="fullNameHello">Hello, Smith Rhodes</p>
+            <p class="mb-2"><a href="profile.html" class="text-5 text-light" data-toggle="tooltip"
+                title="Edit Profile"><i class="fas fa-edit"></i></a></p>
           </div>
           <!-- Profile Details End -->
 
           <!-- Available Balance
-          =============================== -->
+        =============================== -->
           <div class="bg-light shadow-sm rounded text-center p-3 mb-4">
             <div class="text-17 text-light my-3"><i class="fas fa-wallet"></i></div>
-            <h3 class="text-9 font-weight-400">$2956.00</h3>
+            <h3 class="text-9 font-weight-400" id="amount"></h3>
             <p class="mb-2 text-muted opacity-8">Available Balance</p>
             <hr class="mx-n3">
-            <div class="d-flex"><a href="#" class="btn-link mr-auto">Withdraw</a> <a href="#" class="btn-link ml-auto">Deposit</a></div>
+            <div class="d-flex"><a href="#" class="btn-link mr-auto">Withdraw</a> <a href="#"
+                class="btn-link ml-auto">Deposit</a></div>
           </div>
           <!-- Available Balance End -->
 
@@ -334,10 +338,13 @@
 <!-- Scrip chung -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
-<script src="https://cdn3.devexpress.com/jslib/21.2.3/js/dx.all.js"></script>
+
 <script src="../../assets/js/common/Notify.js"></script>
 <script src="../../assets/js/common/CommonFn.js"></script>
 <script src="../../assets/js/common/Resource.js"></script>
+<script src="../../assets/js/common/authentication.js"></script>
+<script src="../../assets/js/common/convertDate.js"></script>
+<script src="../../assets/js/customer/profile.js"></script>
 
 <!-- API -->
 <script src="../../assets/js/common/ApiClient.js"></script>
