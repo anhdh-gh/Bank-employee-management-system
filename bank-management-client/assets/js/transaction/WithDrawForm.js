@@ -23,8 +23,7 @@ class PayCreditForm extends TransactionForm {
         console.log(data)
 
         transactionAPI.payCredit(data.amount).then(res => {
-            console.log(res);
-            $(location).prop('href', 'http://stackoverflow.com');
+            window.location.replace(`${window.location.origin}/view/customer/withdraw-money-success.html`); 
         })
         .catch(e => {
 
