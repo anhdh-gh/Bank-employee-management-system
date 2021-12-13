@@ -69,7 +69,7 @@ public class CustomerService extends PersonService {
         System.out.println(customerCode + " " + customerName + " " + gender);
         List<Customer> resultSearch = customerRepository.findAll();
 
-        if(!gender.equals("Select gender")){
+        if(!gender.equals("All")){
             resultSearch.removeIf(customer -> !customer.getGender().name().equals(gender));
         }
 
