@@ -9,3 +9,4 @@
 - JS
 - Jquery
 - Bootstrap 5
+- Visual Paradigm
